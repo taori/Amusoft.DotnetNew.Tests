@@ -24,7 +24,7 @@ namespace Amusoft.DotnetNew.Tests.UnitTests
         public void GetAbsolutePathWorks()
         {
             var file = new TemplateSolutionFile(typeof(TemplateSolutionFileTests).Assembly.Location, 6, "Amusoft.DotnetNew.Tests.sln");
-            var absolutePath = file.GetAbsolutePath(".\\Amusoft.DotnetNew.Tests.sln");
+            var absolutePath = file.GetAbsolutePath("Amusoft.DotnetNew.Tests.sln");
             var xslnPath = new CrossPlatformPath(file.SolutionPath);
             xslnPath.VirtualPath.ShouldBe(absolutePath.VirtualPath);
         }
