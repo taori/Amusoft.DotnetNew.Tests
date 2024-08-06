@@ -47,7 +47,7 @@ public class TemplateSolutionFile
 	private static string GetSolutionPathFromAssembly(string searchDirectoryStart, int maxParentJumps, string solutionName)
 	{
 		if (Path.GetExtension(searchDirectoryStart) is { Length: > 0})
-			searchDirectoryStart = Path.GetDirectoryName(searchDirectoryStart);
+			searchDirectoryStart = Path.GetDirectoryName(searchDirectoryStart)!;
 		if (!Directory.Exists(searchDirectoryStart))
 			throw new DirectoryNotFoundException($"Directory {searchDirectoryStart} not found");
 
