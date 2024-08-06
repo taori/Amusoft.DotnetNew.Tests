@@ -49,7 +49,7 @@ public class TemplateSolutionFile
 		if (Path.GetExtension(searchDirectoryStart) is { Length: > 0})
 			searchDirectoryStart = Path.GetDirectoryName(searchDirectoryStart);
 		if (!Directory.Exists(searchDirectoryStart))
-			throw new Exception($"Directory {searchDirectoryStart} not found");
+			throw new DirectoryNotFoundException($"Directory {searchDirectoryStart} not found");
 
 		var iterations = maxParentJumps;
 		var searchPath = searchDirectoryStart;
@@ -63,7 +63,7 @@ public class TemplateSolutionFile
 			searchPath = new DirectoryInfo(searchPath).Parent?.FullName;
 		}
 
-		throw new Exception($"Solution file {solutionName} not found in {searchDirectoryStart} or it's parent->child folders within search range {maxParentJumps}");
+		throw new FileNotFoundException($"Solution file {solutionName} not found in {searchDirectoryStart} or it's parent->child folders within search range {maxParentJumps}");
 	}
 
 	/// <summary>

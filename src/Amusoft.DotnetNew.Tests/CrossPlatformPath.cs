@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Amusoft.DotnetNew.Tests;
 
@@ -36,6 +37,7 @@ public class CrossPlatformPath : IEquatable<CrossPlatformPath>
 	/// </summary>
 	/// <param name="other"></param>
 	/// <returns></returns>
+	[ExcludeFromCodeCoverage]
 	public bool Equals(CrossPlatformPath? other)
 	{
 		if (ReferenceEquals(null, other))
@@ -50,6 +52,7 @@ public class CrossPlatformPath : IEquatable<CrossPlatformPath>
 	/// </summary>
 	/// <param name="obj"></param>
 	/// <returns></returns>
+	[ExcludeFromCodeCoverage]
 	public override bool Equals(object? obj)
 	{
 		if (ReferenceEquals(null, obj))
