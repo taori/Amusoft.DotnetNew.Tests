@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFrameworks>net6.0;netstandard2.0</TargetFrameworks>
+		<LangVersion>10.0</LangVersion>
+		<IsPackable>true</IsPackable>
+
+		<Title>Amusoft.DotnetNew.Tests</Title>
+		<Description>Amusoft.DotnetNew.Tests</Description>
+		<PackageId>Amusoft.DotnetNew.Tests</PackageId>
+		<Product>Amusoft.DotnetNew.Tests</Product>
+		<PackageReleaseNotes>
+			Basic SDK to test dotnet new templates
+		</PackageReleaseNotes>
+		<PackageTags>dotnet new templates unit testing</PackageTags>
+	</PropertyGroup>
+
+	<Import Project="..\..\build\Project.Common.props"/>
+
+	<ItemGroup>
+		<InternalsVisibleTo Include="Amusoft.DotnetNew.Tests.UnitTests"/>
+		<InternalsVisibleTo Include="Amusoft.DotnetNew.Tests.IntegrationTests"/>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="8.0.0" PrivateAssets="all"/>
+	</ItemGroup>
+</Project>
