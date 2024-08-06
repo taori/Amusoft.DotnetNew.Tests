@@ -165,6 +165,7 @@ jobs:
       configuration: ${{ needs.parameters.outputs.configuration }}
       verbosity: ${{ needs.parameters.outputs.verbosity }}
       runCoverage: ${{ needs.parameters.outputs.runCoverage }}
+      concurrencyAbortable: false
       dotnetVersion: 6.0.x
     secrets:
       nuget: ${{ secrets.NUGET }}
