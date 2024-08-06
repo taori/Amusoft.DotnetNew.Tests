@@ -1,0 +1,4 @@
+﻿{
+  Type: DirectoryNotFoundException,
+  Message: Directory {TempPath}2 not found
+}

@@ -1,0 +1,4 @@
+﻿{
+  Type: FileNotFoundException,
+  Message: Solution file bla44685465.sln not found in {TempPath} or it's parent->child folders within search range 0
+}

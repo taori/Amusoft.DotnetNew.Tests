@@ -1,0 +1,4 @@
+﻿{
+  Type: ArgumentException,
+  Message: Relative paths should not start with the current location pattern or resolution would fail.
+}
