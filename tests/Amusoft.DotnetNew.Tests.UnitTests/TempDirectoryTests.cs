@@ -1,10 +1,17 @@
 ﻿using System.IO;
-using Amusoft.DotnetNew.Tests;
+using Amusoft.DotnetNew.Tests.UnitTests.Toolkit;
 using Shouldly;
 using Xunit;
+using Xunit.Abstractions;
 
-public class TempDirectoryTests
+namespace Amusoft.DotnetNew.Tests.UnitTests;
+
+public class TempDirectoryTests : TestBase
 {
+	public TempDirectoryTests(ITestOutputHelper outputHelper, GlobalSetupFixture data) : base(outputHelper, data)
+	{
+	}
+
 	[Fact]
 	public void DirectoryExists()
 	{
@@ -13,7 +20,7 @@ public class TempDirectoryTests
 			Directory.Exists(dir.Path).ShouldBeTrue();
 		}
 	}
-	
+
 	[Fact]
 	public void DeletedAfterScope()
 	{
