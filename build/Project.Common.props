@@ -18,6 +18,7 @@
 		<Nullable>Enable</Nullable>
 		<IncludeSymbols>True</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<IsTestProject>false</IsTestProject>
 	</PropertyGroup>
 
 	<PropertyGroup>
