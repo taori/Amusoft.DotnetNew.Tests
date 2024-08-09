@@ -5,6 +5,10 @@ permissions:
     write
   pull-requests:
     write
+  pages: 
+    write
+  id-token: 
+    write
   
 on:
   push:
