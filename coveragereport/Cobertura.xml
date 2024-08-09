@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
+<coverage line-rate="1" branch-rate="0.9545454545454546" lines-covered="46" lines-valid="46" branches-covered="21" branches-valid="22" complexity="34" version="0" timestamp="1723165242">
+  <sources>
+    <source>/home/runner/work/Amusoft.DotnetNew.Tests/Amusoft.DotnetNew.Tests/src/Amusoft.DotnetNew.Tests/</source>
+  </sources>
+  <packages>
+    <package name="Amusoft.DotnetNew.Tests" line-rate="1" branch-rate="0.9545454545454546" complexity="34">
+      <classes>
+        <class name="Amusoft.DotnetNew.Tests.CrossPlatformPath" filename="/home/runner/work/Amusoft.DotnetNew.Tests/Amusoft.DotnetNew.Tests/src/Amusoft.DotnetNew.Tests/CrossPlatformPath.cs" line-rate="1" branch-rate="1" complexity="4">
+          <methods>
+            <method name="get_OriginalPath" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="28" hits="2" branch="false" />
+              </lines>
+            </method>
+            <method name="get_VirtualPath" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="33" hits="2" branch="false" />
+              </lines>
+            </method>
+            <method name="GetHashCode" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="73" hits="2" branch="false" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(System.String)" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="19" hits="6" branch="false" />
+                <line number="21" hits="6" branch="false" />
+                <line number="22" hits="6" branch="false" />
+                <line number="23" hits="6" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="19" hits="6" branch="false" />
+            <line number="21" hits="6" branch="false" />
+            <line number="22" hits="6" branch="false" />
+            <line number="23" hits="6" branch="false" />
+            <line number="28" hits="2" branch="false" />
+            <line number="33" hits="2" branch="false" />
+            <line number="73" hits="2" branch="false" />
+          </lines>
+        </class>
+        <class name="Amusoft.DotnetNew.Tests.RelativePathTranslator" filename="/home/runner/work/Amusoft.DotnetNew.Tests/Amusoft.DotnetNew.Tests/src/Amusoft.DotnetNew.Tests/RelativePathTranslator.cs" line-rate="1" branch-rate="1" complexity="5">
+          <methods>
+            <method name="GetAbsolutePath" signature="(System.String)" line-rate="1" branch-rate="1" complexity="4">
+              <lines>
+                <line number="17" hits="2" branch="true" condition-coverage="100% (4/4)" />
+                <line number="18" hits="1" branch="false" />
+                <line number="20" hits="1" branch="false" />
+                <line number="21" hits="1" branch="false" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(System.String)" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="10" hits="3" branch="false" />
+                <line number="12" hits="3" branch="false" />
+                <line number="13" hits="3" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="10" hits="3" branch="false" />
+            <line number="12" hits="3" branch="false" />
+            <line number="13" hits="3" branch="false" />
+            <line number="17" hits="2" branch="true" condition-coverage="100% (4/4)" />
+            <line number="18" hits="1" branch="false" />
+            <line number="20" hits="1" branch="false" />
+            <line number="21" hits="1" branch="false" />
+          </lines>
+        </class>
+        <class name="Amusoft.DotnetNew.Tests.TempDirectory" filename="/home/runner/work/Amusoft.DotnetNew.Tests/Amusoft.DotnetNew.Tests/src/Amusoft.DotnetNew.Tests/TempDirectory.cs" line-rate="1" branch-rate="1" complexity="3">
+          <methods>
+            <method name="get_Path" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="14" hits="12" branch="false" />
+              </lines>
+            </method>
+            <method name="Dispose" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="18" hits="3" branch="false" />
+                <line number="19" hits="3" branch="false" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="8" hits="3" branch="false" />
+                <line number="10" hits="3" branch="false" />
+                <line number="11" hits="3" branch="false" />
+                <line number="12" hits="3" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="8" hits="3" branch="false" />
+            <line number="10" hits="3" branch="false" />
+            <line number="11" hits="3" branch="false" />
+            <line number="12" hits="3" branch="false" />
+            <line number="14" hits="12" branch="false" />
+            <line number="18" hits="3" branch="false" />
+            <line number="19" hits="3" branch="false" />
+          </lines>
+        </class>
+        <class name="Amusoft.DotnetNew.Tests.TemplateSolutionFile" filename="/home/runner/work/Amusoft.DotnetNew.Tests/Amusoft.DotnetNew.Tests/src/Amusoft.DotnetNew.Tests/TemplateSolutionFile.cs" line-rate="1" branch-rate="0.9444444444444444" complexity="22">
+          <methods>
+            <method name="get_SolutionPath" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="15" hits="2" branch="false" />
+              </lines>
+            </method>
+            <method name="get_SolutionDirectory" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="20" hits="4" branch="false" />
+              </lines>
+            </method>
+            <method name="GetSolutionPathFromAssembly" signature="(System.String,System.Int32,System.String)" line-rate="1" branch-rate="0.9375" complexity="16">
+              <lines>
+                <line number="49" hits="5" branch="true" condition-coverage="100% (4/4)" />
+                <line number="50" hits="3" branch="false" />
+                <line number="51" hits="5" branch="true" condition-coverage="100% (2/2)" />
+                <line number="52" hits="1" branch="false" />
+                <line number="54" hits="4" branch="false" />
+                <line number="55" hits="4" branch="false" />
+                <line number="56" hits="19" branch="true" condition-coverage="100% (4/4)" />
+                <line number="58" hits="18" branch="false" />
+                <line number="59" hits="24" branch="true" condition-coverage="100% (2/2)" />
+                <line number="60" hits="18" branch="true" condition-coverage="100% (2/2)" />
+                <line number="61" hits="3" branch="false" />
+                <line number="63" hits="15" branch="true" condition-coverage="50% (1/2)" />
+                <line number="66" hits="1" branch="false" />
+              </lines>
+            </method>
+            <method name="GetAbsolutePath" signature="(System.String)" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="75" hits="2" branch="false" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(System.String)" line-rate="1" branch-rate="1" complexity="2">
+              <lines>
+                <line number="28" hits="4" branch="false" />
+                <line number="30" hits="4" branch="true" condition-coverage="100% (2/2)" />
+                <line number="31" hits="1" branch="false" />
+                <line number="32" hits="3" branch="false" />
+                <line number="33" hits="3" branch="false" />
+                <line number="34" hits="3" branch="false" />
+                <line number="35" hits="3" branch="false" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(System.String,System.Int32,System.String)" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="43" hits="5" branch="false" />
+                <line number="45" hits="3" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="15" hits="2" branch="false" />
+            <line number="20" hits="4" branch="false" />
+            <line number="28" hits="4" branch="false" />
+            <line number="30" hits="4" branch="true" condition-coverage="100% (2/2)" />
+            <line number="31" hits="1" branch="false" />
+            <line number="32" hits="3" branch="false" />
+            <line number="33" hits="3" branch="false" />
+            <line number="34" hits="3" branch="false" />
+            <line number="35" hits="3" branch="false" />
+            <line number="43" hits="5" branch="false" />
+            <line number="45" hits="3" branch="false" />
+            <line number="49" hits="5" branch="true" condition-coverage="100% (4/4)" />
+            <line number="50" hits="3" branch="false" />
+            <line number="51" hits="5" branch="true" condition-coverage="100% (2/2)" />
+            <line number="52" hits="1" branch="false" />
+            <line number="54" hits="4" branch="false" />
+            <line number="55" hits="4" branch="false" />
+            <line number="56" hits="19" branch="true" condition-coverage="100% (4/4)" />
+            <line number="58" hits="18" branch="false" />
+            <line number="59" hits="24" branch="true" condition-coverage="100% (2/2)" />
+            <line number="60" hits="18" branch="true" condition-coverage="100% (2/2)" />
+            <line number="61" hits="3" branch="false" />
+            <line number="63" hits="15" branch="true" condition-coverage="50% (1/2)" />
+            <line number="66" hits="1" branch="false" />
+            <line number="75" hits="2" branch="false" />
+          </lines>
+        </class>
+      </classes>
+    </package>
+  </packages>
+</coverage>
