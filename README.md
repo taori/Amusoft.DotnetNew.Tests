@@ -17,6 +17,7 @@ Amusoft.DotnetNew.Tests | 100% | 95% | ✔
 
 _Minimum allowed line rate is 85%_
 
+[Coverage details](https://taori.github.io/Amusoft.DotnetNew.Tests)
 <!--CoverageEnd-->
 
 ## Description
