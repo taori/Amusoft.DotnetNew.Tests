@@ -18,6 +18,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "package", "package", "{0000
 		..\build\Project.Common.props = ..\build\Project.Common.props
 		..\scripts\build.ps1 = ..\scripts\build.ps1
 		..\.gitignore = ..\.gitignore
+		..\build\SourceLink.props = ..\build\SourceLink.props
 	EndProjectSection
 EndProject
 Global

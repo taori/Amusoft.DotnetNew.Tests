@@ -3,7 +3,7 @@
 		<VersionPrefix>0.1.0</VersionPrefix>
 		<VersionSuffix>alpha</VersionSuffix>
 		<Copyright>Copyright © Amusoft 2024</Copyright>
-		<Authors>https://github.com/taori/graphs/contributors</Authors>
+		<Authors>https://github.com/taori/Amusoft.DotnetNew.Tests/graphs/contributors</Authors>
 	</PropertyGroup>
 
 	<PropertyGroup>
@@ -16,8 +16,6 @@
 		<WarningsAsErrors>CS1591</WarningsAsErrors>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
 		<Nullable>Enable</Nullable>
-		<IncludeSymbols>True</IncludeSymbols>
-		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<IsTestProject>false</IsTestProject>
 	</PropertyGroup>
 
