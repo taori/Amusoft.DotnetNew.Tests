@@ -21,6 +21,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "package", "package", "{0000
 		..\build\SourceLink.props = ..\build\SourceLink.props
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D3B3C024-9B36-416D-A570-3146FB91F291}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{C94BD735-8346-47DF-8F0B-13CD9BBBD2E9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,5 +77,10 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8B59E246-DB1F-4A94-8661-5B6DDC1E564D}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6E487BCE-283B-4525-83B5-8F228F4A2742} = {C94BD735-8346-47DF-8F0B-13CD9BBBD2E9}
+		{649B1128-B413-4D5A-849E-AE481B1B0C43} = {C94BD735-8346-47DF-8F0B-13CD9BBBD2E9}
+		{439DF4B7-6359-4B8B-8E52-E3E7F9E90D1C} = {D3B3C024-9B36-416D-A570-3146FB91F291}
 	EndGlobalSection
 EndGlobal

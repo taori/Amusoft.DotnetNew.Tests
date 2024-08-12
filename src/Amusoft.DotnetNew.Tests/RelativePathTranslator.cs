@@ -18,6 +18,7 @@ internal class RelativePathTranslator
 			throw new ArgumentException("Relative paths should not start with the current location pattern or resolution would fail.");
 		
 		var absoluteUri = new Uri(new Uri(_referenceDirectory + Path.DirectorySeparatorChar, UriKind.Absolute), new Uri(relativePath, UriKind.Relative));
+		
 		return new CrossPlatformPath(absoluteUri.AbsolutePath);
 	}
 }

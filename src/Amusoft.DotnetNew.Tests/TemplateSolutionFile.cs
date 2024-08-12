@@ -1,6 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Amusoft.DotnetNew.Tests;
 
@@ -20,6 +23,8 @@ public class TemplateSolutionFile
 	public string SolutionDirectory { get; }
 
 	private readonly RelativePathTranslator _pathTranslator;
+	
+	internal SolutionTemplatingContext Context { get; }
 
 	/// <summary>
 	/// Constructor that uses the path to the solution file
@@ -32,6 +37,7 @@ public class TemplateSolutionFile
 		SolutionPath = solutionPath;
 		SolutionDirectory = Path.GetDirectoryName(solutionPath)!;
 		_pathTranslator = new RelativePathTranslator(SolutionDirectory);
+		Context = new SolutionTemplatingContext(this, TemplatingDefaults.Instance.LoggerFactory());
 	}
 
 	/// <summary>
@@ -73,4 +79,28 @@ public class TemplateSolutionFile
 	/// <returns></returns>
 	public CrossPlatformPath GetAbsolutePath(string relativePath) => 
 		_pathTranslator.GetAbsolutePath(relativePath);
+
+	/// <summary>
+	/// Installs a template relative to the solution file
+	/// </summary>
+	/// <param name="path">relative path to the template</param>
+	/// <param name="cancellationToken"></param>
+	public async Task<TemplateInstallation> InstallTemplateAsync(string path, CancellationToken cancellationToken)
+	{
+		var fullPath = GetAbsolutePath(path);
+		if (!Directory.Exists(fullPath.OriginalPath))
+			throw new DirectoryNotFoundException(fullPath.OriginalPath);
+
+		return await TemplateInstallation.CreateAsync(new ProjectTemplatingContext(Context, fullPath), cancellationToken).ConfigureAwait(false);
+	}
+	
+	/// <summary>
+	/// Prints the commands as specified to the given StringBuilder 
+	/// </summary>
+	/// <param name="stringBuilder"></param>
+	/// <param name="kind"></param>
+	public void Print(StringBuilder stringBuilder, PrintKind kind)
+	{
+		Context.CommandLogger.Print(stringBuilder, kind);
+	}
 }

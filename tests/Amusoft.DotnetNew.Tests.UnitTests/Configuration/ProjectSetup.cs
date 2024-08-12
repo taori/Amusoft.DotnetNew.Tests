@@ -17,6 +17,7 @@ namespace Amusoft.DotnetNew.Tests.UnitTests.Toolkit
 		{
 			Verifier.DerivePathInfo(PathInfoConfiguration);
 			VerifierSettings.ScrubMember<Exception>(nameof(Exception.StackTrace));
+			VerifierSettings.ScrubMember<CommandResult>(nameof(CommandResult.Runtime));
 		}
 
 		private static PathInfo PathInfoConfiguration(string sourcefile, string projectdirectory, Type type, MethodInfo method)
