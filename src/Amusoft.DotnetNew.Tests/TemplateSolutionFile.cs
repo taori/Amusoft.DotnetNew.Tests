@@ -16,12 +16,12 @@ public class TemplateSolutionFile
 	/// <summary>
 	/// Path to the solution
 	/// </summary>
-	public string SolutionPath { get; }
+	public CrossPlatformPath SolutionPath { get; }
 
 	/// <summary>
 	/// Directory of the solution file
 	/// </summary>
-	public string SolutionDirectory { get; }
+	public CrossPlatformPath SolutionDirectory { get; }
 
 	private readonly RelativePathTranslator _pathTranslator;
 	
@@ -35,9 +35,9 @@ public class TemplateSolutionFile
 	{
 		if (!solutionPath.EndsWith(".sln"))
 			throw new ArgumentException("Solution files are expected to end with the extension sln");
-		SolutionPath = solutionPath;
-		SolutionDirectory = Path.GetDirectoryName(solutionPath)!;
-		_pathTranslator = new RelativePathTranslator(SolutionDirectory);
+		SolutionPath = new CrossPlatformPath(solutionPath);
+		SolutionDirectory = new CrossPlatformPath(Path.GetDirectoryName(solutionPath)!);
+		_pathTranslator = new RelativePathTranslator(SolutionDirectory.OriginalPath);
 		Context = new SolutionTemplatingContext(this, TemplatingDefaults.Instance.LoggerFactory());
 	}
 
@@ -102,7 +102,8 @@ public class TemplateSolutionFile
 	/// <param name="kind"></param>
 	public void Print(StringBuilder stringBuilder, PrintKind kind)
 	{
-		Context.CommandLogger.AddRewriter(new BackslashRewriter());
+		Context.CommandLogger.AddRewriter(BackslashRewriter.Instance);
+		Context.CommandLogger.AddRewriter(new SolutionDirectoryRewriter(Context));
 		Context.CommandLogger.Print(stringBuilder, kind);
 	}
 }

@@ -50,7 +50,13 @@ public class CommandLogger
 
 		foreach (var printable in data)
 		{
-			stringBuilder.AppendLine(printable.ToString());
+			printable.Print(stringBuilder);
+			// stringBuilder.AppendLine(printable.ToString());
+		}
+
+		foreach (var commandRewriter in _rewriters.OrderBy(d => d.ExecutionOrder))
+		{
+			commandRewriter.Rewrite(stringBuilder);
 		}
 	}
 }

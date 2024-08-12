@@ -1,4 +1,6 @@
-﻿namespace Amusoft.DotnetNew.Tests;
+﻿using System.Text;
+
+namespace Amusoft.DotnetNew.Tests;
 
 /// <summary>
 /// Printable class
@@ -8,5 +10,5 @@ public interface IPrintable
 	/// <summary>
 	/// 
 	/// </summary>
-	string ToString();
+	void Print(StringBuilder stringBuilder);
 }

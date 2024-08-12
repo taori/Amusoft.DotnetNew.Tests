@@ -1,13 +1,20 @@
 ﻿using System;
+using System.Text;
 
 namespace Amusoft.DotnetNew.Tests.Rewriters;
 
 internal class BackslashRewriter : ICommandRewriter
 {
-	public int ExecutionOrder { get; } = int.MinValue;
+	public static readonly BackslashRewriter Instance = new();
 
-	public string Rewrite(string data)
+	private BackslashRewriter()
 	{
-		return data.Replace('\\', '/');
+	}
+	
+	public int ExecutionOrder => int.MinValue;
+
+	public void Rewrite(StringBuilder stringBuilder)
+	{
+		stringBuilder.Replace('\\', '/');
 	}
 }

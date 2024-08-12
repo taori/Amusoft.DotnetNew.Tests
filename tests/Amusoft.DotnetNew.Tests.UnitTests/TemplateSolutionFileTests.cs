@@ -19,8 +19,8 @@ namespace Amusoft.DotnetNew.Tests.UnitTests
         public void SearchingWorks()
         {
             var file = new TemplateSolutionFile(typeof(TemplateSolutionFileTests).Assembly.Location, 6, "Amusoft.DotnetNew.Tests.sln");
-            File.Exists(file.SolutionPath).ShouldBeTrue();
-            Directory.Exists(file.SolutionDirectory).ShouldBeTrue();
+            File.Exists(file.SolutionPath.OriginalPath).ShouldBeTrue();
+            Directory.Exists(file.SolutionDirectory.OriginalPath).ShouldBeTrue();
         }
 
         [Fact]
@@ -28,7 +28,7 @@ namespace Amusoft.DotnetNew.Tests.UnitTests
         {
             var file = new TemplateSolutionFile(typeof(TemplateSolutionFileTests).Assembly.Location, 6, "Amusoft.DotnetNew.Tests.sln");
             var absolutePath = file.GetAbsolutePath("Amusoft.DotnetNew.Tests.sln");
-            var xslnPath = new CrossPlatformPath(file.SolutionPath);
+            var xslnPath = new CrossPlatformPath(file.SolutionPath.OriginalPath);
             xslnPath.VirtualPath.ShouldBe(absolutePath.VirtualPath);
         }
 

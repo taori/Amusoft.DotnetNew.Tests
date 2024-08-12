@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.Text.Json;
 
 namespace Amusoft.DotnetNew.Tests;
@@ -19,7 +20,7 @@ internal record class CommandResult(
 	TimeSpan Runtime
 ) : ICommandResponse
 {
-	string IPrintable.ToString()
+	public void Print(StringBuilder stringBuilder)
 	{
 		var serialized = JsonSerializer.Serialize((this with
 			{
@@ -32,6 +33,6 @@ internal record class CommandResult(
 			}
 		);
 		
-		return TemplatingDefaults.Instance.PrintPattern("Result", serialized);
+		stringBuilder.Append(TemplatingDefaults.Instance.PrintPattern("Result", serialized));
 	}
 }

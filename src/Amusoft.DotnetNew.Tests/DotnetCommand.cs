@@ -1,4 +1,6 @@
-﻿namespace Amusoft.DotnetNew.Tests;
+﻿using System.Text;
+
+namespace Amusoft.DotnetNew.Tests;
 
 internal class DotnetCommand : ICommandInvocation
 {
@@ -9,8 +11,8 @@ internal class DotnetCommand : ICommandInvocation
 		Command = command;
 	}
 
-	string IPrintable.ToString()
+	public void Print(StringBuilder stringBuilder)
 	{
-		return TemplatingDefaults.Instance.PrintPattern("Command", Command);
+		stringBuilder.Append(TemplatingDefaults.Instance.PrintPattern("Command", Command));
 	}
 }

@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Amusoft.DotnetNew.Tests.Internals;
+using Amusoft.DotnetNew.Tests.Rewriters;
 
 namespace Amusoft.DotnetNew.Tests;
 
@@ -24,6 +25,7 @@ public class TemplateInstallation : IAsyncDisposable
 	{
 		await LoggedDotnetCli.RunDotnetCommandAsync(projectTemplatingContext, $"new install \"{projectTemplatingContext.ProjectTemplatePath.OriginalPath}\"", cancellationToken);
 		var result = new TemplateInstallation(projectTemplatingContext);
+		projectTemplatingContext.SolutionContext.CommandLogger.AddRewriter(new ProjectDirectoryRewriter(projectTemplatingContext));
 		return result;
 	}
 

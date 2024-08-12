@@ -16,5 +16,5 @@ public class TemplatingSettings
 	/// Pattern used for printing data
 	/// </summary>
 	public PrintDelegate PrintPattern { get; init; } = (token, content) 
-		=> $"---{token}---" + Environment.NewLine + Environment.NewLine + content + Environment.NewLine;
+		=> $"---{token}---" + Environment.NewLine + Environment.NewLine + content + Environment.NewLine + Environment.NewLine;
 }

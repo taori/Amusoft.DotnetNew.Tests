@@ -1,7 +1,9 @@
-﻿namespace Amusoft.DotnetNew.Tests;
+﻿using System.Text;
+
+namespace Amusoft.DotnetNew.Tests;
 
 internal interface ICommandRewriter
 {
 	public int ExecutionOrder { get; }
-	string Rewrite(string data);
+	void Rewrite(StringBuilder stringBuilder);
 }
