@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Amusoft.DotnetNew.Tests.Rewriters;
 
 namespace Amusoft.DotnetNew.Tests;
 
@@ -101,6 +102,7 @@ public class TemplateSolutionFile
 	/// <param name="kind"></param>
 	public void Print(StringBuilder stringBuilder, PrintKind kind)
 	{
+		Context.CommandLogger.AddRewriter(new BackslashRewriter());
 		Context.CommandLogger.Print(stringBuilder, kind);
 	}
 }

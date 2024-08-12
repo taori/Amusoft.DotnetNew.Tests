@@ -3,7 +3,6 @@ using System.IO;
 using System.Threading.Tasks;
 using Amusoft.DotnetNew.Tests.UnitTests.Toolkit;
 using Shouldly;
-using VerifyTests;
 using VerifyXunit;
 using Xunit;
 using Xunit.Abstractions;
