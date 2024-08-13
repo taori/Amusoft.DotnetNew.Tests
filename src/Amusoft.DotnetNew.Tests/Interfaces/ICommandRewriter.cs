@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace Amusoft.DotnetNew.Tests;
+namespace Amusoft.DotnetNew.Tests.Interfaces;
 
 internal interface ICommandRewriter
 {

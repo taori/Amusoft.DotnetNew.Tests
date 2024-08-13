@@ -1,4 +1,4 @@
-﻿namespace Amusoft.DotnetNew.Tests;
+﻿namespace Amusoft.DotnetNew.Tests.Templating;
 
 /// <summary>
 /// Core API for customization

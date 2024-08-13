@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace Amusoft.DotnetNew.Tests;
+namespace Amusoft.DotnetNew.Tests.Interfaces;
 
 /// <summary>
 /// Printable class

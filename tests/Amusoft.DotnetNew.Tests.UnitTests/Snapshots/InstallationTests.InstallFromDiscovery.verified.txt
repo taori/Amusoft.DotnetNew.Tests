@@ -1,0 +1,37 @@
+﻿---Command---
+
+dotnet new install "{ProjectDir:dotnet-library-repo}"
+
+---Result---
+
+{
+  "ExitCode": 0,
+  "Output": "The following template packages will be installed:
+   {ProjectDir:dotnet-library-repo}
+
+Success: {ProjectDir:dotnet-library-repo} installed the following templates:
+Template Name             Short Name           Language  Tags         
+------------------------  -------------------  --------  -------------
+nuget library repository  dotnet-library-repo  [C#]      C#/Repository
+
+",
+  "Errors": "",
+  "Success": true,
+  "Runtime": "00:00:00"
+}
+
+---Command---
+
+dotnet new uninstall "{ProjectDir:dotnet-library-repo}"
+
+---Result---
+
+{
+  "ExitCode": 0,
+  "Output": "Success: {ProjectDir:dotnet-library-repo} was uninstalled.
+",
+  "Errors": "",
+  "Success": true,
+  "Runtime": "00:00:00"
+}
+

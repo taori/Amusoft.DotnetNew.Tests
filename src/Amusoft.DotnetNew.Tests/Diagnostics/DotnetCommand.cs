@@ -1,6 +1,8 @@
 ﻿using System.Text;
+using Amusoft.DotnetNew.Tests.Interfaces;
+using Amusoft.DotnetNew.Tests.Templating;
 
-namespace Amusoft.DotnetNew.Tests;
+namespace Amusoft.DotnetNew.Tests.Diagnostics;
 
 internal class DotnetCommand : ICommandInvocation
 {

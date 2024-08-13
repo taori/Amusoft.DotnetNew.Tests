@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Text;
 using System.Text.Json;
+using Amusoft.DotnetNew.Tests.Interfaces;
+using Amusoft.DotnetNew.Tests.Templating;
+using Amusoft.DotnetNew.Tests.Utility;
 
-namespace Amusoft.DotnetNew.Tests;
+namespace Amusoft.DotnetNew.Tests.Diagnostics;
 
 /// <summary>
 /// 

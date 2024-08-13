@@ -1,4 +1,5 @@
-﻿using CliWrap.Buffered;
+﻿using Amusoft.DotnetNew.Tests.Diagnostics;
+using CliWrap.Buffered;
 
 namespace Amusoft.DotnetNew.Tests.Extensions;
 

@@ -1,4 +1,4 @@
-﻿namespace Amusoft.DotnetNew.Tests;
+﻿namespace Amusoft.DotnetNew.Tests.Diagnostics;
 
 /// <summary>
 /// Specifies how to print data

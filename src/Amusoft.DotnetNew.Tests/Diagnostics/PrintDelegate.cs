@@ -1,4 +1,4 @@
-﻿namespace Amusoft.DotnetNew.Tests;
+﻿namespace Amusoft.DotnetNew.Tests.Diagnostics;
 
 /// <summary>
 /// Takes the data kind and the content and returns it as printable string

@@ -1,3 +1,4 @@
+using Amusoft.DotnetNew.Tests.Templating;
 using Shouldly;
 
 namespace Amusoft.DotnetNew.Tests.IntegrationTests;

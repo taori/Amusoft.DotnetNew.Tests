@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace Amusoft.DotnetNew.Tests;
+namespace Amusoft.DotnetNew.Tests.Templating;
 
 internal class TempDirectory : IDisposable
 {

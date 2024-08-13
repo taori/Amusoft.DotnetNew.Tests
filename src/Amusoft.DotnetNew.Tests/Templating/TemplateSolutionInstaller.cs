@@ -1,43 +1,38 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Amusoft.DotnetNew.Tests.Diagnostics;
 using Amusoft.DotnetNew.Tests.Rewriters;
+using Amusoft.DotnetNew.Tests.Utility;
 
-namespace Amusoft.DotnetNew.Tests;
+namespace Amusoft.DotnetNew.Tests.Templating;
 
 /// <summary>
 /// Top level class to install a template solution
 /// </summary>
-public class TemplateSolutionFile
+public class TemplateSolutionInstaller
 {
-	/// <summary>
-	/// Path to the solution
-	/// </summary>
-	public CrossPlatformPath SolutionPath { get; }
-
-	/// <summary>
-	/// Directory of the solution file
-	/// </summary>
-	public CrossPlatformPath SolutionDirectory { get; }
-
-	private readonly RelativePathTranslator _pathTranslator;
-	
 	internal SolutionTemplatingContext Context { get; }
+	
+	/// <summary>
+	/// 
+	/// </summary>
+	public Solution Solution { get; }
 
 	/// <summary>
 	/// Constructor that uses the path to the solution file
 	/// </summary>
 	/// <param name="solutionPath"></param>
-	public TemplateSolutionFile(string solutionPath)
+	public TemplateSolutionInstaller(string solutionPath)
 	{
 		if (!solutionPath.EndsWith(".sln"))
 			throw new ArgumentException("Solution files are expected to end with the extension sln");
-		SolutionPath = new CrossPlatformPath(solutionPath);
-		SolutionDirectory = new CrossPlatformPath(Path.GetDirectoryName(solutionPath)!);
-		_pathTranslator = new RelativePathTranslator(SolutionDirectory.OriginalPath);
+		
+		Solution = new Solution(solutionPath);
 		Context = new SolutionTemplatingContext(this, TemplatingDefaults.Instance.LoggerFactory());
 	}
 
@@ -47,7 +42,7 @@ public class TemplateSolutionFile
 	/// <param name="searchDirectoryStart">directory indicating where to start looking for the solution file</param>
 	/// <param name="maxParentJumps"></param>
 	/// <param name="solutionName">filename of the solution</param>
-	public TemplateSolutionFile(string searchDirectoryStart, int maxParentJumps, string solutionName) : this(GetSolutionPathFromAssembly(searchDirectoryStart, maxParentJumps, solutionName))
+	public TemplateSolutionInstaller(string searchDirectoryStart, int maxParentJumps, string solutionName) : this(GetSolutionPathFromAssembly(searchDirectoryStart, maxParentJumps, solutionName))
 	{
 	}
 
@@ -74,21 +69,13 @@ public class TemplateSolutionFile
 	}
 
 	/// <summary>
-	/// Returns the path of the file relative to the directory of the solution
-	/// </summary>
-	/// <param name="relativePath">a path like ./filename.txt or ../a/filename.txt</param>
-	/// <returns></returns>
-	public CrossPlatformPath GetAbsolutePath(string relativePath) => 
-		_pathTranslator.GetAbsolutePath(relativePath);
-
-	/// <summary>
 	/// Installs a template relative to the solution file
 	/// </summary>
 	/// <param name="path">relative path to the template</param>
 	/// <param name="cancellationToken"></param>
 	public async Task<TemplateInstallation> InstallTemplateAsync(string path, CancellationToken cancellationToken)
 	{
-		var fullPath = GetAbsolutePath(path);
+		var fullPath = Solution.PathTranslator.GetAbsolutePath(path);
 		if (!Directory.Exists(fullPath.OriginalPath))
 			throw new DirectoryNotFoundException(fullPath.OriginalPath);
 
@@ -102,8 +89,44 @@ public class TemplateSolutionFile
 	/// <param name="kind"></param>
 	public void Print(StringBuilder stringBuilder, PrintKind kind)
 	{
-		Context.CommandLogger.AddRewriter(BackslashRewriter.Instance);
-		Context.CommandLogger.AddRewriter(new SolutionDirectoryRewriter(Context));
 		Context.CommandLogger.Print(stringBuilder, kind);
+	}
+
+	/// <summary>
+	/// Finds the folders with template.json files in them
+	/// </summary>
+	/// <param name="searchFolder">relative path to the folder you want to run discovery in</param>
+	/// <returns></returns>
+	/// <exception cref="DirectoryNotFoundException"></exception>
+	public CrossPlatformPath[] DiscoverTemplates(string searchFolder)
+	{
+		var folder = Solution.PathTranslator.GetAbsolutePath(searchFolder);
+		if (!Directory.Exists(folder.OriginalPath))
+			throw new DirectoryNotFoundException(folder.OriginalPath);
+
+		var templateFiles = Directory.EnumerateFiles(folder.OriginalPath, "template.json", SearchOption.AllDirectories);
+		
+		return templateFiles
+			.Select(path => Path.Combine(path.Split(Path.DirectorySeparatorChar)[..^2]))
+			.Select(path => Solution.PathTranslator.GetRelativePath(path))
+			.ToArray();
+	}
+
+	/// <summary>
+	/// Installs all templates that can be found in the given directory
+	/// </summary>
+	/// <param name="path"></param>
+	/// <param name="cancellationToken"></param>
+	/// <returns></returns>
+	public async Task<List<TemplateInstallation>> InstallTemplatesFromDirectoryAsync(string path, CancellationToken cancellationToken)
+	{
+		var result = new List<TemplateInstallation>();
+		foreach (var projectPath in DiscoverTemplates(path))
+		{
+			cancellationToken.ThrowIfCancellationRequested();
+			result.Add(await InstallTemplateAsync(projectPath.OriginalPath, cancellationToken));
+		}
+
+		return result;
 	}
 }

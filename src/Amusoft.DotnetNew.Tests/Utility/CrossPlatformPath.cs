@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.InteropServices;
 
-namespace Amusoft.DotnetNew.Tests;
+namespace Amusoft.DotnetNew.Tests.Utility;
 
 /// <summary>
 /// Unix and Windows systems have different path seperators which makes testing templates harder
@@ -19,7 +20,10 @@ public class CrossPlatformPath : IEquatable<CrossPlatformPath>
 	public CrossPlatformPath(string originalPath)
 	{
 		_originalPath = originalPath;
-		_virtualPath = originalPath.Replace('\\', '/');
+		_virtualPath =
+			RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+			? originalPath.Replace('\\', '/')
+			: originalPath;
 	}
 
 	/// <summary>
@@ -31,6 +35,15 @@ public class CrossPlatformPath : IEquatable<CrossPlatformPath>
 	/// Path that is the same accross multiple operating systems
 	/// </summary>
 	public string VirtualPath => _virtualPath;
+
+	/// <summary>
+	/// Why are you looking at this tooltip?
+	/// </summary>
+	/// <returns></returns>
+	public override string ToString()
+	{
+		return VirtualPath;
+	}
 
 	/// <summary>
 	/// 

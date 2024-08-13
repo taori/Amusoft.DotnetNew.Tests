@@ -1,4 +1,6 @@
-﻿namespace Amusoft.DotnetNew.Tests;
+﻿using Amusoft.DotnetNew.Tests.Utility;
+
+namespace Amusoft.DotnetNew.Tests.Templating;
 
 /// <summary>
 /// Context of templating operations

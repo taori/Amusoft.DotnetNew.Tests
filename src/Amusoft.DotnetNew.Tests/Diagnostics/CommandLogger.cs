@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Amusoft.DotnetNew.Tests.Interfaces;
 
-namespace Amusoft.DotnetNew.Tests;
+namespace Amusoft.DotnetNew.Tests.Diagnostics;
 
 /// <summary>
 /// Logs the output of commands
@@ -11,7 +12,7 @@ namespace Amusoft.DotnetNew.Tests;
 public class CommandLogger
 {
 	private readonly List<ICommandData> _commandData = new();
-	private readonly List<ICommandRewriter> _rewriters = new();
+	private readonly HashSet<ICommandRewriter> _rewriters = new();
 	
 	/// <summary>
 	/// Command results
@@ -42,16 +43,15 @@ public class CommandLogger
 	{
 		IEnumerable<IPrintable> data = kind switch
 		{
-			PrintKind.All => _commandData,
-			PrintKind.Invocations => _commandData.OfType<ICommandInvocation>(),
-			PrintKind.Responses => _commandData.OfType<ICommandResponse>(),
+			PrintKind.All => CommandData,
+			PrintKind.Invocations => CommandData.OfType<ICommandInvocation>(),
+			PrintKind.Responses => CommandData.OfType<ICommandResponse>(),
 			_ => throw new ArgumentOutOfRangeException(nameof(kind), kind, null)
 		};
 
 		foreach (var printable in data)
 		{
 			printable.Print(stringBuilder);
-			// stringBuilder.AppendLine(printable.ToString());
 		}
 
 		foreach (var commandRewriter in _rewriters.OrderBy(d => d.ExecutionOrder))

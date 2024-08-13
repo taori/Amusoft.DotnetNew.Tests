@@ -5,6 +5,9 @@
 	<PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
 		<ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
 	</PropertyGroup>
+	<PropertyGroup>
+		<DefaultItemExcludes>$(DefaultItemExcludes);*.received.*</DefaultItemExcludes>
+	</PropertyGroup>
 
 	<ItemGroup>
 		<SourceRoot Include="$(MSBuildThisFileDirectory)/"/>

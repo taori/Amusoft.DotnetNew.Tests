@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Amusoft.DotnetNew.Tests.Internals;
+using Amusoft.DotnetNew.Tests.CLI;
 using Amusoft.DotnetNew.Tests.Rewriters;
 
-namespace Amusoft.DotnetNew.Tests;
+namespace Amusoft.DotnetNew.Tests.Templating;
 
 /// <summary>
 /// 

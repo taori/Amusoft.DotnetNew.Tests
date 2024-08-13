@@ -3,22 +3,23 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Amusoft.DotnetNew.Tests.Extensions;
+using Amusoft.DotnetNew.Tests.Templating;
 using CliWrap;
 using CliWrap.Buffered;
 using CliWrap.Builders;
 
-namespace Amusoft.DotnetNew.Tests.Internals;
+namespace Amusoft.DotnetNew.Tests.CLI;
 
 internal static class LoggedDotnetCli
 {
-	internal static Task RunDotnetCommandAsync(ProjectTemplatingContext context, Action<ArgumentsBuilder> arguments, CancellationToken cancellationToken)
+	internal static Task<bool> RunDotnetCommandAsync(ProjectTemplatingContext context, Action<ArgumentsBuilder> arguments, CancellationToken cancellationToken)
 	{
 		var builder = new ArgumentsBuilder();
 		arguments(builder);
 		return RunDotnetCommandAsync(context, builder.Build(), cancellationToken);
 	}
 	
-	internal static async Task RunDotnetCommandAsync(ProjectTemplatingContext context, string arguments, CancellationToken cancellationToken)
+	internal static async Task<bool> RunDotnetCommandAsync(ProjectTemplatingContext context, string arguments, CancellationToken cancellationToken)
 	{
 		var env = new Dictionary<string, string?>()
 		{
@@ -35,6 +36,8 @@ internal static class LoggedDotnetCli
 			.ConfigureAwait(false);
 		
 		context.SolutionContext.CommandLogger.AddResult(bufferedCommandResult.ToCommandResult());
+
+		return bufferedCommandResult.IsSuccess;
 	}
 	
 }

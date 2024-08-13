@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Text.Encodings.Web;
 
-namespace Amusoft.DotnetNew.Tests;
+namespace Amusoft.DotnetNew.Tests.Utility;
 
 internal class NewLineIgnoreEncoder : JavaScriptEncoder
 {

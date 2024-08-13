@@ -2,6 +2,7 @@
 using System.IO;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using Amusoft.DotnetNew.Tests.Diagnostics;
 using VerifyTests;
 using VerifyXunit;
 using Xunit;

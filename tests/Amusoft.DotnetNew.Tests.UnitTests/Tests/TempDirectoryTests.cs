@@ -1,10 +1,11 @@
 ﻿using System.IO;
+using Amusoft.DotnetNew.Tests.Templating;
 using Amusoft.DotnetNew.Tests.UnitTests.Toolkit;
 using Shouldly;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace Amusoft.DotnetNew.Tests.UnitTests;
+namespace Amusoft.DotnetNew.Tests.UnitTests.Tests;
 
 public class TempDirectoryTests : TestBase
 {

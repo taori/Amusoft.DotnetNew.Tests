@@ -1,3 +1,3 @@
-﻿namespace Amusoft.DotnetNew.Tests;
+﻿namespace Amusoft.DotnetNew.Tests.Interfaces;
 
 internal interface ICommandResponse : ICommandData {}
