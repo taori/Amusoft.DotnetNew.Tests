@@ -16,17 +16,14 @@
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 	</PropertyGroup>
 
-<!--	<Import Project="..\..\build\Project.Common.props"/>-->
-
 	<ItemGroup>
 		<InternalsVisibleTo Include="Amusoft.DotnetNew.Tests.UnitTests"/>
 		<InternalsVisibleTo Include="Amusoft.DotnetNew.Tests.IntegrationTests"/>
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="CliWrap" Version="3.6.6" />
+		<PackageReference Include="CliWrap" Version="[3.6.*,)" />
 		<PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="8.0.0" PrivateAssets="all"/>
-		<PackageReference Include="System.Text.Json" Version="[6.*,)" PrivateAssets="all" Condition="'$(TargetFramework)' == 'netstandard2.0'"/>
-		<PackageReference Include="IndexRange" Version="[1.0.3,)" PrivateAssets="all" Condition="'$(TargetFramework)' == 'netstandard2.0'"/>
+		<PackageReference Include="System.Text.Json" Version="[6.*,)" Condition="'$(TargetFramework)' == 'netstandard2.0'"/>
 	</ItemGroup>
 </Project>
