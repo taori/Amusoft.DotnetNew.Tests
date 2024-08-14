@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Amusoft.DotnetNew.Tests.CLI;
 using Amusoft.DotnetNew.Tests.Rewriters;
+using Amusoft.DotnetNew.Tests.Scopes;
 
 namespace Amusoft.DotnetNew.Tests.Templating;
 
@@ -23,9 +24,10 @@ public class TemplateInstallation : IAsyncDisposable
 
 	internal static async Task<TemplateInstallation> CreateAsync(ProjectTemplatingContext projectTemplatingContext, CancellationToken cancellationToken)
 	{
-		await LoggedDotnetCli.RunDotnetCommandAsync(projectTemplatingContext.SolutionContext.CommandLogger, $"new install \"{projectTemplatingContext.ProjectTemplatePath.OriginalPath}\"", cancellationToken);
+		await LoggedDotnetCli.RunDotnetCommandAsync($"new install \"{projectTemplatingContext.ProjectTemplatePath.OriginalPath}\"", cancellationToken);
 		var result = new TemplateInstallation(projectTemplatingContext);
-		projectTemplatingContext.SolutionContext.CommandLogger.AddRewriter(new ProjectDirectoryRewriter(projectTemplatingContext));
+		var logger = LoggingScope.Current?.Logger;
+		logger?.AddRewriter(new ProjectDirectoryRewriter(projectTemplatingContext));
 		return result;
 	}
 
@@ -48,7 +50,7 @@ public class TemplateInstallation : IAsyncDisposable
 		if (_disposed)
 			return;
 
-		await LoggedDotnetCli.RunDotnetCommandAsync(Context.SolutionContext.CommandLogger, $"new uninstall \"{Context.ProjectTemplatePath.OriginalPath}\"", cancellationToken);
+		await LoggedDotnetCli.RunDotnetCommandAsync($"new uninstall \"{Context.ProjectTemplatePath.OriginalPath}\"", cancellationToken);
 
 		_disposed = true;
 	}

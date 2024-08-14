@@ -21,7 +21,7 @@ public static class DotnetNew
 	/// <exception cref="ScaffoldingFailedException"></exception>
 	public static async Task<Scaffold> New(string arguments, CancellationToken cancellationToken)
 	{
-		var result = await LoggedDotnetCli.RunDotnetCommandAsync(new CommandLogger(), arguments, cancellationToken);
+		var result = await LoggedDotnetCli.RunDotnetCommandAsync(arguments, cancellationToken);
 		if (!result)
 			throw new ScaffoldingFailedException($"Scaffolding with arguments {arguments} failed.");
 

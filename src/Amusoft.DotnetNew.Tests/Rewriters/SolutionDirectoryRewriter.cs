@@ -1,24 +1,24 @@
 ﻿using System;
 using System.Text;
 using Amusoft.DotnetNew.Tests.Interfaces;
-using Amusoft.DotnetNew.Tests.Templating;
+using Amusoft.DotnetNew.Tests.Utility;
 
 namespace Amusoft.DotnetNew.Tests.Rewriters;
 
 internal class SolutionDirectoryRewriter : ICommandRewriter, IEquatable<SolutionDirectoryRewriter>
 {
-	private readonly SolutionTemplatingContext _solutionContext;
+	private readonly CrossPlatformPath _solutionDirectory;
 
-	public SolutionDirectoryRewriter(SolutionTemplatingContext solutionContext)
+	public SolutionDirectoryRewriter(CrossPlatformPath solutionDirectory)
 	{
-		_solutionContext = solutionContext;
+		_solutionDirectory = solutionDirectory;
 	}
 	
 	public int ExecutionOrder { get; } = 0;
 	
 	public void Rewrite(StringBuilder stringBuilder)
 	{
-		stringBuilder.Replace(_solutionContext.SolutionInstaller.Solution.Directory.VirtualPath, "{SolutionDir}");
+		stringBuilder.Replace(_solutionDirectory.VirtualPath, "{SolutionDir}");
 	}
 
 	public bool Equals(SolutionDirectoryRewriter? other)
@@ -26,6 +26,6 @@ internal class SolutionDirectoryRewriter : ICommandRewriter, IEquatable<Solution
 		if (other is null)
 			return false;
 
-		return _solutionContext.SolutionInstaller.Solution.Directory.VirtualPath.Equals(other._solutionContext.SolutionInstaller.Solution.Directory.VirtualPath);
+		return _solutionDirectory.VirtualPath.Equals(other._solutionDirectory.VirtualPath);
 	}
 }

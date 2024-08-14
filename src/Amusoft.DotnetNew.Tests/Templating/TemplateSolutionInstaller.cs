@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Amusoft.DotnetNew.Tests.Diagnostics;
 using Amusoft.DotnetNew.Tests.Rewriters;
+using Amusoft.DotnetNew.Tests.Scopes;
 using Amusoft.DotnetNew.Tests.Utility;
 
 namespace Amusoft.DotnetNew.Tests.Templating;
@@ -16,13 +17,11 @@ namespace Amusoft.DotnetNew.Tests.Templating;
 /// </summary>
 public class TemplateSolutionInstaller
 {
-	internal SolutionTemplatingContext Context { get; }
-	
 	/// <summary>
 	/// 
 	/// </summary>
 	public Solution Solution { get; }
-
+	
 	/// <summary>
 	/// Constructor that uses the path to the solution file
 	/// </summary>
@@ -33,7 +32,10 @@ public class TemplateSolutionInstaller
 			throw new ArgumentException("Solution files are expected to end with the extension sln");
 		
 		Solution = new Solution(solutionPath);
-		Context = new SolutionTemplatingContext(this, TemplatingDefaults.Instance.LoggerFactory());
+
+		var logger = LoggingScope.Current?.Logger;
+		logger?.AddRewriter(BackslashRewriter.Instance);
+		logger?.AddRewriter(new SolutionDirectoryRewriter(Solution.Directory));
 	}
 
 	/// <summary>
@@ -79,7 +81,7 @@ public class TemplateSolutionInstaller
 		if (!Directory.Exists(fullPath.OriginalPath))
 			throw new DirectoryNotFoundException(fullPath.OriginalPath);
 
-		return await TemplateInstallation.CreateAsync(new ProjectTemplatingContext(Context, fullPath), cancellationToken).ConfigureAwait(false);
+		return await TemplateInstallation.CreateAsync(new ProjectTemplatingContext(this, fullPath), cancellationToken).ConfigureAwait(false);
 	}
 	
 	/// <summary>
@@ -89,7 +91,8 @@ public class TemplateSolutionInstaller
 	/// <param name="kind"></param>
 	public void Print(StringBuilder stringBuilder, PrintKind kind)
 	{
-		Context.CommandLogger.Print(stringBuilder, kind);
+		var logger = LoggingScope.Current?.Logger;
+		logger?.Print(stringBuilder, kind);
 	}
 
 	/// <summary>
