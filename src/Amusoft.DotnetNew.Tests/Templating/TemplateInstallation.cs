@@ -23,7 +23,7 @@ public class TemplateInstallation : IAsyncDisposable
 
 	internal static async Task<TemplateInstallation> CreateAsync(ProjectTemplatingContext projectTemplatingContext, CancellationToken cancellationToken)
 	{
-		await LoggedDotnetCli.RunDotnetCommandAsync(projectTemplatingContext, $"new install \"{projectTemplatingContext.ProjectTemplatePath.OriginalPath}\"", cancellationToken);
+		await LoggedDotnetCli.RunDotnetCommandAsync(projectTemplatingContext.SolutionContext.CommandLogger, $"new install \"{projectTemplatingContext.ProjectTemplatePath.OriginalPath}\"", cancellationToken);
 		var result = new TemplateInstallation(projectTemplatingContext);
 		projectTemplatingContext.SolutionContext.CommandLogger.AddRewriter(new ProjectDirectoryRewriter(projectTemplatingContext));
 		return result;
@@ -48,7 +48,7 @@ public class TemplateInstallation : IAsyncDisposable
 		if (_disposed)
 			return;
 
-		await LoggedDotnetCli.RunDotnetCommandAsync(Context, $"new uninstall \"{Context.ProjectTemplatePath.OriginalPath}\"", cancellationToken);
+		await LoggedDotnetCli.RunDotnetCommandAsync(Context.SolutionContext.CommandLogger, $"new uninstall \"{Context.ProjectTemplatePath.OriginalPath}\"", cancellationToken);
 
 		_disposed = true;
 	}
