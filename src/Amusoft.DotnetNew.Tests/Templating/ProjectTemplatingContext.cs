@@ -7,16 +7,10 @@ namespace Amusoft.DotnetNew.Tests.Templating;
 /// </summary>
 public class ProjectTemplatingContext
 {
-	internal ProjectTemplatingContext(TemplateSolutionInstaller solutionContext, CrossPlatformPath projectTemplatePath)
+	internal ProjectTemplatingContext(CrossPlatformPath projectTemplatePath)
 	{
-		SolutionContext = solutionContext;
 		ProjectTemplatePath = projectTemplatePath;
 	}
-
-	/// <summary>
-	/// Solution file associated with the operations
-	/// </summary>
-	internal TemplateSolutionInstaller SolutionContext { get; set; }
 
 	/// <summary>
 	/// Path of the templating solution

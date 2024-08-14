@@ -81,7 +81,7 @@ public class TemplateSolutionInstaller
 		if (!Directory.Exists(fullPath.OriginalPath))
 			throw new DirectoryNotFoundException(fullPath.OriginalPath);
 
-		return await TemplateInstallation.CreateAsync(new ProjectTemplatingContext(this, fullPath), cancellationToken).ConfigureAwait(false);
+		return await TemplateInstallation.CreateAsync(new ProjectTemplatingContext(fullPath), cancellationToken).ConfigureAwait(false);
 	}
 	
 	/// <summary>
