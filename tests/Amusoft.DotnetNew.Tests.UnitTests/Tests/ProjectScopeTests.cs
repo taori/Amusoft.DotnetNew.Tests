@@ -98,7 +98,7 @@ public class ProjectScopeTests
 			using (var scope = new ProjectScope(currentJoin))
 			{
 				// await Task.Delay(10);
-				var scopePaths = ProjectScope.Current?.ParentScopes.Select(d => d.Path).ToArray();
+				var scopePaths = ProjectScope.Current?.GetParentScopes().Select(d => d.Path).ToArray();
 
 				if (take < limit)
 					await ProcessTestSet(data, take + 1, limit, expected);

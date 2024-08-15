@@ -17,4 +17,6 @@ internal class DotnetCommand : ICommandInvocation
 	{
 		stringBuilder.Append(TemplatingDefaults.Instance.PrintPattern("Command", Command));
 	}
+
+	public static implicit operator DotnetCommand(string command) => new(command);
 }

@@ -34,16 +34,16 @@ public abstract class AmbientScope<T> : IDisposable
 	/// <summary>
 	/// Parent scopes of current scope
 	/// </summary>
-	public IEnumerable<T> ParentScopes
+	public IEnumerable<T> GetParentScopes(Predicate<T>? continueCondition = default)
 	{
-		get
+		var current = this;
+		while (current != null)
 		{
-			var current = this;
-			while (current != null)
+			if (current.ParentScope == null || current._parentScope.Value == null)
+				break;
+
+			if (continueCondition?.Invoke(current._parentScope.Value) ?? true)
 			{
-				if (current.ParentScope == null || current._parentScope.Value == null)
-					break;
-				
 				yield return current._parentScope.Value;
 				current = current._parentScope.Value;
 			}

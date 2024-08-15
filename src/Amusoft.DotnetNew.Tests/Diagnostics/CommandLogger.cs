@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using Amusoft.DotnetNew.Tests.Interfaces;
+using Amusoft.DotnetNew.Tests.Scopes;
 
 namespace Amusoft.DotnetNew.Tests.Diagnostics;
 
 /// <summary>
 /// Logs the output of commands
 /// </summary>
-public class CommandLogger
+public class CommandLogger : ILogReceiver
 {
 	private readonly List<ICommandData> _commandData = new();
 	private readonly HashSet<ICommandRewriter> _rewriters = new();
@@ -24,14 +26,14 @@ public class CommandLogger
 		_rewriters.Add(rewriter);
 	}
 
-	internal void AddResult(ICommandData commandResult)
+	void ILogReceiver.AddResult(ICommandResponse result)
 	{
-		_commandData.Add(commandResult);
+		_commandData.Add(result);
 	}
 	
-	internal void AddInvocation(string command)
+	void ILogReceiver.AddInvocation(ICommandInvocation command)
 	{
-		_commandData.Add(new DotnetCommand(command));
+		_commandData.Add(command);
 	}
 
 	/// <summary>
@@ -70,5 +72,10 @@ public class CommandLogger
 		{
 			commandRewriter.Rewrite(stringBuilder);
 		}
+	}
+
+	internal ILogReceiver AsReceiver()
+	{
+		return this;
 	}
 }

@@ -28,8 +28,7 @@ internal static class LoggedDotnetCli
 			["DOTNET_CLI_UI_LANGUAGE"] = "en",
 		};
 
-		var logger = LoggingScope.Current?.Logger;
-		logger?.AddInvocation($"dotnet {arguments}");
+		LoggingScope.TryAddInvocation($"dotnet {arguments}");
 
 		var command = Cli.Wrap("dotnet")
 			.WithEnvironmentVariables(env)
@@ -41,7 +40,7 @@ internal static class LoggedDotnetCli
 			.ExecuteBufferedAsync(cancellationToken)
 			.ConfigureAwait(false);
 		
-		logger?.AddResult(bufferedCommandResult.ToCommandResult());
+		LoggingScope.TryAddResult(bufferedCommandResult.ToCommandResult());
 
 		return bufferedCommandResult.IsSuccess;
 	}
