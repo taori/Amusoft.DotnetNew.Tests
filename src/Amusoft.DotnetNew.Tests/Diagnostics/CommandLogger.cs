@@ -35,6 +35,18 @@ public class CommandLogger
 	}
 
 	/// <summary>
+	/// prints the output as string
+	/// </summary>
+	/// <param name="kind"></param>
+	/// <returns></returns>
+	public string ToString(PrintKind kind)
+	{
+		var sb = new StringBuilder();
+		Print(sb, kind);
+		return sb.ToString();
+	}
+
+	/// <summary>
 	/// Prints the collected data
 	/// </summary>
 	/// <param name="stringBuilder"></param>

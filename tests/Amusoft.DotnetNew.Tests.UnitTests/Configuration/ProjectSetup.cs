@@ -2,20 +2,25 @@
 using System.IO;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Threading;
 using Amusoft.DotnetNew.Tests.Diagnostics;
+using Amusoft.DotnetNew.Tests.Templating;
+using Amusoft.DotnetNew.Tests.UnitTests.Helpers;
 using VerifyTests;
 using VerifyXunit;
 using Xunit;
 
 [assembly: CollectionBehavior(DisableTestParallelization = true)]
 
-namespace Amusoft.DotnetNew.Tests.UnitTests.Toolkit
+namespace Amusoft.DotnetNew.Tests.UnitTests.Configuration
 {
 	public class ProjectSetup
 	{
 		[ModuleInitializer]
 		public static void Initialize()
 		{
+			var solution = TemplateSolutionInstallerHelper.GetLocalSolution();
+			solution.UninstallTemplatesFromDirectoryAsync("../tests/Resources", CancellationToken.None).GetAwaiter().GetResult();
 			Verifier.DerivePathInfo(PathInfoConfiguration);
 			VerifierSettings.ScrubMember<Exception>(nameof(Exception.StackTrace));
 			VerifierSettings.ScrubMember<CommandResult>(nameof(CommandResult.Runtime));

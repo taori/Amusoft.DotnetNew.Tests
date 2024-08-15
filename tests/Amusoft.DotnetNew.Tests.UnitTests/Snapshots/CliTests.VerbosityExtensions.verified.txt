@@ -1,0 +1,7 @@
+﻿{
+  Minimal: m,
+  Quiet: q,
+  Normal: n,
+  Detailed: d,
+  Diagnostic: diag
+}

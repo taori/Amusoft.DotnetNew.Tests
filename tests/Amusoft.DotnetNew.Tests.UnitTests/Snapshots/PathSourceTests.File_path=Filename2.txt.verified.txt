@@ -1,0 +1,10 @@
+﻿{
+  File: {
+    OriginalPath: {TempPath}Filename2.txt,
+    VirtualPath: {TempPath}Filename2.txt
+  },
+  Directory: {
+    OriginalPath: {TempPath},
+    VirtualPath: {TempPath}
+  }
+}

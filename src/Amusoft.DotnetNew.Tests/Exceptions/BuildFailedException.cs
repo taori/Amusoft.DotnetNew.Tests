@@ -3,14 +3,14 @@
 /// <summary>
 /// 
 /// </summary>
-public class ScaffoldingFailedException : CliException
+public class BuildFailedException : CliException
 {
 	/// <summary>
 	/// 
 	/// </summary>
 	/// <param name="message"></param>
 	/// <param name="output"></param>
-	public ScaffoldingFailedException(string? message, string? output) : base(message, output)
+	public BuildFailedException(string? message, string? output) : base(message, output)
 	{
 	}
 }

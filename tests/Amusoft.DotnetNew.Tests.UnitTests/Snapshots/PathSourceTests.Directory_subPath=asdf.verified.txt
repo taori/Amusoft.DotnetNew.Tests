@@ -1,0 +1,10 @@
+﻿{
+  File: {
+    OriginalPath: {TempPath}asdf,
+    VirtualPath: {TempPath}asdf
+  },
+  Directory: {
+    OriginalPath: {TempPath}asdf,
+    VirtualPath: {TempPath}asdf
+  }
+}

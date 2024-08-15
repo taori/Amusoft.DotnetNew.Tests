@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Amusoft.DotnetNew.Tests.CLI;
 using Amusoft.DotnetNew.Tests.Diagnostics;
 using Amusoft.DotnetNew.Tests.Rewriters;
 using Amusoft.DotnetNew.Tests.Scopes;
@@ -20,7 +21,7 @@ public class TemplateSolutionInstaller
 	/// <summary>
 	/// 
 	/// </summary>
-	public Solution Solution { get; }
+	public PathSource Solution { get; }
 	
 	/// <summary>
 	/// Constructor that uses the path to the solution file
@@ -31,7 +32,7 @@ public class TemplateSolutionInstaller
 		if (!solutionPath.EndsWith(".sln"))
 			throw new ArgumentException("Solution files are expected to end with the extension sln");
 		
-		Solution = new Solution(solutionPath);
+		Solution = new PathSource(solutionPath);
 
 		var logger = LoggingScope.Current?.Logger;
 		logger?.AddRewriter(BackslashRewriter.Instance);
@@ -73,15 +74,29 @@ public class TemplateSolutionInstaller
 	/// <summary>
 	/// Installs a template relative to the solution file
 	/// </summary>
-	/// <param name="path">relative path to the template</param>
+	/// <param name="relativePath">relative path to the template</param>
 	/// <param name="cancellationToken"></param>
-	public async Task<TemplateInstallation> InstallTemplateAsync(string path, CancellationToken cancellationToken)
+	public async Task<TemplateInstallation> InstallTemplateAsync(string relativePath, CancellationToken cancellationToken)
 	{
-		var fullPath = Solution.PathTranslator.GetAbsolutePath(path);
+		var fullPath = Solution.PathTranslator.GetAbsolutePath(relativePath);
 		if (!Directory.Exists(fullPath.OriginalPath))
 			throw new DirectoryNotFoundException(fullPath.OriginalPath);
 
 		return await TemplateInstallation.CreateAsync(new ProjectTemplatingContext(fullPath), cancellationToken).ConfigureAwait(false);
+	}
+
+	/// <summary>
+	/// Installs a template relative to the solution file
+	/// </summary>
+	/// <param name="relativePath">relative path to the template</param>
+	/// <param name="cancellationToken"></param>
+	public async Task<bool> UninstallTemplateAsync(string relativePath, CancellationToken cancellationToken)
+	{
+		var fullPath = Solution.PathTranslator.GetAbsolutePath(relativePath);
+		if (!Directory.Exists(fullPath.OriginalPath))
+			throw new DirectoryNotFoundException(fullPath.OriginalPath);
+
+		return await DotnetCli.UninstallAsync(fullPath.OriginalPath, cancellationToken);
 	}
 	
 	/// <summary>
@@ -118,18 +133,32 @@ public class TemplateSolutionInstaller
 	/// <summary>
 	/// Installs all templates that can be found in the given directory
 	/// </summary>
-	/// <param name="path"></param>
+	/// <param name="relativePath"></param>
 	/// <param name="cancellationToken"></param>
 	/// <returns></returns>
-	public async Task<List<TemplateInstallation>> InstallTemplatesFromDirectoryAsync(string path, CancellationToken cancellationToken)
+	public async Task<List<TemplateInstallation>> InstallTemplatesFromDirectoryAsync(string relativePath, CancellationToken cancellationToken)
 	{
 		var result = new List<TemplateInstallation>();
-		foreach (var projectPath in DiscoverTemplates(path))
+		foreach (var projectPath in DiscoverTemplates(relativePath))
 		{
 			cancellationToken.ThrowIfCancellationRequested();
 			result.Add(await InstallTemplateAsync(projectPath.OriginalPath, cancellationToken));
 		}
 
 		return result;
+	}
+
+	/// <summary>
+	/// Uninstalls all templates that can be found in the given directory
+	/// </summary>
+	/// <param name="relativePath"></param>
+	/// <param name="cancellationToken"></param>
+	public async Task UninstallTemplatesFromDirectoryAsync(string relativePath, CancellationToken cancellationToken)
+	{
+		foreach (var projectPath in DiscoverTemplates(relativePath))
+		{
+			cancellationToken.ThrowIfCancellationRequested();
+			await UninstallTemplateAsync(projectPath.OriginalPath, cancellationToken);
+		}
 	}
 }

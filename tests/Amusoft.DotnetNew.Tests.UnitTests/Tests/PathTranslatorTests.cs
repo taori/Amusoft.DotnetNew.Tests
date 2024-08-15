@@ -18,5 +18,17 @@ public class PathTranslatorTests
 		var translator = new PathTranslator(refDirectory);
 		translator.GetRelativePath(absolutePath).VirtualPath
 			.ShouldBe(new CrossPlatformPath(expected).VirtualPath);
+		
+		//C:\Users\A\AppData\Local\Temp\bf129b466576486fb0bfbb43d5f28b49
+	}
+
+	[Theory]
+	[InlineData(@"C:\Users\A\AppData\Local\Temp\bf129b466576486fb0bfbb43d5f28b49",@"src/All.sln",@"C:/Users/A/AppData/Local/Temp/bf129b466576486fb0bfbb43d5f28b49/src/All.sln")]
+	[InlineData(@"C:\Users\A\AppData\Local\Temp\bf129b466576486fb0bfbb43d5f28b49",@"../src/All.sln",@"C:/Users/A/AppData/Local/Temp/src/All.sln")]
+	public void AbsolutePath(string refpath, string relPath, string expected)
+	{
+		var translator = new PathTranslator(refpath);
+		translator.GetAbsolutePath(relPath).VirtualPath
+			.ShouldBe(new CrossPlatformPath(expected).VirtualPath);
 	}
 }

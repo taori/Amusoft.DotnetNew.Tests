@@ -14,14 +14,14 @@ namespace Amusoft.DotnetNew.Tests.CLI;
 
 internal static class LoggedDotnetCli
 {
-	internal static Task<bool> RunDotnetCommandAsync(Action<ArgumentsBuilder> arguments, CancellationToken cancellationToken)
+	internal static Task<bool> RunDotnetCommandAsync(Action<ArgumentsBuilder> arguments, CancellationToken cancellationToken, Action<Command>? configure = default)
 	{
 		var builder = new ArgumentsBuilder();
 		arguments(builder);
 		return RunDotnetCommandAsync(builder.Build(), cancellationToken);
 	}
 	
-	internal static async Task<bool> RunDotnetCommandAsync(string arguments, CancellationToken cancellationToken)
+	internal static async Task<bool> RunDotnetCommandAsync(string arguments, CancellationToken cancellationToken, Action<Command>? configure = default)
 	{
 		var env = new Dictionary<string, string?>()
 		{
@@ -30,11 +30,14 @@ internal static class LoggedDotnetCli
 
 		var logger = LoggingScope.Current?.Logger;
 		logger?.AddInvocation($"dotnet {arguments}");
-		
-		var bufferedCommandResult = await Cli.Wrap("dotnet")
+
+		var command = Cli.Wrap("dotnet")
 			.WithEnvironmentVariables(env)
 			.WithArguments(arguments)
-			.WithValidation(CommandResultValidation.None)
+			.WithValidation(CommandResultValidation.None);
+		configure?.Invoke(command);
+		
+		var bufferedCommandResult = await command
 			.ExecuteBufferedAsync(cancellationToken)
 			.ConfigureAwait(false);
 		
