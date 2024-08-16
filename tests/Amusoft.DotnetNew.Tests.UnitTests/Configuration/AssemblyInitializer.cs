@@ -4,7 +4,7 @@ using Xunit;
 
 namespace Amusoft.DotnetNew.Tests.UnitTests.Configuration;
 
-[CollectionDefinition("AssemblyInitializer")]
+[CollectionDefinition("AssemblyInitializer", DisableParallelization = true)]
 public class AssemblyInitializer: IAsyncLifetime, ICollectionFixture<AssemblyInitializer>
 {
 	public Task InitializeAsync()
