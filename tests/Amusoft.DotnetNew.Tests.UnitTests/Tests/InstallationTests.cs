@@ -47,10 +47,8 @@ public class InstallationTests : TestBase
 		{
 			var solutionFile = TemplateSolutionInstallerHelper.CreateLocalSolution();
 			var installations = await solutionFile.InstallTemplatesFromDirectoryAsync("../tests/Resources", CancellationToken.None);
-			foreach (var installation in installations.Installations)
-			{
-				await installation.UninstallAsync(CancellationToken.None);
-			}
+
+			await installations.DisposeAsync();
 
 			var log = loggingScope.ToFullString(PrintKind.All);
 			await Verifier.Verify(log);

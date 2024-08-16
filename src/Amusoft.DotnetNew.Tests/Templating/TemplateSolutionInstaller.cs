@@ -138,8 +138,11 @@ public class TemplateInstallationGroup : IAsyncDisposable
 	/// Installations which were made
 	/// </summary>
 	public IReadOnlyList<TemplateInstallation> Installations => _installations;
-	
-	async ValueTask IAsyncDisposable.DisposeAsync()
+
+	/// <summary>
+	/// 
+	/// </summary>
+	public async ValueTask DisposeAsync()
 	{
 		foreach (var installation in _installations)
 		{
