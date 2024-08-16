@@ -11,6 +11,7 @@ internal static class DotnetCli
 	{
 		using (var scope = new LoggingScope(false))
 		{
+			// 106 == already installed
 			var r = await LoggedDotnetCli.RunDotnetCommandAsync($"new install \"{path}\"", cancellationToken, [106]);
 			scope.ParentScope?.AddResult(new TextResult(r ? $"Install for {path} succeded" : $"Install for {path} failed - {scope.ToFullString(PrintKind.All)}"));
 			return r;

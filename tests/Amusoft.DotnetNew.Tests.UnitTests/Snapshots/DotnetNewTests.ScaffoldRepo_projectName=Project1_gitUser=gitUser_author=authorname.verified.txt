@@ -4,6 +4,10 @@
 
 Install for {ProjectDir:dotnet-library-repo} succeded
 
+---Result---
+
+Created temp directory at {Scaffold}
+
 ---Command---
 
 dotnet new dotnet-library-repo -o "{Scaffold}" -n "Project1" --GitProjectName "Project1", --NugetPackageId "Project1",  --ProductName "Project1",  --GitUser "gitUser",  --Author "authorname"
