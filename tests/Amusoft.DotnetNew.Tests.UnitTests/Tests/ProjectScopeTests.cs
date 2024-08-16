@@ -14,7 +14,7 @@ namespace Amusoft.DotnetNew.Tests.UnitTests.Tests;
 
 public class ProjectScopeTests : TestBase
 {
-	[Theory]
+	[Theory(Timeout = 10000)]
 	[InlineData("a", "b")]
 	[InlineData("c", "b")]
 	private void NonThreaded(string v1, string v2)
@@ -36,7 +36,7 @@ public class ProjectScopeTests : TestBase
 		ProjectScope.Current.ShouldBeNull();
 	}
 	
-	[Theory]
+	[Theory(Timeout = 10000)]
 	[InlineData("a", "b")]
 	[InlineData("c", "b")]
 	private async Task ThreadedBehavior(string v1, string v2)

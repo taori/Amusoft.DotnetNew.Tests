@@ -17,7 +17,7 @@ namespace Amusoft.DotnetNew.Tests.UnitTests.Tests;
 
 public class InstallationTests : TestBase
 {
-	[Fact]
+	[Fact(Timeout = 10000)]
 	public async Task TestInstallAndUninstall()
 	{
 		using (var loggingScope = new LoggingScope())
@@ -30,7 +30,7 @@ public class InstallationTests : TestBase
 		}
 	}
 	
-	[Fact]
+	[Fact(Timeout = 10000)]
 	public async Task DiscoverTemplateProjects()
 	{
 		var solutionFile = TemplateSolutionInstallerHelper.CreateLocalSolution();
@@ -40,7 +40,7 @@ public class InstallationTests : TestBase
 		await Verifier.Verify(paths);
 	}
 	
-	[Fact]
+	[Fact(Timeout = 10000)]
 	public async Task InstallFromDiscovery()
 	{
 		using (var loggingScope = new LoggingScope())

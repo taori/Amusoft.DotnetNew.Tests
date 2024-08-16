@@ -15,7 +15,7 @@ namespace Amusoft.DotnetNew.Tests.UnitTests.Tests
     public class TemplateSolutionInstallerTests : TestBase
     {
 
-        [Fact]
+        [Fact(Timeout = 10000)]
         public void SearchingWorks()
         {
             var file = TemplateSolutionInstallerHelper.CreateLocalSolution();
@@ -23,7 +23,7 @@ namespace Amusoft.DotnetNew.Tests.UnitTests.Tests
             Directory.Exists(file.Solution.Directory.OriginalPath).ShouldBeTrue();
         }
 
-        [Fact]
+        [Fact(Timeout = 10000)]
         public void GetAbsolutePathWorks()
         {
             var file = TemplateSolutionInstallerHelper.CreateLocalSolution();
@@ -31,25 +31,25 @@ namespace Amusoft.DotnetNew.Tests.UnitTests.Tests
             absolutePath.ShouldBe(file.Solution.File);
         }
 
-        [Fact]
+        [Fact(Timeout = 10000)]
         public async Task NonSlnThrows()
         {
             await Verifier.Throws(() => new TemplateSolution("bla.txt"));
         }
 
-        [Fact]
+        [Fact(Timeout = 10000)]
         public async Task NoFoundHandling()
         {
             await Verifier.Throws(() => new TemplateSolution(Path.GetTempPath(), 0, "bla44685465.sln"));
         }
 
-        [Fact]
+        [Fact(Timeout = 10000)]
         public async Task DirectoryDoesNotExist()
         {
             await Verifier.Throws(() => new TemplateSolution(Path.GetTempPath() + "2", 0, "bla.sln"));
         }
 
-        [Fact]
+        [Fact(Timeout = 10000)]
         public async Task LocalRelativePathDeclined()
         {
             var file = TemplateSolutionInstallerHelper.CreateLocalSolution();

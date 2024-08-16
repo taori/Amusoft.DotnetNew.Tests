@@ -11,7 +11,7 @@ namespace Amusoft.DotnetNew.Tests.UnitTests.Tests;
 public class TempDirectoryTests : TestBase
 {
 
-	[Fact]
+	[Fact(Timeout = 10000)]
 	public void DirectoryExists()
 	{
 		using (var dir = new TempDirectory())
@@ -20,7 +20,7 @@ public class TempDirectoryTests : TestBase
 		}
 	}
 
-	[Fact]
+	[Fact(Timeout = 10000)]
 	public void DeletedAfterScope()
 	{
 		var path = string.Empty;

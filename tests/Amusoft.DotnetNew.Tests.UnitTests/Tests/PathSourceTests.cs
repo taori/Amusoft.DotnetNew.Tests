@@ -11,7 +11,7 @@ namespace Amusoft.DotnetNew.Tests.UnitTests.Tests;
 
 public class PathSourceTests : TestBase
 {
-	[Theory]
+	[Theory(Timeout = 10000)]
 	[InlineData("Filename.txt")]
 	[InlineData("Filename2.txt")]
 	public async Task File(string path)
@@ -25,7 +25,7 @@ public class PathSourceTests : TestBase
 		).UseParameters(path);
 	}
 	
-	[Theory]
+	[Theory(Timeout = 10000)]
 	[InlineData("asdf")]
 	[InlineData("asdf2")]
 	public async Task Directory(string subPath)

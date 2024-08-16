@@ -13,7 +13,7 @@ namespace Amusoft.DotnetNew.Tests.UnitTests.Tests;
 
 public class CliTests : TestBase
 {
-	[Fact]
+	[Fact(Timeout = 10000)]
 	public async Task VerbosityExtensions()
 	{
 		var values = new Dictionary<Verbosity, string>();

@@ -13,7 +13,7 @@ namespace Amusoft.DotnetNew.Tests.UnitTests.Tests;
 
 public class LoggingScopeTests : TestBase
 {
-	[Fact]
+	[Fact(Timeout = 10000)]
 	void InvocationConnected()
 	{
 		var invocation = new TestInvocation("inner");
@@ -25,7 +25,7 @@ public class LoggingScopeTests : TestBase
 		outer.ToFullString(PrintKind.All).ShouldContain("inner");
 	}
 	
-	[Fact]
+	[Fact(Timeout = 10000)]
 	void InvocationDisconnected()
 	{
 		var invocation = new TestInvocation("inner");
@@ -37,7 +37,7 @@ public class LoggingScopeTests : TestBase
 		outer.ToFullString(PrintKind.All).ShouldNotContain("inner");
 	}
 	
-	[Fact]
+	[Fact(Timeout = 10000)]
 	void InvocationConnectedRecursive()
 	{
 		var invocation = new TestInvocation("inner");
@@ -50,7 +50,7 @@ public class LoggingScopeTests : TestBase
 		scope1.ToFullString(PrintKind.All).ShouldContain("inner");
 	}
 	
-	[Fact]
+	[Fact(Timeout = 10000)]
 	void ResultConnected()
 	{
 		var item = new TestResult("inner");
@@ -62,7 +62,7 @@ public class LoggingScopeTests : TestBase
 		outer.ToFullString(PrintKind.All).ShouldContain("inner");
 	}
 	
-	[Fact]
+	[Fact(Timeout = 10000)]
 	void ResultDisconnected()
 	{
 		var item = new TestResult("inner");
@@ -74,7 +74,7 @@ public class LoggingScopeTests : TestBase
 		outer.ToFullString(PrintKind.All).ShouldNotContain("inner");
 	}
 	
-	[Fact]
+	[Fact(Timeout = 10000)]
 	void ResultConnectedRecursive()
 	{
 		var item = new TestResult("inner");
@@ -87,7 +87,7 @@ public class LoggingScopeTests : TestBase
 		scope1.ToFullString(PrintKind.All).ShouldContain("inner");
 	}
 	
-	[Fact]
+	[Fact(Timeout = 10000)]
 	void RewriterConnected()
 	{
 		var item = new TestRewriter("inner");
@@ -99,7 +99,7 @@ public class LoggingScopeTests : TestBase
 		outer.ToFullString(PrintKind.All).ShouldContain("inner");
 	}
 	
-	[Fact]
+	[Fact(Timeout = 10000)]
 	void RewriterDisconnected()
 	{
 		var item = new TestRewriter("inner");
@@ -111,7 +111,7 @@ public class LoggingScopeTests : TestBase
 		outer.ToFullString(PrintKind.All).ShouldNotContain("inner");
 	}
 	
-	[Fact]
+	[Fact(Timeout = 10000)]
 	void RewriterConnectedRecursive()
 	{
 		var item = new TestRewriter("inner");
