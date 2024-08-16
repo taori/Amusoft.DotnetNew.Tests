@@ -1,16 +1,19 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace Amusoft.DotnetNew.Tests.UnitTests.Configuration;
 
 [CollectionDefinition("AssemblyInitializer")]
-public class AssemblyInitializer: IDisposable, ICollectionFixture<AssemblyInitializer>
+public class AssemblyInitializer: IAsyncLifetime, ICollectionFixture<AssemblyInitializer>
 {
-	public AssemblyInitializer()
+	public Task InitializeAsync()
 	{
+		return Task.CompletedTask;
 	}
 
-	public void Dispose()
+	public Task DisposeAsync()
 	{
+		return Task.CompletedTask;
 	}
 }
