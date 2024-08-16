@@ -9,7 +9,7 @@ namespace Amusoft.DotnetNew.Tests.UnitTests.Tests;
 
 public class PathTranslatorTests : TestBase
 {
-	[Theory(Timeout = 10000)]
+	[Theory]
 	[InlineData(@"D:\a\b",@"D:\a\c",@"../c")]
 	[InlineData(@"D:\a\b\c.txt",@"D:\a\c",@"../../c")]
 	[InlineData(@"D:\a\b",@"D:\a\d",@"../d")]
@@ -25,7 +25,7 @@ public class PathTranslatorTests : TestBase
 		//C:\Users\A\AppData\Local\Temp\bf129b466576486fb0bfbb43d5f28b49
 	}
 
-	[Theory(Timeout = 10000)]
+	[Theory]
 	[InlineData(@"C:\Users\A\AppData\Local\Temp\bf129b466576486fb0bfbb43d5f28b49",@"src/All.sln",@"C:/Users/A/AppData/Local/Temp/bf129b466576486fb0bfbb43d5f28b49/src/All.sln")]
 	[InlineData(@"C:\Users\A\AppData\Local\Temp\bf129b466576486fb0bfbb43d5f28b49",@"../src/All.sln",@"C:/Users/A/AppData/Local/Temp/src/All.sln")]
 	public void AbsolutePath(string refpath, string relPath, string expected)

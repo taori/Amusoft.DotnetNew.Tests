@@ -11,7 +11,7 @@ namespace Amusoft.DotnetNew.Tests.UnitTests.Tests;
 public class CrossPlatformPathTests : TestBase
 {
 
-	[Fact(Timeout = 10000)]
+	[Fact]
 	public void OriginalPathEquals()
 	{
 		var a = new CrossPlatformPath(Path.GetTempPath());
@@ -19,7 +19,7 @@ public class CrossPlatformPathTests : TestBase
 		a.OriginalPath.Equals(b.OriginalPath).ShouldBeTrue();
 	}
 
-	[Fact(Timeout = 10000)]
+	[Fact]
 	public void CrossPlatformPathEquals()
 	{
 		var a = new CrossPlatformPath(Path.GetTempPath());

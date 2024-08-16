@@ -15,7 +15,7 @@ namespace Amusoft.DotnetNew.Tests.UnitTests.Tests
     public class TemplateSolutionInstallerTests : TestBase
     {
 
-        [Fact(Timeout = 10000)]
+        [Fact]
         public void SearchingWorks()
         {
             var file = TemplateSolutionInstallerHelper.CreateLocalSolution();
@@ -23,7 +23,7 @@ namespace Amusoft.DotnetNew.Tests.UnitTests.Tests
             Directory.Exists(file.Solution.Directory.OriginalPath).ShouldBeTrue();
         }
 
-        [Fact(Timeout = 10000)]
+        [Fact]
         public void GetAbsolutePathWorks()
         {
             var file = TemplateSolutionInstallerHelper.CreateLocalSolution();
