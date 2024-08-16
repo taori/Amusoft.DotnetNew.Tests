@@ -24,8 +24,8 @@ public class DotnetNewTests : TestBase
 	{
 		using (var loggingScope = new LoggingScope())
 		{
-			var solution = TemplateSolutionInstallerHelper.GetLocalSolution();
-			var installations = await solution.InstallTemplatesFromDirectoryAsync("../tests/Resources", CancellationToken.None);
+			var solution = TemplateSolutionInstallerHelper.CreateLocalSolution();
+			await using var installations = await solution.InstallTemplatesFromDirectoryAsync("../tests/Resources", CancellationToken.None);
 
 			var args = $"""
 			           -n "{projectName}"
@@ -40,9 +40,14 @@ public class DotnetNewTests : TestBase
 			await scaffold.RestoreAsync($"src/{projectName}.sln", null, CancellationToken.None);
 			await scaffold.BuildAsync($"src/{projectName}.sln", null, CancellationToken.None);
 
-			await Verifier.Verify(loggingScope.ToFullString(PrintKind.All)).UseParameters(projectName, gitUser, author);
+			await Verifier.Verify(new
+				{
+					log = loggingScope.ToFullString(PrintKind.All),
+					files = list,
+				})
+				.UseParameters(projectName, gitUser, author);
 			
-			installations.Count.ShouldBe(1);
+			installations.Installations.Count.ShouldBe(1);
 		}
 	}
 

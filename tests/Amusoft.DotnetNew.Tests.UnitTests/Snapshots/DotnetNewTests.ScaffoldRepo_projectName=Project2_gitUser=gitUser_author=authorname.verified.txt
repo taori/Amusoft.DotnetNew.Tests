@@ -1,22 +1,24 @@
-﻿---Command---
+﻿{
+  log:
+---Command---
 
 dotnet new install "{ProjectDir:dotnet-library-repo}"
 
 ---Result---
 
 {
-  "ExitCode": 106,
+  "ExitCode": 0,
   "Output": "The following template packages will be installed:
    {ProjectDir:dotnet-library-repo}
 
-",
-  "Errors": "{ProjectDir:dotnet-library-repo} is already installed.
-To reinstall the same version of the template package, use /u0027--force/u0027 option:
-   dotnet new install {ProjectDir:dotnet-library-repo} --force
+Success: {ProjectDir:dotnet-library-repo} installed the following templates:
+Template Name             Short Name           Language  Tags         
+------------------------  -------------------  --------  -------------
+nuget library repository  dotnet-library-repo  [C#]      C#/Repository
 
-For details on the exit code, refer to https://aka.ms/templating-exit-codes#106
 ",
-  "Success": false,
+  "Errors": "",
+  "Success": true,
   "Runtime": "00:00:00"
 }
 
@@ -44,3 +46,91 @@ success: restore "{Scaffold}/src/Project2.sln" -v m
 
 success: build {Scaffold}/src/Project2.sln --no-restore -v m
 
+,
+  files: [
+    {
+      OriginalPath: .gitignore,
+      VirtualPath: .gitignore
+    },
+    {
+      OriginalPath: README.md,
+      VirtualPath: README.md
+    },
+    {
+      OriginalPath: build/Project.Common.props,
+      VirtualPath: build/Project.Common.props
+    },
+    {
+      OriginalPath: build/SourceLink.props,
+      VirtualPath: build/SourceLink.props
+    },
+    {
+      OriginalPath: scripts/build.ps1,
+      VirtualPath: scripts/build.ps1
+    },
+    {
+      OriginalPath: src/Directory.Build.props,
+      VirtualPath: src/Directory.Build.props
+    },
+    {
+      OriginalPath: src/nuget.config,
+      VirtualPath: src/nuget.config
+    },
+    {
+      OriginalPath: src/packageIcon.png,
+      VirtualPath: src/packageIcon.png
+    },
+    {
+      OriginalPath: src/Project2.sln,
+      VirtualPath: src/Project2.sln
+    },
+    {
+      OriginalPath: .github/workflows/CI.yml,
+      VirtualPath: .github/workflows/CI.yml
+    },
+    {
+      OriginalPath: src/Project2/Project2.csproj,
+      VirtualPath: src/Project2/Project2.csproj
+    },
+    {
+      OriginalPath: tests/Project2.IntegrationTests/Project2.IntegrationTests.csproj,
+      VirtualPath: tests/Project2.IntegrationTests/Project2.IntegrationTests.csproj
+    },
+    {
+      OriginalPath: tests/Project2.IntegrationTests/UnitTest1.cs,
+      VirtualPath: tests/Project2.IntegrationTests/UnitTest1.cs
+    },
+    {
+      OriginalPath: tests/Project2.IntegrationTests/Usings.cs,
+      VirtualPath: tests/Project2.IntegrationTests/Usings.cs
+    },
+    {
+      OriginalPath: tests/Project2.UnitTests/nlog.config,
+      VirtualPath: tests/Project2.UnitTests/nlog.config
+    },
+    {
+      OriginalPath: tests/Project2.UnitTests/Project2.UnitTests.csproj,
+      VirtualPath: tests/Project2.UnitTests/Project2.UnitTests.csproj
+    },
+    {
+      OriginalPath: tests/Project2.UnitTests/UnitTest1.cs,
+      VirtualPath: tests/Project2.UnitTests/UnitTest1.cs
+    },
+    {
+      OriginalPath: tests/Project2.UnitTests/Configuration/ProjectSetup.cs,
+      VirtualPath: tests/Project2.UnitTests/Configuration/ProjectSetup.cs
+    },
+    {
+      OriginalPath: tests/Project2.UnitTests/Toolkit/EmbeddedResourceReader.cs,
+      VirtualPath: tests/Project2.UnitTests/Toolkit/EmbeddedResourceReader.cs
+    },
+    {
+      OriginalPath: tests/Project2.UnitTests/Toolkit/GlobalSetupFixture.cs,
+      VirtualPath: tests/Project2.UnitTests/Toolkit/GlobalSetupFixture.cs
+    },
+    {
+      OriginalPath: tests/Project2.UnitTests/Toolkit/TestBase.cs,
+      VirtualPath: tests/Project2.UnitTests/Toolkit/TestBase.cs
+    }
+  ]
+}

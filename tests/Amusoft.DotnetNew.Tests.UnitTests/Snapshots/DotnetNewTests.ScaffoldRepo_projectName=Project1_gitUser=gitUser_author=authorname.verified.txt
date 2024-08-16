@@ -1,4 +1,6 @@
-﻿---Command---
+﻿{
+  log:
+---Command---
 
 dotnet new install "{ProjectDir:dotnet-library-repo}"
 
@@ -44,3 +46,91 @@ success: restore "{Scaffold}/src/Project1.sln" -v m
 
 success: build {Scaffold}/src/Project1.sln --no-restore -v m
 
+,
+  files: [
+    {
+      OriginalPath: .gitignore,
+      VirtualPath: .gitignore
+    },
+    {
+      OriginalPath: README.md,
+      VirtualPath: README.md
+    },
+    {
+      OriginalPath: build/Project.Common.props,
+      VirtualPath: build/Project.Common.props
+    },
+    {
+      OriginalPath: build/SourceLink.props,
+      VirtualPath: build/SourceLink.props
+    },
+    {
+      OriginalPath: scripts/build.ps1,
+      VirtualPath: scripts/build.ps1
+    },
+    {
+      OriginalPath: src/Directory.Build.props,
+      VirtualPath: src/Directory.Build.props
+    },
+    {
+      OriginalPath: src/nuget.config,
+      VirtualPath: src/nuget.config
+    },
+    {
+      OriginalPath: src/packageIcon.png,
+      VirtualPath: src/packageIcon.png
+    },
+    {
+      OriginalPath: src/Project1.sln,
+      VirtualPath: src/Project1.sln
+    },
+    {
+      OriginalPath: .github/workflows/CI.yml,
+      VirtualPath: .github/workflows/CI.yml
+    },
+    {
+      OriginalPath: src/Project1/Project1.csproj,
+      VirtualPath: src/Project1/Project1.csproj
+    },
+    {
+      OriginalPath: tests/Project1.IntegrationTests/Project1.IntegrationTests.csproj,
+      VirtualPath: tests/Project1.IntegrationTests/Project1.IntegrationTests.csproj
+    },
+    {
+      OriginalPath: tests/Project1.IntegrationTests/UnitTest1.cs,
+      VirtualPath: tests/Project1.IntegrationTests/UnitTest1.cs
+    },
+    {
+      OriginalPath: tests/Project1.IntegrationTests/Usings.cs,
+      VirtualPath: tests/Project1.IntegrationTests/Usings.cs
+    },
+    {
+      OriginalPath: tests/Project1.UnitTests/nlog.config,
+      VirtualPath: tests/Project1.UnitTests/nlog.config
+    },
+    {
+      OriginalPath: tests/Project1.UnitTests/Project1.UnitTests.csproj,
+      VirtualPath: tests/Project1.UnitTests/Project1.UnitTests.csproj
+    },
+    {
+      OriginalPath: tests/Project1.UnitTests/UnitTest1.cs,
+      VirtualPath: tests/Project1.UnitTests/UnitTest1.cs
+    },
+    {
+      OriginalPath: tests/Project1.UnitTests/Configuration/ProjectSetup.cs,
+      VirtualPath: tests/Project1.UnitTests/Configuration/ProjectSetup.cs
+    },
+    {
+      OriginalPath: tests/Project1.UnitTests/Toolkit/EmbeddedResourceReader.cs,
+      VirtualPath: tests/Project1.UnitTests/Toolkit/EmbeddedResourceReader.cs
+    },
+    {
+      OriginalPath: tests/Project1.UnitTests/Toolkit/GlobalSetupFixture.cs,
+      VirtualPath: tests/Project1.UnitTests/Toolkit/GlobalSetupFixture.cs
+    },
+    {
+      OriginalPath: tests/Project1.UnitTests/Toolkit/TestBase.cs,
+      VirtualPath: tests/Project1.UnitTests/Toolkit/TestBase.cs
+    }
+  ]
+}

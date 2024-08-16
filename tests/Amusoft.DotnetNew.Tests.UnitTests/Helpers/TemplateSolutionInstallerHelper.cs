@@ -5,6 +5,6 @@ namespace Amusoft.DotnetNew.Tests.UnitTests.Helpers;
 
 public static class TemplateSolutionInstallerHelper
 {
-	public static TemplateSolutionInstaller GetLocalSolution() => 
+	public static TemplateSolution CreateLocalSolution() => 
 		new(typeof(InstallationTests).Assembly.Location, 6, "Amusoft.DotnetNew.Tests.sln");
 }

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Threading;
-using Amusoft.DotnetNew.Tests.UnitTests.Helpers;
 using Xunit;
 
 namespace Amusoft.DotnetNew.Tests.UnitTests.Configuration;
@@ -14,6 +12,5 @@ public class AssemblyInitializer: IDisposable, ICollectionFixture<AssemblyInitia
 
 	public void Dispose()
 	{
-		TemplateSolutionInstallerHelper.GetLocalSolution().UninstallTemplatesFromDirectory("../tests/Resources", CancellationToken.None);
 	}
 }

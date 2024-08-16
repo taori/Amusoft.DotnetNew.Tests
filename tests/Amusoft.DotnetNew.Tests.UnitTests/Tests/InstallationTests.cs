@@ -11,6 +11,7 @@ using Shouldly;
 using VerifyXunit;
 using Xunit;
 using Xunit.Abstractions;
+using Xunit.Sdk;
 
 namespace Amusoft.DotnetNew.Tests.UnitTests.Tests;
 
@@ -21,7 +22,7 @@ public class InstallationTests : TestBase
 	{
 		using (var loggingScope = new LoggingScope())
 		{
-			var solutionFile = TemplateSolutionInstallerHelper.GetLocalSolution();
+			var solutionFile = TemplateSolutionInstallerHelper.CreateLocalSolution();
 			var installation = await solutionFile.InstallTemplateAsync("../tests/Resources/dotnet-library-repo", CancellationToken.None);
 			await installation.UninstallAsync(CancellationToken.None);
 
@@ -32,7 +33,7 @@ public class InstallationTests : TestBase
 	[Fact]
 	public async Task DiscoverTemplateProjects()
 	{
-		var solutionFile = TemplateSolutionInstallerHelper.GetLocalSolution();
+		var solutionFile = TemplateSolutionInstallerHelper.CreateLocalSolution();
 		var paths = solutionFile.DiscoverTemplates("../tests/Resources")
 			.Select(d => d.VirtualPath);
 
@@ -44,18 +45,16 @@ public class InstallationTests : TestBase
 	{
 		using (var loggingScope = new LoggingScope())
 		{
-			var solutionFile = TemplateSolutionInstallerHelper.GetLocalSolution();
+			var solutionFile = TemplateSolutionInstallerHelper.CreateLocalSolution();
 			var installations = await solutionFile.InstallTemplatesFromDirectoryAsync("../tests/Resources", CancellationToken.None);
-
-			foreach (var installation in installations)
+			foreach (var installation in installations.Installations)
 			{
 				await installation.UninstallAsync(CancellationToken.None);
 			}
 
-			installations.Count.ShouldBe(1);
-
 			var log = loggingScope.ToFullString(PrintKind.All);
 			await Verifier.Verify(log);
+			
 		}
 	}
 
