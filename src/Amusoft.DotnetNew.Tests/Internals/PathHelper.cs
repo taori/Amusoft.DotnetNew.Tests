@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.IO;
 
 namespace Amusoft.DotnetNew.Tests.Internals;
@@ -9,7 +10,7 @@ internal static class PathHelper
 	{
 		for (int i = 0; i < count; i++)
 		{
-			input = Path.GetDirectoryName(input);
+			input = Path.GetDirectoryName(input) ?? throw new Exception($"Directory for {input} could not be found");
 		}
 
 		return input;
