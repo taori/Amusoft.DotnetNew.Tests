@@ -13,8 +13,8 @@ namespace Amusoft.DotnetNew.Tests.UnitTests.Tests;
 
 public class LoggingScopeTests : TestBase
 {
-	[Fact(Timeout = 10000)]
-	void InvocationConnected()
+	[Fact]
+	public void InvocationConnected()
 	{
 		var invocation = new TestInvocation("inner");
 		
@@ -25,8 +25,8 @@ public class LoggingScopeTests : TestBase
 		outer.ToFullString(PrintKind.All).ShouldContain("inner");
 	}
 	
-	[Fact(Timeout = 10000)]
-	void InvocationDisconnected()
+	[Fact]
+	public void InvocationDisconnected()
 	{
 		var invocation = new TestInvocation("inner");
 		
@@ -37,8 +37,8 @@ public class LoggingScopeTests : TestBase
 		outer.ToFullString(PrintKind.All).ShouldNotContain("inner");
 	}
 	
-	[Fact(Timeout = 10000)]
-	void InvocationConnectedRecursive()
+	[Fact]
+	public void InvocationConnectedRecursive()
 	{
 		var invocation = new TestInvocation("inner");
 		
@@ -50,8 +50,8 @@ public class LoggingScopeTests : TestBase
 		scope1.ToFullString(PrintKind.All).ShouldContain("inner");
 	}
 	
-	[Fact(Timeout = 10000)]
-	void ResultConnected()
+	[Fact]
+	public void ResultConnected()
 	{
 		var item = new TestResult("inner");
 		
@@ -62,8 +62,8 @@ public class LoggingScopeTests : TestBase
 		outer.ToFullString(PrintKind.All).ShouldContain("inner");
 	}
 	
-	[Fact(Timeout = 10000)]
-	void ResultDisconnected()
+	[Fact]
+	public void ResultDisconnected()
 	{
 		var item = new TestResult("inner");
 		
@@ -74,8 +74,8 @@ public class LoggingScopeTests : TestBase
 		outer.ToFullString(PrintKind.All).ShouldNotContain("inner");
 	}
 	
-	[Fact(Timeout = 10000)]
-	void ResultConnectedRecursive()
+	[Fact]
+	public void ResultConnectedRecursive()
 	{
 		var item = new TestResult("inner");
 		
@@ -87,8 +87,8 @@ public class LoggingScopeTests : TestBase
 		scope1.ToFullString(PrintKind.All).ShouldContain("inner");
 	}
 	
-	[Fact(Timeout = 10000)]
-	void RewriterConnected()
+	[Fact]
+	public void RewriterConnected()
 	{
 		var item = new TestRewriter("inner");
 		
@@ -99,8 +99,8 @@ public class LoggingScopeTests : TestBase
 		outer.ToFullString(PrintKind.All).ShouldContain("inner");
 	}
 	
-	[Fact(Timeout = 10000)]
-	void RewriterDisconnected()
+	[Fact]
+	public void RewriterDisconnected()
 	{
 		var item = new TestRewriter("inner");
 		
@@ -111,8 +111,8 @@ public class LoggingScopeTests : TestBase
 		outer.ToFullString(PrintKind.All).ShouldNotContain("inner");
 	}
 	
-	[Fact(Timeout = 10000)]
-	void RewriterConnectedRecursive()
+	[Fact]
+	public void RewriterConnectedRecursive()
 	{
 		var item = new TestRewriter("inner");
 		
