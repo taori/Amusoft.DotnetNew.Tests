@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Amusoft.DotnetNew.Tests.CLI;
 using Amusoft.DotnetNew.Tests.Diagnostics;
+using Amusoft.DotnetNew.Tests.Internals;
 using Amusoft.DotnetNew.Tests.Rewriters;
 using Amusoft.DotnetNew.Tests.Scopes;
 using Amusoft.DotnetNew.Tests.Utility;
@@ -101,7 +103,7 @@ public class TemplateSolution
 		var templateFiles = Directory.EnumerateFiles(folder.OriginalPath, "template.json", SearchOption.AllDirectories);
 		
 		return templateFiles
-			.Select(path => Path.Combine(path.Split(Path.DirectorySeparatorChar)[..^2]))
+			.Select(path => PathHelper.AbsoluteTrimPathEnd(path, 2))
 			.Select(path => Solution.PathTranslator.GetRelativePath(path))
 			.ToArray();
 	}
