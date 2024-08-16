@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Amusoft.DotnetNew.Tests.CLI;
@@ -66,11 +67,16 @@ public class Scaffold : IAsyncDisposable
 	/// Gets all paths within the temp directory with their relative paths
 	/// </summary>
 	/// <returns></returns>
-	public IEnumerable<CrossPlatformPath> GetDirectoryContents()
+	public IEnumerable<string> GetDirectoryContents()
 	{
-		foreach (var fullPath in Directory.EnumerateFiles(_tempPath.Directory.OriginalPath, "*", SearchOption.AllDirectories))
+		return Files().OrderBy(d => d);
+
+		IEnumerable<string> Files()
 		{
-			yield return _tempPath.PathTranslator.GetRelativePath(fullPath);
+			foreach (var fullPath in Directory.EnumerateFiles(_tempPath.Directory.OriginalPath, "*", SearchOption.AllDirectories))
+			{
+				yield return _tempPath.PathTranslator.GetRelativePath(fullPath).VirtualPath;
+			}
 		}
 	}
 }
