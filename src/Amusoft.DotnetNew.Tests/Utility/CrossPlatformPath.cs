@@ -42,7 +42,7 @@ public class CrossPlatformPath : IEquatable<CrossPlatformPath>
 	/// <returns></returns>
 	public override string ToString()
 	{
-		return VirtualPath;
+		return $"{OriginalPath} -> {VirtualPath}";
 	}
 
 	/// <summary>

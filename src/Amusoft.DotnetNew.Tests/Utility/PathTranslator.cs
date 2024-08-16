@@ -42,9 +42,16 @@ public class PathTranslator
 	/// <returns></returns>
 	public CrossPlatformPath GetRelativePath(string absolutePath)
 	{
-		var baseUri = new Uri(_referenceDirectory.VirtualPath.TrimEnd('/') + '/', UriKind.Absolute);
-		var refUri = new Uri(new CrossPlatformPath(absolutePath).VirtualPath.TrimEnd('/') + '/', UriKind.Absolute);
-		var relUri = baseUri.MakeRelativeUri(refUri);
-		return new CrossPlatformPath(relUri.OriginalString.TrimEnd('/'));
+		try
+		{
+			var baseUri = new Uri(_referenceDirectory.VirtualPath.TrimEnd('/') + '/', UriKind.Absolute);
+			var refUri = new Uri(new CrossPlatformPath(absolutePath).VirtualPath.TrimEnd('/') + '/', UriKind.Absolute);
+			var relUri = baseUri.MakeRelativeUri(refUri);
+			return new CrossPlatformPath(relUri.OriginalString.TrimEnd('/'));
+		}
+		catch (UriFormatException e)
+		{
+			throw new Exception($"Failed to resolve path for absolute path {absolutePath} with reference directory {_referenceDirectory}", e);
+		}
 	}
 }
