@@ -1,14 +1,16 @@
-﻿using Amusoft.XUnit.NLog.Extensions;
+﻿using Amusoft.DotnetNew.Tests.UnitTests.Configuration;
+using Amusoft.XUnit.NLog.Extensions;
 using Xunit;
 using Xunit.Abstractions;
 
 namespace Amusoft.DotnetNew.Tests.UnitTests.Toolkit
 {
-	public class TestBase : LoggedTestBase, IClassFixture<GlobalSetupFixture>
+	[Collection("AssemblyInitializer")]
+	public class TestBase : LoggedTestBase
 	{
-		private readonly GlobalSetupFixture _data;
+		private readonly AssemblyInitializer _data;
 
-		public TestBase(ITestOutputHelper outputHelper, GlobalSetupFixture data) : base(outputHelper)
+		public TestBase(ITestOutputHelper outputHelper, AssemblyInitializer data) : base(outputHelper)
 		{
 			_data = data;
 		}

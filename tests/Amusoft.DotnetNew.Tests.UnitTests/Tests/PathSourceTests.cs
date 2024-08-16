@@ -1,12 +1,15 @@
 ﻿using System.IO;
 using System.Threading.Tasks;
 using Amusoft.DotnetNew.Tests.Templating;
+using Amusoft.DotnetNew.Tests.UnitTests.Configuration;
+using Amusoft.DotnetNew.Tests.UnitTests.Toolkit;
 using VerifyXunit;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Amusoft.DotnetNew.Tests.UnitTests.Tests;
 
-public class PathSourceTests
+public class PathSourceTests : TestBase
 {
 	[Theory]
 	[InlineData("Filename.txt")]
@@ -34,5 +37,9 @@ public class PathSourceTests
 				Directory = pathSource.Directory,
 			}
 		).UseParameters(subPath);
+	}
+
+	public PathSourceTests(ITestOutputHelper outputHelper, AssemblyInitializer data) : base(outputHelper, data)
+	{
 	}
 }

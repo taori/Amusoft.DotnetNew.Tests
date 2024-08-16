@@ -1,6 +1,7 @@
 using System.IO;
 using System.Threading.Tasks;
 using Amusoft.DotnetNew.Tests.Templating;
+using Amusoft.DotnetNew.Tests.UnitTests.Configuration;
 using Amusoft.DotnetNew.Tests.UnitTests.Toolkit;
 using Amusoft.DotnetNew.Tests.Utility;
 using Shouldly;
@@ -12,9 +13,6 @@ namespace Amusoft.DotnetNew.Tests.UnitTests.Tests
 {
     public class TemplateSolutionInstallerTests : TestBase
     {
-        public TemplateSolutionInstallerTests(ITestOutputHelper outputHelper, GlobalSetupFixture data) : base(outputHelper, data)
-        {
-        }
 
         [Fact]
         public void SearchingWorks()
@@ -55,6 +53,10 @@ namespace Amusoft.DotnetNew.Tests.UnitTests.Tests
         {
             var file = new TemplateSolutionInstaller(typeof(TemplateSolutionInstallerTests).Assembly.Location, 6, "Amusoft.DotnetNew.Tests.sln");
             await Verifier.Throws(() => file.Solution.PathTranslator.GetAbsolutePath("./Amusoft.DotnetNew.Tests.sln"));
+        }
+
+        public TemplateSolutionInstallerTests(ITestOutputHelper outputHelper, AssemblyInitializer data) : base(outputHelper, data)
+        {
         }
     }
 }

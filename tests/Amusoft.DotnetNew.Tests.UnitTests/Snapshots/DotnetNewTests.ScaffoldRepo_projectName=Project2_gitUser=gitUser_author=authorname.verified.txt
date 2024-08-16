@@ -36,58 +36,11 @@ dotnet new dotnet-library-repo -o "{Scaffold}" -n "Project2" --GitProjectName "P
   "Runtime": "00:00:00"
 }
 
----Command---
+---Result---
 
-dotnet restore "{Scaffold}/src/Project2.sln" -v m --disable-parallel
+success: restore "{Scaffold}/src/Project2.sln" -v m
 
 ---Result---
 
-{
-  "ExitCode": 0,
-  "Output": "  Determining projects to restore...
-  Restored {Scaffold}/tests/Project2.IntegrationTests/Project2.IntegrationTests.csproj (in 336 ms).
-  Restored {Scaffold}/tests/Project2.UnitTests/Project2.UnitTests.csproj (in 99 ms).
-  Restored {Scaffold}/src/Project2/Project2.csproj (in 50 ms).
-",
-  "Errors": "",
-  "Success": true,
-  "Runtime": "00:00:00"
-}
-
----Command---
-
-dotnet build {Scaffold}/src/Project2.sln --no-restore -v m
-
----Result---
-
-{
-  "ExitCode": 0,
-  "Output": "{UserProfile}/.nuget/packages/microsoft.build.tasks.git/1.0.0/build/Microsoft.Build.Tasks.Git.targets(24,5): warning : Unable to locate repository with working directory that contains directory /u0027{Scaffold}/src/Project2/u0027. [{Scaffold}/src/Project2/Project2.csproj::TargetFramework=netstandard2.0]
-{UserProfile}/.nuget/packages/microsoft.build.tasks.git/1.0.0/build/Microsoft.Build.Tasks.Git.targets(47,5): warning : Unable to locate repository with working directory that contains directory /u0027{Scaffold}/src/Project2/u0027. [{Scaffold}/src/Project2/Project2.csproj::TargetFramework=netstandard2.0]
-{UserProfile}/.nuget/packages/microsoft.sourcelink.common/1.0.0/build/Microsoft.SourceLink.Common.targets(52,5): warning : Source control information is not available - the generated source link is empty. [{Scaffold}/src/Project2/Project2.csproj::TargetFramework=netstandard2.0]
-  Project2.IntegrationTests -/u003E {Scaffold}/tests/Project2.IntegrationTests/bin/Debug/net6.0/Project2.IntegrationTests.dll
-  Project2 -/u003E {Scaffold}/src/Project2/bin/Debug/netstandard2.0/Project2.dll
-{UserProfile}/.nuget/packages/microsoft.build.tasks.git/1.0.0/build/Microsoft.Build.Tasks.Git.targets(24,5): warning : Unable to locate repository with working directory that contains directory /u0027{Scaffold}/src/Project2/u0027. [{Scaffold}/src/Project2/Project2.csproj::TargetFramework=net6.0]
-{UserProfile}/.nuget/packages/microsoft.build.tasks.git/1.0.0/build/Microsoft.Build.Tasks.Git.targets(47,5): warning : Unable to locate repository with working directory that contains directory /u0027{Scaffold}/src/Project2/u0027. [{Scaffold}/src/Project2/Project2.csproj::TargetFramework=net6.0]
-{UserProfile}/.nuget/packages/microsoft.sourcelink.common/1.0.0/build/Microsoft.SourceLink.Common.targets(52,5): warning : Source control information is not available - the generated source link is empty. [{Scaffold}/src/Project2/Project2.csproj::TargetFramework=net6.0]
-  Project2 -/u003E {Scaffold}/src/Project2/bin/Debug/net6.0/Project2.dll
-  Project2.UnitTests -/u003E {Scaffold}/tests/Project2.UnitTests/bin/Debug/net6.0/Project2.UnitTests.dll
-
-Build succeeded.
-
-{UserProfile}/.nuget/packages/microsoft.build.tasks.git/1.0.0/build/Microsoft.Build.Tasks.Git.targets(24,5): warning : Unable to locate repository with working directory that contains directory /u0027{Scaffold}/src/Project2/u0027. [{Scaffold}/src/Project2/Project2.csproj::TargetFramework=netstandard2.0]
-{UserProfile}/.nuget/packages/microsoft.build.tasks.git/1.0.0/build/Microsoft.Build.Tasks.Git.targets(47,5): warning : Unable to locate repository with working directory that contains directory /u0027{Scaffold}/src/Project2/u0027. [{Scaffold}/src/Project2/Project2.csproj::TargetFramework=netstandard2.0]
-{UserProfile}/.nuget/packages/microsoft.sourcelink.common/1.0.0/build/Microsoft.SourceLink.Common.targets(52,5): warning : Source control information is not available - the generated source link is empty. [{Scaffold}/src/Project2/Project2.csproj::TargetFramework=netstandard2.0]
-{UserProfile}/.nuget/packages/microsoft.build.tasks.git/1.0.0/build/Microsoft.Build.Tasks.Git.targets(24,5): warning : Unable to locate repository with working directory that contains directory /u0027{Scaffold}/src/Project2/u0027. [{Scaffold}/src/Project2/Project2.csproj::TargetFramework=net6.0]
-{UserProfile}/.nuget/packages/microsoft.build.tasks.git/1.0.0/build/Microsoft.Build.Tasks.Git.targets(47,5): warning : Unable to locate repository with working directory that contains directory /u0027{Scaffold}/src/Project2/u0027. [{Scaffold}/src/Project2/Project2.csproj::TargetFramework=net6.0]
-{UserProfile}/.nuget/packages/microsoft.sourcelink.common/1.0.0/build/Microsoft.SourceLink.Common.targets(52,5): warning : Source control information is not available - the generated source link is empty. [{Scaffold}/src/Project2/Project2.csproj::TargetFramework=net6.0]
-    6 Warning(s)
-    0 Error(s)
-
-Time Elapsed 00:00:01.38
-",
-  "Errors": "",
-  "Success": true,
-  "Runtime": "00:00:00"
-}
+success: build {Scaffold}/src/Project2.sln --no-restore -v m
 

@@ -1,10 +1,13 @@
-﻿using Amusoft.DotnetNew.Tests.Utility;
+﻿using Amusoft.DotnetNew.Tests.UnitTests.Configuration;
+using Amusoft.DotnetNew.Tests.UnitTests.Toolkit;
+using Amusoft.DotnetNew.Tests.Utility;
 using Shouldly;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Amusoft.DotnetNew.Tests.UnitTests.Tests;
 
-public class PathTranslatorTests
+public class PathTranslatorTests : TestBase
 {
 	[Theory]
 	[InlineData(@"D:\a\b",@"D:\a\c",@"../c")]
@@ -30,5 +33,9 @@ public class PathTranslatorTests
 		var translator = new PathTranslator(refpath);
 		translator.GetAbsolutePath(relPath).VirtualPath
 			.ShouldBe(new CrossPlatformPath(expected).VirtualPath);
+	}
+
+	public PathTranslatorTests(ITestOutputHelper outputHelper, AssemblyInitializer data) : base(outputHelper, data)
+	{
 	}
 }

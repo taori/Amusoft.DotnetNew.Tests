@@ -21,7 +21,7 @@ internal record class CommandResult(
 	string Errors,
 	bool Success,
 	TimeSpan Runtime
-) : ICommandResponse
+) : ICommandResult
 {
 	public void Print(StringBuilder stringBuilder)
 	{

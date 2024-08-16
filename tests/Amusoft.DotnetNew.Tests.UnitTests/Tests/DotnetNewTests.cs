@@ -5,14 +5,17 @@ using System.Threading;
 using System.Threading.Tasks;
 using Amusoft.DotnetNew.Tests.Diagnostics;
 using Amusoft.DotnetNew.Tests.Scopes;
+using Amusoft.DotnetNew.Tests.UnitTests.Configuration;
 using Amusoft.DotnetNew.Tests.UnitTests.Helpers;
+using Amusoft.DotnetNew.Tests.UnitTests.Toolkit;
 using Shouldly;
 using VerifyXunit;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Amusoft.DotnetNew.Tests.UnitTests.Tests;
 
-public class DotnetNewTests
+public class DotnetNewTests : TestBase
 {
 	[Theory]
 	[InlineData("Project1", "gitUser", "authorname")]
@@ -37,12 +40,13 @@ public class DotnetNewTests
 			await scaffold.RestoreAsync($"src/{projectName}.sln", null, CancellationToken.None);
 			await scaffold.BuildAsync($"src/{projectName}.sln", null, CancellationToken.None);
 
-			var sb = new StringBuilder();
-			loggingScope.Logger.Print(sb, PrintKind.All);
-			var log = sb.ToString();
-			await Verifier.Verify(log).UseParameters(projectName, gitUser, author);
+			await Verifier.Verify(loggingScope.ToFullString(PrintKind.All)).UseParameters(projectName, gitUser, author);
 			
 			installations.Count.ShouldBe(1);
 		}
+	}
+
+	public DotnetNewTests(ITestOutputHelper outputHelper, AssemblyInitializer data) : base(outputHelper, data)
+	{
 	}
 }

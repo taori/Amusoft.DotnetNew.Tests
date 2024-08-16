@@ -4,14 +4,17 @@ using System.Threading;
 using System.Threading.Tasks;
 using Amusoft.DotnetNew.Tests.Diagnostics;
 using Amusoft.DotnetNew.Tests.Scopes;
+using Amusoft.DotnetNew.Tests.UnitTests.Configuration;
 using Amusoft.DotnetNew.Tests.UnitTests.Helpers;
+using Amusoft.DotnetNew.Tests.UnitTests.Toolkit;
 using Shouldly;
 using VerifyXunit;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Amusoft.DotnetNew.Tests.UnitTests.Tests;
 
-public class InstallationTests
+public class InstallationTests : TestBase
 {
 	[Fact]
 	public async Task TestInstallAndUninstall()
@@ -22,10 +25,7 @@ public class InstallationTests
 			var installation = await solutionFile.InstallTemplateAsync("../tests/Resources/dotnet-library-repo", CancellationToken.None);
 			await installation.UninstallAsync(CancellationToken.None);
 
-			var sb = new StringBuilder();
-			solutionFile.Print(sb, PrintKind.All);
-
-			await Verifier.Verify(sb.ToString());
+			await Verifier.Verify(loggingScope.ToFullString(PrintKind.All));
 		}
 	}
 	
@@ -54,9 +54,12 @@ public class InstallationTests
 
 			installations.Count.ShouldBe(1);
 
-			var sb = new StringBuilder();
-			loggingScope.Logger.Print(sb, PrintKind.All);
-			await Verifier.Verify(sb.ToString());
+			var log = loggingScope.ToFullString(PrintKind.All);
+			await Verifier.Verify(log);
 		}
+	}
+
+	public InstallationTests(ITestOutputHelper outputHelper, AssemblyInitializer data) : base(outputHelper, data)
+	{
 	}
 }

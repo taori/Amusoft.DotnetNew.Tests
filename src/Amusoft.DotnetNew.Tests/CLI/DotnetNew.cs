@@ -35,7 +35,7 @@ public static class DotnetNew
 		
 		LoggingScope.TryAddRewriter(new FolderNameAliasRewriter(new CrossPlatformPath(tempDirectory.Path), "Scaffold"));
 		var result = await LoggedDotnetCli.RunDotnetCommandAsync(fullArgs, cancellationToken);
-		var output = LoggingScope.ToString(PrintKind.All);
+		var output = LoggingScope.ToFullString();
 		if (!result)
 			throw new BuildFailedException(fullArgs, output);
 		
@@ -60,14 +60,21 @@ public static class DotnetNew
 				throw new FileNotFoundException(fullPath);
 			throw new DirectoryNotFoundException(fullPath);
 		}
-		
-		var fullArgs = arguments is null
-			? $"build {fullPath} --no-restore -v {verbosity.ToVerbosityText()}"
-			: $"build {fullPath} --no-restore -v {verbosity.ToVerbosityText()} {arguments}";
-		var result = await LoggedDotnetCli.RunDotnetCommandAsync(fullArgs, cancellationToken);
-		var output = LoggingScope.ToString(PrintKind.All);
-		if (!result)
-			throw new BuildFailedException(fullArgs, output);
+
+		using (var loggingScope = new LoggingScope(false))
+		{
+			var fullArgs = arguments is null
+				? $"build {fullPath} --no-restore -v {verbosity.ToVerbosityText()}"
+				: $"build {fullPath} --no-restore -v {verbosity.ToVerbosityText()} {arguments}";
+			if (await LoggedDotnetCli.RunDotnetCommandAsync(fullArgs, cancellationToken))
+			{
+				loggingScope.ParentScope?.AddResult(new TextResult($"success: {fullArgs}"));
+			}
+			else
+			{
+				throw new BuildFailedException(fullArgs, loggingScope.ToFullString(PrintKind.All));
+			}
+		}
 	}
 
 	/// <summary>
@@ -88,13 +95,20 @@ public static class DotnetNew
 				throw new FileNotFoundException(fullPath);
 			throw new DirectoryNotFoundException(fullPath);
 		}
-		
-		var fullArgs = arguments is null
-			? $"restore \"{fullPath}\" -v {verbosity.ToVerbosityText()} --disable-parallel"
-			: $"restore \"{fullPath}\" -v {verbosity.ToVerbosityText()} --disable-parallel {arguments}";
-		var result = await LoggedDotnetCli.RunDotnetCommandAsync(fullArgs, cancellationToken);
-		var output = LoggingScope.ToString(PrintKind.All);
-		if (!result)
-			throw new BuildFailedException(fullArgs, output);
+
+		using(var loggingScope = new LoggingScope(false))
+		{
+			var fullArgs = arguments is null
+				? $"restore \"{fullPath}\" -v {verbosity.ToVerbosityText()}"
+				: $"restore \"{fullPath}\" -v {verbosity.ToVerbosityText()} {arguments}";
+			if (await LoggedDotnetCli.RunDotnetCommandAsync(fullArgs, cancellationToken))
+			{
+				loggingScope.ParentScope?.AddResult(new TextResult($"success: {fullArgs}"));
+			}
+			else
+			{
+				throw new BuildFailedException(fullArgs, loggingScope.ToFullString(PrintKind.All));
+			}
+		}
 	}
 }

@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using Amusoft.DotnetNew.Tests.Templating;
+using Amusoft.DotnetNew.Tests.UnitTests.Configuration;
 using Amusoft.DotnetNew.Tests.UnitTests.Toolkit;
 using Shouldly;
 using Xunit;
@@ -9,9 +10,6 @@ namespace Amusoft.DotnetNew.Tests.UnitTests.Tests;
 
 public class TempDirectoryTests : TestBase
 {
-	public TempDirectoryTests(ITestOutputHelper outputHelper, GlobalSetupFixture data) : base(outputHelper, data)
-	{
-	}
 
 	[Fact]
 	public void DirectoryExists()
@@ -32,5 +30,9 @@ public class TempDirectoryTests : TestBase
 		}
 		
 		Directory.Exists(path).ShouldBeFalse();
+	}
+
+	public TempDirectoryTests(ITestOutputHelper outputHelper, AssemblyInitializer data) : base(outputHelper, data)
+	{
 	}
 }

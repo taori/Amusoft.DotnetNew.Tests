@@ -4,12 +4,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using Amusoft.DotnetNew.Tests.Scopes;
 using Amusoft.DotnetNew.Tests.Templating;
+using Amusoft.DotnetNew.Tests.UnitTests.Configuration;
+using Amusoft.DotnetNew.Tests.UnitTests.Toolkit;
 using Shouldly;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Amusoft.DotnetNew.Tests.UnitTests.Tests;
 
-public class ProjectScopeTests
+public class ProjectScopeTests : TestBase
 {
 	[Theory]
 	[InlineData("a", "b")]
@@ -106,5 +109,9 @@ public class ProjectScopeTests
 					scopePaths.ShouldBe(expected);
 			}
 		}
+	}
+
+	public ProjectScopeTests(ITestOutputHelper outputHelper, AssemblyInitializer data) : base(outputHelper, data)
+	{
 	}
 }

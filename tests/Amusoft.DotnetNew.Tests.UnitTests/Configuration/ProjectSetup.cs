@@ -19,8 +19,6 @@ namespace Amusoft.DotnetNew.Tests.UnitTests.Configuration
 		[ModuleInitializer]
 		public static void Initialize()
 		{
-			var solution = TemplateSolutionInstallerHelper.GetLocalSolution();
-			solution.UninstallTemplatesFromDirectoryAsync("../tests/Resources", CancellationToken.None).GetAwaiter().GetResult();
 			Verifier.DerivePathInfo(PathInfoConfiguration);
 			VerifierSettings.ScrubMember<Exception>(nameof(Exception.StackTrace));
 			VerifierSettings.ScrubMember<CommandResult>(nameof(CommandResult.Runtime));

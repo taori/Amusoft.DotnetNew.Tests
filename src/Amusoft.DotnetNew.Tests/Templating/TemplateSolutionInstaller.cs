@@ -34,9 +34,8 @@ public class TemplateSolutionInstaller
 		
 		Solution = new PathSource(solutionPath);
 
-		var logger = LoggingScope.Current?.Logger;
-		logger?.AddRewriter(BackslashRewriter.Instance);
-		logger?.AddRewriter(new SolutionDirectoryRewriter(Solution.Directory));
+		LoggingScope.TryAddRewriter(BackslashRewriter.Instance);
+		LoggingScope.TryAddRewriter(new SolutionDirectoryRewriter(Solution.Directory));
 	}
 
 	/// <summary>
@@ -98,17 +97,6 @@ public class TemplateSolutionInstaller
 
 		return await DotnetCli.UninstallAsync(fullPath.OriginalPath, cancellationToken);
 	}
-	
-	/// <summary>
-	/// Prints the commands as specified to the given StringBuilder 
-	/// </summary>
-	/// <param name="stringBuilder"></param>
-	/// <param name="kind"></param>
-	public void Print(StringBuilder stringBuilder, PrintKind kind)
-	{
-		var logger = LoggingScope.Current?.Logger;
-		logger?.Print(stringBuilder, kind);
-	}
 
 	/// <summary>
 	/// Finds the folders with template.json files in them
@@ -153,12 +141,16 @@ public class TemplateSolutionInstaller
 	/// </summary>
 	/// <param name="relativePath"></param>
 	/// <param name="cancellationToken"></param>
-	public async Task UninstallTemplatesFromDirectoryAsync(string relativePath, CancellationToken cancellationToken)
+	public void UninstallTemplatesFromDirectory(string relativePath, CancellationToken cancellationToken)
 	{
-		foreach (var projectPath in DiscoverTemplates(relativePath))
-		{
-			cancellationToken.ThrowIfCancellationRequested();
-			await UninstallTemplateAsync(projectPath.OriginalPath, cancellationToken);
-		}
+		Task.Run(async () =>
+			{
+				foreach (var projectPath in DiscoverTemplates(relativePath))
+				{
+					cancellationToken.ThrowIfCancellationRequested();
+					await UninstallTemplateAsync(projectPath.OriginalPath, cancellationToken);
+				}
+			}
+		).GetAwaiter().GetResult();
 	}
 }

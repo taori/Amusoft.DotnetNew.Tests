@@ -2,13 +2,7 @@
 
 namespace Amusoft.DotnetNew.Tests.Interfaces;
 
-/// <summary>
-/// Printable class
-/// </summary>
-public interface IPrintable
+internal interface IPrintable
 {
-	/// <summary>
-	/// 
-	/// </summary>
 	void Print(StringBuilder stringBuilder);
 }
