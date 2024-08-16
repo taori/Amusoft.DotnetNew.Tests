@@ -34,7 +34,7 @@ public static class DotnetNew
 			: $"new {template} -o \"{tempDirectory.Path}\"";
 		
 		LoggingScope.TryAddRewriter(new FolderNameAliasRewriter(new CrossPlatformPath(tempDirectory.Path), "Scaffold"));
-		var result = await LoggedDotnetCli.RunDotnetCommandAsync(fullArgs, cancellationToken);
+		var result = await LoggedDotnetCli.RunDotnetCommandAsync(fullArgs, cancellationToken, []);
 		var output = LoggingScope.ToFullString();
 		if (!result)
 			throw new BuildFailedException(fullArgs, output);
@@ -66,7 +66,7 @@ public static class DotnetNew
 			var fullArgs = arguments is null
 				? $"build {fullPath} --no-restore -v {verbosity.ToVerbosityText()}"
 				: $"build {fullPath} --no-restore -v {verbosity.ToVerbosityText()} {arguments}";
-			if (await LoggedDotnetCli.RunDotnetCommandAsync(fullArgs, cancellationToken))
+			if (await LoggedDotnetCli.RunDotnetCommandAsync(fullArgs, cancellationToken, []))
 			{
 				loggingScope.ParentScope?.AddResult(new TextResult($"success: {fullArgs}"));
 			}
@@ -101,7 +101,7 @@ public static class DotnetNew
 			var fullArgs = arguments is null
 				? $"restore \"{fullPath}\" -v {verbosity.ToVerbosityText()}"
 				: $"restore \"{fullPath}\" -v {verbosity.ToVerbosityText()} {arguments}";
-			if (await LoggedDotnetCli.RunDotnetCommandAsync(fullArgs, cancellationToken))
+			if (await LoggedDotnetCli.RunDotnetCommandAsync(fullArgs, cancellationToken, []))
 			{
 				loggingScope.ParentScope?.AddResult(new TextResult($"success: {fullArgs}"));
 			}

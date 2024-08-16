@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Amusoft.DotnetNew.Tests.Diagnostics;
@@ -14,14 +15,14 @@ namespace Amusoft.DotnetNew.Tests.CLI;
 
 internal static class LoggedDotnetCli
 {
-	internal static Task<bool> RunDotnetCommandAsync(Action<ArgumentsBuilder> arguments, CancellationToken cancellationToken, Action<Command>? configure = default)
+	internal static Task<bool> RunDotnetCommandAsync(Action<ArgumentsBuilder> arguments, CancellationToken cancellationToken, int[] acceptAsSuccess, Action<Command>? configure = default)
 	{
 		var builder = new ArgumentsBuilder();
 		arguments(builder);
-		return RunDotnetCommandAsync(builder.Build(), cancellationToken);
+		return RunDotnetCommandAsync(builder.Build(), cancellationToken, acceptAsSuccess, configure);
 	}
 	
-	internal static async Task<bool> RunDotnetCommandAsync(string arguments, CancellationToken cancellationToken, Action<Command>? configure = default)
+	internal static async Task<bool> RunDotnetCommandAsync(string arguments, CancellationToken cancellationToken, int[] acceptAsSuccess, Action<Command>? configure = default)
 	{
 		var env = new Dictionary<string, string?>()
 		{
@@ -42,7 +43,7 @@ internal static class LoggedDotnetCli
 		
 		LoggingScope.TryAddResult(bufferedCommandResult.ToCommandResult());
 
-		return bufferedCommandResult.IsSuccess;
+		return bufferedCommandResult.IsSuccess || acceptAsSuccess.Contains(bufferedCommandResult.ExitCode);
 	}
 	
 }
