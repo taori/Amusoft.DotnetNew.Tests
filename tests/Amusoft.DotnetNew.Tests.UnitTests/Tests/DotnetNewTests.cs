@@ -20,7 +20,7 @@ public class DotnetNewTests : TestBase
 	// 15m
 	[InlineData("Project1", "gitUser", "authorname")]
 	[InlineData("Project2", "gitUser", "authorname")]
-	[Trait("Category","SkipInCI")]
+	// [Trait("Category","SkipInCI")]
 	[Theory(Timeout = 900_000)]
 	private async Task ScaffoldRepo(string projectName, string gitUser, string author)
 	{
