@@ -25,12 +25,18 @@ public class TempDirectory : IDisposable
 	/// </summary>
 	public string Path { get; set; }
 
+	private bool _disposed;
 	/// <summary>
 	/// Dispose
 	/// </summary>
 	public void Dispose()
 	{
+		if (_disposed)
+			return;
+		_disposed = true;
+		
 		Directory.Delete(Path, true);
 		LoggingScope.TryAddResult(new TextResult($"Deleting temp directory {Path}"));
+		GC.SuppressFinalize(this);
 	}
 }

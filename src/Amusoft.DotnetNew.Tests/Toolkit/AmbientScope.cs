@@ -106,5 +106,7 @@ public abstract class AmbientScope<T> : IDisposable
 		{
 			ChangeCurrentScope(null);
 		}
+		
+		GC.SuppressFinalize(this);
 	}
 }

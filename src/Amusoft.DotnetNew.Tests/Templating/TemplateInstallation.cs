@@ -11,7 +11,7 @@ namespace Amusoft.DotnetNew.Tests.Templating;
 /// <summary>
 /// 
 /// </summary>
-public class TemplateInstallation : IAsyncDisposable
+public class TemplateInstallation : IDisposable
 {
 	/// <summary>
 	/// 
@@ -35,14 +35,6 @@ public class TemplateInstallation : IAsyncDisposable
 		return result;
 	}
 
-	/// <summary>
-	/// Dispose member
-	/// </summary>
-	public async ValueTask DisposeAsync()
-	{
-		await UninstallAsync(CancellationToken.None);
-	}
-
 	private bool _disposed;
 
 	/// <summary>
@@ -57,5 +49,14 @@ public class TemplateInstallation : IAsyncDisposable
 		await DotnetCli.UninstallAsync(Context.ProjectTemplatePath.OriginalPath, cancellationToken);
 
 		_disposed = true;
+		GC.SuppressFinalize(this);
+	}
+
+	/// <summary>
+	/// Dispose
+	/// </summary>
+	public void Dispose()
+	{
+		UninstallAsync(CancellationToken.None).GetAwaiter().GetResult();
 	}
 }

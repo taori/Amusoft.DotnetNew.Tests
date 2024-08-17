@@ -19,7 +19,7 @@ public class DotnetNewTests : TestBase
 {
 	[InlineData("Project1", "gitUser", "authorname")]
 	[InlineData("Project2", "gitUser", "authorname")]
-	[Trait("Category","SkipInCI")]
+	// [Trait("Category","SkipInCI")]
 	// https://github.com/taori/Amusoft.DotnetNew.Tests/issues/1
 	[Theory(Timeout = 60_000)]
 	private async Task ScaffoldRepo(string projectName, string gitUser, string author)
@@ -27,7 +27,7 @@ public class DotnetNewTests : TestBase
 		using (var loggingScope = new LoggingScope())
 		{
 			var solution = TemplateSolutionInstallerHelper.CreateLocalSolution();
-			await using (var installations = await solution.InstallTemplatesFromDirectoryAsync("../tests/Resources", CancellationToken.None))
+			using (var installations = await solution.InstallTemplatesFromDirectoryAsync("../tests/Resources", CancellationToken.None))
 			{
 				var args = $"""
 				            -n "{projectName}"
@@ -37,7 +37,7 @@ public class DotnetNewTests : TestBase
 				            --GitUser "{gitUser}", 
 				            --Author "{author}"
 				            """;
-				await using (var scaffold = await CLI.DotnetNew.NewAsync("dotnet-library-repo", args.Replace(Environment.NewLine, " "), CancellationToken.None))
+				using (var scaffold = await CLI.DotnetNew.NewAsync("dotnet-library-repo", args.Replace(Environment.NewLine, " "), CancellationToken.None))
 				{
 					var list = scaffold.GetRelativeDirectoryPaths().ToArray();
 					await scaffold.RestoreAsync($"src/{projectName}.sln", null, CancellationToken.None);

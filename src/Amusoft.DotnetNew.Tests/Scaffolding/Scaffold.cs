@@ -13,7 +13,7 @@ namespace Amusoft.DotnetNew.Tests.Scaffolding;
 /// <summary>
 /// 
 /// </summary>
-public class Scaffold : IAsyncDisposable
+public class Scaffold : IDisposable
 {
 	private readonly PathSource _tempPath;
 	private readonly TempDirectory _tempDirectory;
@@ -25,18 +25,6 @@ public class Scaffold : IAsyncDisposable
 	{
 		_tempDirectory = tempDirectory;
 		_tempPath = new PathSource(_tempDirectory.Path);
-	}
-	
-	/// <summary>
-	/// 
-	/// </summary>
-	/// <returns></returns>
-	/// <exception cref="NotImplementedException"></exception>
-	public ValueTask DisposeAsync()
-	{
-		_tempDirectory.Dispose();
-		
-		return ValueTask.CompletedTask;
 	}
 
 	/// <summary>
@@ -79,5 +67,19 @@ public class Scaffold : IAsyncDisposable
 				yield return _tempPath.PathTranslator.GetRelativePath(fullPath).VirtualPath;
 			}
 		}
+	}
+
+	private bool _disposed;
+	/// <summary>
+	/// 
+	/// </summary>
+	public void Dispose()
+	{
+		if (_disposed)
+			return;
+		_disposed = true;
+		
+		_tempDirectory.Dispose();
+		GC.SuppressFinalize(this);
 	}
 }
