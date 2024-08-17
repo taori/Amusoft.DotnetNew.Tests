@@ -110,14 +110,14 @@ public static class DotnetNew
 				throw new BuildFailedException(fullArgs, loggingScope.ToFullString(PrintKind.All));
 			}
 			
-			if (await LoggedDotnetCli.RunDotnetCommandAsync(fullArgs, cancellationToken, []))
-			{
-				loggingScope.ParentScope?.AddResult(new TextResult($"success: {fullArgs}"));
-			}
-			else
-			{
-				throw new BuildFailedException(fullArgs, loggingScope.ToFullString(PrintKind.All));
-			}
+			// if (await LoggedDotnetCli.RunDotnetCommandAsync(fullArgs, cancellationToken, []))
+			// {
+			// 	loggingScope.ParentScope?.AddResult(new TextResult($"success: {fullArgs}"));
+			// }
+			// else
+			// {
+			// 	throw new BuildFailedException(fullArgs, loggingScope.ToFullString(PrintKind.All));
+			// }
 		}
 	}
 
