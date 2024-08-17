@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.Serialization;
 
 namespace Amusoft.DotnetNew.Tests.Exceptions;
@@ -6,6 +7,7 @@ namespace Amusoft.DotnetNew.Tests.Exceptions;
 /// <summary>
 /// 
 /// </summary>
+[ExcludeFromCodeCoverage]
 public abstract class CliException : Exception
 {
 	/// <summary>

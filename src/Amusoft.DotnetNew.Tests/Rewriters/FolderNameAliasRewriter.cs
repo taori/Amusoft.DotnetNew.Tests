@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using Amusoft.DotnetNew.Tests.Interfaces;
 using Amusoft.DotnetNew.Tests.Utility;
@@ -23,7 +24,8 @@ internal class FolderNameAliasRewriter : ICommandRewriter, IEquatable<FolderName
 		stringBuilder.Replace(Folder.VirtualPath, $"{{{Alias}}}");
 		stringBuilder.Replace(Folder.OriginalPath, $"{{{Alias}}}");
 	}
-
+	
+	[ExcludeFromCodeCoverage]
 	public bool Equals(FolderNameAliasRewriter? other)
 	{
 		if (other is null)

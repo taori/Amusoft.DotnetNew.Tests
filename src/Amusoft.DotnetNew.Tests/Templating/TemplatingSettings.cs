@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using Amusoft.DotnetNew.Tests.Diagnostics;
 
 namespace Amusoft.DotnetNew.Tests.Templating;

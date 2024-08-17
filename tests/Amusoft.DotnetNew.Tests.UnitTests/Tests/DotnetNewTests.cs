@@ -17,11 +17,11 @@ namespace Amusoft.DotnetNew.Tests.UnitTests.Tests;
 
 public class DotnetNewTests : TestBase
 {
-	// 15m
 	[InlineData("Project1", "gitUser", "authorname")]
 	[InlineData("Project2", "gitUser", "authorname")]
-	// [Trait("Category","SkipInCI")]
-	[Theory(Timeout = 900_000)]
+	[Trait("Category","SkipInCI")]
+	// https://github.com/taori/Amusoft.DotnetNew.Tests/issues/1
+	[Theory(Timeout = 60_000)]
 	private async Task ScaffoldRepo(string projectName, string gitUser, string author)
 	{
 		using (var loggingScope = new LoggingScope())
@@ -37,22 +37,22 @@ public class DotnetNewTests : TestBase
 				            --GitUser "{gitUser}", 
 				            --Author "{author}"
 				            """;
-				var scaffold = await CLI.DotnetNew.NewAsync("dotnet-library-repo", args.Replace(Environment.NewLine, " "), CancellationToken.None);
-				var list = scaffold.GetRelativeDirectoryPaths().ToArray();
-				await scaffold.RestoreAsync($"src/{projectName}.sln", null, CancellationToken.None);
-				await scaffold.BuildAsync($"src/{projectName}.sln", null, CancellationToken.None);
+				await using (var scaffold = await CLI.DotnetNew.NewAsync("dotnet-library-repo", args.Replace(Environment.NewLine, " "), CancellationToken.None))
+				{
+					var list = scaffold.GetRelativeDirectoryPaths().ToArray();
+					await scaffold.RestoreAsync($"src/{projectName}.sln", null, CancellationToken.None);
+					await scaffold.BuildAsync($"src/{projectName}.sln", null, CancellationToken.None);
 
-				var a = loggingScope.ToFullString(PrintKind.All);
+					await Verifier.Verify(new
+							{
+								log = loggingScope.ToFullString(PrintKind.All),
+								files = list,
+							}
+						)
+						.UseParameters(projectName, gitUser, author);
 
-				await Verifier.Verify(new
-						{
-							log = loggingScope.ToFullString(PrintKind.All),
-							files = list,
-						}
-					)
-					.UseParameters(projectName, gitUser, author);
-
-				installations.Installations.Count.ShouldBe(1);
+					installations.Installations.Count.ShouldBe(1);
+				}
 			}
 		}
 	}

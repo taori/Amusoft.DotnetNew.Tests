@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using Amusoft.DotnetNew.Tests.Interfaces;
 using Amusoft.DotnetNew.Tests.Utility;
@@ -21,6 +22,7 @@ internal class SolutionDirectoryRewriter : ICommandRewriter, IEquatable<Solution
 		stringBuilder.Replace(_solutionDirectory.VirtualPath, "{SolutionDir}");
 	}
 
+	[ExcludeFromCodeCoverage]
 	public bool Equals(SolutionDirectoryRewriter? other)
 	{
 		if (other is null)

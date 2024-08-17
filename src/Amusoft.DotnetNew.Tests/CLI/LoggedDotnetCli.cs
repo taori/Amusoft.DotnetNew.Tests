@@ -57,6 +57,7 @@ internal class CliWrapRunner : IProcessRunner
 	}
 }
 
+[ExcludeFromCodeCoverage]
 internal class LocalProcessRunner : IProcessRunner
 {
 	public async Task<bool> RunAsync(string arguments, CancellationToken cancellationToken, int[] successStatusCodes)

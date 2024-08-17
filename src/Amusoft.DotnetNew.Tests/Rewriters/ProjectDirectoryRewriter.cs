@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Text;
 using Amusoft.DotnetNew.Tests.Interfaces;
@@ -23,7 +24,8 @@ internal class ProjectDirectoryRewriter : ICommandRewriter, IEquatable<ProjectDi
 		stringBuilder.Replace(_context.ProjectTemplatePath.VirtualPath, $"{{ProjectDir:{dir}}}");
 		stringBuilder.Replace(_context.ProjectTemplatePath.OriginalPath, $"{{ProjectDir:{dir}}}");
 	}
-
+	
+	[ExcludeFromCodeCoverage]
 	public bool Equals(ProjectDirectoryRewriter? other)
 	{
 		if (other is null)

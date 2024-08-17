@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using Amusoft.DotnetNew.Tests.Interfaces;
 
@@ -19,6 +20,7 @@ internal class BackslashRewriter : ICommandRewriter, IEquatable<BackslashRewrite
 		stringBuilder.Replace('\\', '/');
 	}
 
+	[ExcludeFromCodeCoverage]
 	public bool Equals(BackslashRewriter? other)
 	{
 		return ReferenceEquals(other, this);

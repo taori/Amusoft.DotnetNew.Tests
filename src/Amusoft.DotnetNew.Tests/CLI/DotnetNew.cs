@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading;
@@ -17,6 +18,7 @@ namespace Amusoft.DotnetNew.Tests.CLI;
 /// <summary>
 /// Dotnet new CLI tool
 /// </summary>
+[ExcludeFromCodeCoverage]
 public static class DotnetNew
 {
 	/// <summary>

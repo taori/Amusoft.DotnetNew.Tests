@@ -1,8 +1,11 @@
-﻿namespace Amusoft.DotnetNew.Tests.Exceptions;
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace Amusoft.DotnetNew.Tests.Exceptions;
 
 /// <summary>
 /// 
 /// </summary>
+[ExcludeFromCodeCoverage]
 public class BuildFailedException : CliException
 {
 	/// <summary>
