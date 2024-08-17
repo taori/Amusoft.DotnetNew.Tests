@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System.Diagnostics;
+using System.IO;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using Amusoft.DotnetNew.Tests.Diagnostics;
@@ -71,14 +73,42 @@ public static class DotnetNew
 			var fullArgs = arguments is null
 				? $"build {fullPath} {restoreArgument} -v {verbosity.ToVerbosityText()}"
 				: $"build {fullPath} {restoreArgument} -v {verbosity.ToVerbosityText()} {arguments}";
-			if (await LoggedDotnetCli.RunDotnetCommandAsync(fullArgs, cancellationToken, []))
+
+			var psi = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+				? new ProcessStartInfo("dotnet", fullArgs)
+				{
+					UseShellExecute = false,
+					CreateNoWindow = true,
+					LoadUserProfile = false,
+				}
+				: new ProcessStartInfo("dotnet", fullArgs)
+				{
+					UseShellExecute = false,
+					CreateNoWindow = true,
+				};
+			
+			var process = new Process();
+			process.StartInfo = psi;
+			process.Start();
+			
+			if (process.WaitForExit(30000))
 			{
-				loggingScope.ParentScope?.AddResult(new TextResult($"success: {fullArgs}"));
+				loggingScope.ParentScope?.AddResult(new TextResult($"success: {fullArgs}"));;
 			}
 			else
 			{
+				process.Kill();
 				throw new BuildFailedException(fullArgs, loggingScope.ToFullString(PrintKind.All));
 			}
+			
+			// if (await LoggedDotnetCli.RunDotnetCommandAsync(fullArgs, cancellationToken, []))
+			// {
+			// 	loggingScope.ParentScope?.AddResult(new TextResult($"success: {fullArgs}"));
+			// }
+			// else
+			// {
+			// 	throw new BuildFailedException(fullArgs, loggingScope.ToFullString(PrintKind.All));
+			// }
 		}
 	}
 
