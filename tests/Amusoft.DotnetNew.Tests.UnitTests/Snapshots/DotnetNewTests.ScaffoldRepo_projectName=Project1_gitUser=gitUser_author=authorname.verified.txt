@@ -16,9 +16,7 @@ dotnet new dotnet-library-repo -o "{Scaffold}" -n "Project1" --GitProjectName "P
 
 {
   "ExitCode": 0,
-  "Output": "The template /u0022nuget library repository/u0022 was created successfully.
-
-",
+  "Output": "The template /u0022nuget library repository/u0022 was created successfully.",
   "Errors": "",
   "Success": true,
   "Runtime": "00:00:00"

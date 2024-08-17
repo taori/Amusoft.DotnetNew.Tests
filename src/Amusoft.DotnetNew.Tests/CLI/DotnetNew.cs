@@ -73,51 +73,15 @@ public static class DotnetNew
 			var fullArgs = arguments is null
 				? $"build {fullPath} {restoreArgument} -v {verbosity.ToVerbosityText()}"
 				: $"build {fullPath} {restoreArgument} -v {verbosity.ToVerbosityText()} {arguments}";
-
-			var psi = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
-				? new ProcessStartInfo("dotnet", fullArgs)
-				{
-					UseShellExecute = false,
-					CreateNoWindow = true,
-					LoadUserProfile = false,
-				}
-				: new ProcessStartInfo("dotnet", fullArgs)
-				{
-					UseShellExecute = false,
-					CreateNoWindow = true,
-				};
 			
-			psi.Environment.Add("DOTNET_CLI_UI_LANGUAGE","en");
-			
-			var process = new Process();
-			process.StartInfo = psi;
-			process.Start();
-			
-			if (process.WaitForExit(30000))
+			if (await LoggedDotnetCli.RunDotnetCommandAsync(fullArgs, cancellationToken, []))
 			{
-				if (process.ExitCode == 0)
-				{
-					loggingScope.ParentScope?.AddResult(new TextResult($"success: {fullArgs}"));;
-				}
-				else
-				{
-					throw new BuildFailedException(fullArgs, loggingScope.ToFullString(PrintKind.All));
-				}
+				loggingScope.ParentScope?.AddResult(new TextResult($"success: {fullArgs}"));
 			}
 			else
 			{
-				process.Kill();
 				throw new BuildFailedException(fullArgs, loggingScope.ToFullString(PrintKind.All));
 			}
-			
-			// if (await LoggedDotnetCli.RunDotnetCommandAsync(fullArgs, cancellationToken, []))
-			// {
-			// 	loggingScope.ParentScope?.AddResult(new TextResult($"success: {fullArgs}"));
-			// }
-			// else
-			// {
-			// 	throw new BuildFailedException(fullArgs, loggingScope.ToFullString(PrintKind.All));
-			// }
 		}
 	}
 

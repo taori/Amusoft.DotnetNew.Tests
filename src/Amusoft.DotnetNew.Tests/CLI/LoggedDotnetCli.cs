@@ -1,28 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Runtime.InteropServices;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Amusoft.DotnetNew.Tests.Diagnostics;
 using Amusoft.DotnetNew.Tests.Extensions;
 using Amusoft.DotnetNew.Tests.Scopes;
-using Amusoft.DotnetNew.Tests.Templating;
 using CliWrap;
 using CliWrap.Buffered;
-using CliWrap.Builders;
+using CommandResult = Amusoft.DotnetNew.Tests.Diagnostics.CommandResult;
 
 namespace Amusoft.DotnetNew.Tests.CLI;
 
 internal static class LoggedDotnetCli
 {
-	internal static Task<bool> RunDotnetCommandAsync(Action<ArgumentsBuilder> arguments, CancellationToken cancellationToken, int[] acceptAsSuccess, Action<Command>? configure = default)
+	internal static Task<bool> RunDotnetCommandAsync(string arguments, CancellationToken cancellationToken, int[] acceptAsSuccess)
 	{
-		var builder = new ArgumentsBuilder();
-		arguments(builder);
-		return RunDotnetCommandAsync(builder.Build(), cancellationToken, acceptAsSuccess, configure);
+		var runner = new LocalProcessRunner();
+		return runner.RunAsync(arguments, cancellationToken, acceptAsSuccess);
 	}
-	
-	internal static async Task<bool> RunDotnetCommandAsync(string arguments, CancellationToken cancellationToken, int[] acceptAsSuccess, Action<Command>? configure = default)
+}
+
+internal interface IProcessRunner
+{
+	Task<bool> RunAsync(string arguments, CancellationToken cancellationToken, int[] successStatusCodes);
+}
+
+[ExcludeFromCodeCoverage]
+internal class CliWrapRunner : IProcessRunner
+{
+	public async Task<bool> RunAsync(string arguments, CancellationToken cancellationToken, int[] successStatusCodes)
 	{
 		var env = new Dictionary<string, string?>()
 		{
@@ -35,7 +46,6 @@ internal static class LoggedDotnetCli
 			.WithEnvironmentVariables(env)
 			.WithArguments(arguments)
 			.WithValidation(CommandResultValidation.None);
-		configure?.Invoke(command);
 		
 		var bufferedCommandResult = await command
 			.ExecuteBufferedAsync(cancellationToken)
@@ -43,7 +53,57 @@ internal static class LoggedDotnetCli
 		
 		LoggingScope.TryAddResult(bufferedCommandResult.ToCommandResult());
 
-		return bufferedCommandResult.IsSuccess || acceptAsSuccess.Contains(bufferedCommandResult.ExitCode);
+		return bufferedCommandResult.IsSuccess || successStatusCodes.Contains(bufferedCommandResult.ExitCode);
 	}
-	
+}
+
+internal class LocalProcessRunner : IProcessRunner
+{
+	public async Task<bool> RunAsync(string arguments, CancellationToken cancellationToken, int[] successStatusCodes)
+	{
+		LoggingScope.TryAddInvocation($"dotnet {arguments}");
+		
+		var psi = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+			? new ProcessStartInfo("dotnet", arguments)
+			{
+				RedirectStandardOutput = true,
+				UseShellExecute = false,
+				CreateNoWindow = true,
+				LoadUserProfile = false,
+			}
+			: new ProcessStartInfo("dotnet", arguments)
+			{
+				RedirectStandardOutput = true,
+				UseShellExecute = false,
+				CreateNoWindow = true,
+			};
+
+		psi.Environment.Add("DOTNET_CLI_UI_LANGUAGE", "en");
+
+		var sb = new StringBuilder();
+		var process = new Process();
+		process.StartInfo = psi;
+		process.OutputDataReceived += (sender, args) => sb.Append(args.Data);
+		process.Start();
+		process.BeginOutputReadLine();
+
+		var sw = new Stopwatch();
+		sw.Restart();
+		try
+		{
+			await process.WaitForExitAsync(cancellationToken).ConfigureAwait(false);
+			
+			sw.Stop();
+		
+			var success = process.HasExited && (process.ExitCode == 0 || successStatusCodes.Contains(process.ExitCode));
+			LoggingScope.TryAddResult(new CommandResult(process.ExitCode, sb.ToString(), string.Empty, success, sw.Elapsed));
+
+			return success;
+		}
+		catch (OperationCanceledException)
+		{
+			LoggingScope.TryAddResult(new TextResult("Process aborted"));
+			return false;
+		}
+	}
 }
