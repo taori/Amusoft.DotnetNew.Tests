@@ -103,9 +103,10 @@ public static class DotnetNew
 
 		using(var loggingScope = new LoggingScope(false))
 		{
+			var vText = verbosity.ToVerbosityText();
 			var fullArgs = arguments is null
-				? $"restore \"{fullPath}\" -v {verbosity.ToVerbosityText()}"
-				: $"restore \"{fullPath}\" -v {verbosity.ToVerbosityText()} {arguments}";
+				? $"restore \"{fullPath}\" -v {vText} --ignore-failed-sources"
+				: $"restore \"{fullPath}\" -v {vText} --ignore-failed-sources {arguments}";
 			if (await LoggedDotnetCli.RunDotnetCommandAsync(fullArgs, cancellationToken, []))
 			{
 				loggingScope.ParentScope?.AddResult(new TextResult($"success: {fullArgs}"));
