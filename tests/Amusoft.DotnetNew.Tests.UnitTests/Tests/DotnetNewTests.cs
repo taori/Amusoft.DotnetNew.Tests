@@ -37,8 +37,8 @@ public class DotnetNewTests : TestBase
 				            """;
 				var scaffold = await CLI.DotnetNew.NewAsync("dotnet-library-repo", args.Replace(Environment.NewLine, " "), CancellationToken.None);
 				var list = scaffold.GetDirectoryContents().ToArray();
-				// await scaffold.RestoreAsync($"src/{projectName}.sln", null, CancellationToken.None);
-				// await scaffold.BuildAsync($"src/{projectName}.sln", null, CancellationToken.None);
+				await scaffold.RestoreAsync($"src/{projectName}.sln", null, CancellationToken.None);
+				await scaffold.BuildAsync($"src/{projectName}.sln", null, CancellationToken.None);
 
 				await Verifier.Verify(new
 						{
