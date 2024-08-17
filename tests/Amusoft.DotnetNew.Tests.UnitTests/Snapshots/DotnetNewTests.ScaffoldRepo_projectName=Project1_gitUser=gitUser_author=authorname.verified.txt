@@ -26,7 +26,7 @@ dotnet new dotnet-library-repo -o "{Scaffold}" -n "Project1" --GitProjectName "P
 
 ---Result---
 
-success: restore "{Scaffold}/src/Project1.sln" -v m
+success: build {Scaffold}/src/Project1.sln  -v m
 
 ,
   files: [

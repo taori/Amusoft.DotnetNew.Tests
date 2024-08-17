@@ -46,9 +46,10 @@ public class Scaffold : IAsyncDisposable
 	/// <param name="arguments">build arguments</param>
 	/// <param name="cancellationToken">cancellation token</param>
 	/// <param name="verbosity"></param>
-	public async Task BuildAsync(string relativePath, string? arguments, CancellationToken cancellationToken, Verbosity verbosity = default)
+	/// <param name="restore"></param>
+	public async Task BuildAsync(string relativePath, string? arguments, CancellationToken cancellationToken, Verbosity verbosity = default, bool restore = false)
 	{
-		await CLI.DotnetNew.BuildAsync(_tempPath.PathTranslator.GetAbsolutePath(relativePath).OriginalPath, arguments, verbosity, cancellationToken);
+		await CLI.DotnetNew.BuildAsync(_tempPath.PathTranslator.GetAbsolutePath(relativePath).OriginalPath, arguments, verbosity, cancellationToken, restore);
 	}
 
 	/// <summary>

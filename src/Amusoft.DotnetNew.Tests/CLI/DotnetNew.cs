@@ -53,7 +53,7 @@ public static class DotnetNew
 	/// <exception cref="FileNotFoundException"></exception>
 	/// <exception cref="DirectoryNotFoundException"></exception>
 	/// <exception cref="ScaffoldingFailedException"></exception>
-	public static async Task BuildAsync(string fullPath, string? arguments, Verbosity verbosity, CancellationToken cancellationToken, bool restore = false)
+	public static async Task BuildAsync(string fullPath, string? arguments, Verbosity verbosity, CancellationToken cancellationToken, bool restore)
 	{
 		if (!File.Exists(fullPath) && !Directory.Exists(fullPath))
 		{
