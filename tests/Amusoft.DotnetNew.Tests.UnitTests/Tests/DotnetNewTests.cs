@@ -17,8 +17,8 @@ namespace Amusoft.DotnetNew.Tests.UnitTests.Tests;
 
 public class DotnetNewTests : TestBase
 {
-	// 30m
-	[Theory(Timeout = 1_800_000)]
+	// 15m
+	[Theory(Timeout = 900_000)]
 	[InlineData("Project1", "gitUser", "authorname")]
 	[InlineData("Project2", "gitUser", "authorname")]
 	private async Task ScaffoldRepo(string projectName, string gitUser, string author)
