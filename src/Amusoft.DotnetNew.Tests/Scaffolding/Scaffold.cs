@@ -67,7 +67,7 @@ public class Scaffold : IAsyncDisposable
 	/// Gets all paths within the temp directory with their relative paths
 	/// </summary>
 	/// <returns></returns>
-	public IEnumerable<string> GetDirectoryContents()
+	public IEnumerable<string> GetRelativeDirectoryPaths()
 	{
 		return Files().OrderBy(d => d);
 

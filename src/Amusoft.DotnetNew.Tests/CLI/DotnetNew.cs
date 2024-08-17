@@ -49,10 +49,11 @@ public static class DotnetNew
 	/// <param name="arguments">build arguments</param>
 	/// <param name="verbosity"></param>
 	/// <param name="cancellationToken">cancellation token</param>
+	/// <param name="restore"></param>
 	/// <exception cref="FileNotFoundException"></exception>
 	/// <exception cref="DirectoryNotFoundException"></exception>
 	/// <exception cref="ScaffoldingFailedException"></exception>
-	public static async Task BuildAsync(string fullPath, string? arguments, Verbosity verbosity, CancellationToken cancellationToken)
+	public static async Task BuildAsync(string fullPath, string? arguments, Verbosity verbosity, CancellationToken cancellationToken, bool restore = false)
 	{
 		if (!File.Exists(fullPath) && !Directory.Exists(fullPath))
 		{
@@ -61,11 +62,15 @@ public static class DotnetNew
 			throw new DirectoryNotFoundException(fullPath);
 		}
 
+		var restoreArgument = restore
+			? string.Empty
+			: "--no-restore";
+
 		using (var loggingScope = new LoggingScope(false))
 		{
 			var fullArgs = arguments is null
-				? $"build {fullPath} --no-restore -v {verbosity.ToVerbosityText()}"
-				: $"build {fullPath} --no-restore -v {verbosity.ToVerbosityText()} {arguments}";
+				? $"build {fullPath} {restoreArgument} -v {verbosity.ToVerbosityText()}"
+				: $"build {fullPath} {restoreArgument} -v {verbosity.ToVerbosityText()} {arguments}";
 			if (await LoggedDotnetCli.RunDotnetCommandAsync(fullArgs, cancellationToken, []))
 			{
 				loggingScope.ParentScope?.AddResult(new TextResult($"success: {fullArgs}"));

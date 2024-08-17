@@ -24,6 +24,10 @@ dotnet new dotnet-library-repo -o "{Scaffold}" -n "Project2" --GitProjectName "P
   "Runtime": "00:00:00"
 }
 
+---Result---
+
+success: restore "{Scaffold}/src/Project2.sln" -v m
+
 ,
   files: [
     .github/workflows/CI.yml,
