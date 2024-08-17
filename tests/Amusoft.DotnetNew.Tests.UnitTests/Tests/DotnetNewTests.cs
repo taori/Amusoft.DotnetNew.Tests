@@ -42,6 +42,8 @@ public class DotnetNewTests : TestBase
 				await scaffold.RestoreAsync($"src/{projectName}.sln", null, CancellationToken.None);
 				await scaffold.BuildAsync($"src/{projectName}.sln", null, CancellationToken.None);
 
+				var a = loggingScope.ToFullString(PrintKind.All);
+
 				await Verifier.Verify(new
 						{
 							log = loggingScope.ToFullString(PrintKind.All),
