@@ -1,0 +1,4 @@
+﻿{
+  Type: FileNotFoundException,
+  Message: {TempPath}somefile.sln
+}

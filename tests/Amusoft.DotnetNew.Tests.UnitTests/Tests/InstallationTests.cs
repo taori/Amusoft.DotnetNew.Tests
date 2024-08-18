@@ -31,6 +31,20 @@ public class InstallationTests : TestBase
 	}
 	
 	[Fact(Timeout = 10000)]
+	public async Task DisposeOnlyHappensOnceOnUninstall()
+	{
+		using (var loggingScope = new LoggingScope())
+		{
+			var solutionFile = TemplateSolutionInstallerHelper.CreateLocalSolution();
+			var installation = await solutionFile.InstallTemplateAsync("../tests/Resources/dotnet-library-repo", CancellationToken.None);
+			await installation.UninstallAsync(CancellationToken.None);
+			installation.Dispose();
+
+			await Verifier.Verify(loggingScope.ToFullString(PrintKind.All));
+		}
+	}
+	
+	[Fact(Timeout = 10000)]
 	public async Task DiscoverTemplateProjects()
 	{
 		var solutionFile = TemplateSolutionInstallerHelper.CreateLocalSolution();

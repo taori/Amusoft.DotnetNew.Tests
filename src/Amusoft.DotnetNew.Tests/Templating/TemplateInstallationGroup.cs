@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Amusoft.DotnetNew.Tests.Templating;
 
@@ -13,6 +14,7 @@ public class TemplateInstallationGroup : IDisposable
 	/// <summary>
 	/// Installations which were made
 	/// </summary>
+	[ExcludeFromCodeCoverage]
 	public IReadOnlyList<TemplateInstallation> Installations => _installations;
 	
 	internal void Add(TemplateInstallation installation)

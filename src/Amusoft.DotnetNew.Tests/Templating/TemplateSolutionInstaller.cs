@@ -82,7 +82,7 @@ public class TemplateSolution
 	{
 		var fullPath = Solution.PathTranslator.GetAbsolutePath(relativePath);
 		if (!Directory.Exists(fullPath.OriginalPath))
-			throw new DirectoryNotFoundException(fullPath.OriginalPath);
+			throw new DirectoryNotFoundException($"{Solution.Directory.VirtualPath} + {relativePath}");
 
 		return await TemplateInstallation.CreateAsync(new ProjectTemplatingContext(fullPath), cancellationToken).ConfigureAwait(false);
 	}
@@ -97,7 +97,7 @@ public class TemplateSolution
 	{
 		var folder = Solution.PathTranslator.GetAbsolutePath(searchFolder);
 		if (!Directory.Exists(folder.OriginalPath))
-			throw new DirectoryNotFoundException(folder.OriginalPath);
+			throw new DirectoryNotFoundException($"{Solution.Directory.VirtualPath} + {searchFolder}");
 
 		var templateFiles = Directory.EnumerateFiles(folder.OriginalPath, "template.json", SearchOption.AllDirectories);
 		

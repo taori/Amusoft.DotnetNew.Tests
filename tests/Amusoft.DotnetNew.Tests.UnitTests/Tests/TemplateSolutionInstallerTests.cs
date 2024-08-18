@@ -1,4 +1,5 @@
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using Amusoft.DotnetNew.Tests.Templating;
 using Amusoft.DotnetNew.Tests.UnitTests.Configuration;
@@ -31,6 +32,13 @@ namespace Amusoft.DotnetNew.Tests.UnitTests.Tests
             absolutePath.ShouldBe(file.Solution.File);
         }
 
+        [Fact]
+        public async Task InstallFailsIfDirectoryDoesNotExist()
+        {
+            var file = TemplateSolutionInstallerHelper.CreateLocalSolution();
+            await Verifier.ThrowsTask(() => file.InstallTemplateAsync("../nonexistingfolder", CancellationToken.None));
+        }
+
         [Fact(Timeout = 10000)]
         public async Task NonSlnThrows()
         {
@@ -41,6 +49,12 @@ namespace Amusoft.DotnetNew.Tests.UnitTests.Tests
         public async Task NoFoundHandling()
         {
             await Verifier.Throws(() => new TemplateSolution(Path.GetTempPath(), 0, "bla44685465.sln"));
+        }
+
+        [Fact(Timeout = 10000)]
+        public async Task FileNotFound()
+        {
+            await Verifier.Throws(() => new TemplateSolution(Path.Combine(Path.GetTempPath(), "somefile.sln")));
         }
 
         [Fact(Timeout = 10000)]

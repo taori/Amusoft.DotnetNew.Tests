@@ -31,6 +31,15 @@ public class TempDirectoryTests : TestBase
 		
 		Directory.Exists(path).ShouldBeFalse();
 	}
+	
+	[Fact]
+	public void MultiDisposeNoThrow()
+	{
+		using (var dir = new TempDirectory())
+		{
+			dir.Dispose();
+		}
+	}
 
 	public TempDirectoryTests(ITestOutputHelper outputHelper, AssemblyInitializer data) : base(outputHelper, data)
 	{
