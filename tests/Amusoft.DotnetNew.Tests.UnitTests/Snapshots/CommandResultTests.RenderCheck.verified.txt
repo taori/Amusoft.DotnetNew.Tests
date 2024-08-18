@@ -1,0 +1,5 @@
+﻿{
+  Output: some output,
+  Errors: some error,
+  Success: true
+}
