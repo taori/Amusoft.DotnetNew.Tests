@@ -34,12 +34,12 @@ on:
       versionSuffix:
         type: string
         description: e.g alpha.1
-        default: ""
+        default: "alpha"
 
       publish:
         type: boolean
         description: run dotnet publish?
-        default: false
+        default: true
 
       removePrereleases:
         type: boolean
@@ -119,7 +119,7 @@ jobs:
               @("verbosity",          "${{github.event.inputs.verbosity}}",           "minimal"),
               @("publish",            "${{github.event.inputs.publish}}",             "false"),
               @("package",            "${{github.event.inputs.package}}",             "true"),
-              @("publishSymbols",     "${{github.event.inputs.publishSymbols}}",      "true"),
+              @("publishSymbols",     "${{github.event.inputs.publishSymbols}}",      "false"),
               @("removePrereleases",  "${{github.event.inputs.removePrereleases}}",   "false"),
               @("skipTests",          "${{github.event.inputs.skipTests}}",           "false"),
               @("runCoverage",        "${{github.event.inputs.runCoverage}}",         "true")
