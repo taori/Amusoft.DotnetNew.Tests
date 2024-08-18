@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -13,6 +14,7 @@ namespace Amusoft.DotnetNew.Tests.Scaffolding;
 /// <summary>
 /// 
 /// </summary>
+[ExcludeFromCodeCoverage(Justification = "https://github.com/taori/Amusoft.DotnetNew.Tests/issues/1")]
 public class Scaffold : IDisposable
 {
 	private readonly PathSource _tempPath;
