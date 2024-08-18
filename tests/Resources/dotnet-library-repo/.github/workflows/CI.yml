@@ -29,12 +29,12 @@ on:
       package:
         type: boolean
         description: run dotnet pack?
-        default: false
+        default: true
 
       publish:
         type: boolean
         description: run dotnet publish?
-        default: false
+        default: true
 
       skipTests:
         type: boolean
@@ -44,7 +44,7 @@ on:
       publishSymbols:
         type: boolean
         description: publish snupkg?
-        default: false
+        default: true
 
       removePrereleases:
         type: boolean
