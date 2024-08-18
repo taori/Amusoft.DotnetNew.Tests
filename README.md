@@ -8,12 +8,13 @@
 [![NuGet version (Amusoft.DotnetNew.Tests)](https://img.shields.io/nuget/vpre/Amusoft.DotnetNew.Tests.svg)](https://www.nuget.org/packages/Amusoft.DotnetNew.Tests/latest/prerelease)
 
 <!--CoverageStart-->
-![Code Coverage](https://img.shields.io/badge/Code%20Coverage-98%25-success?style=flat)
+![Code Coverage](https://img.shields.io/badge/Code%20Coverage-94%25-yellow?style=flat)
 
 Package | Line Rate | Branch Rate | Health
 -------- | --------- | ----------- | ------
-Amusoft.DotnetNew.Tests | 98% | 86% | ✔
-**Summary** | **98%** (282 / 288) | **86%** (101 / 118) | ✔
+Amusoft.DotnetNew.Tests | 98% | 88% | ✔
+Shared.TestSdk | 40% | 50% | ❌
+**Summary** | **94%** (337 / 357) | **87%** (116 / 134) | ➖
 
 _Minimum allowed line rate is 85%_
 
