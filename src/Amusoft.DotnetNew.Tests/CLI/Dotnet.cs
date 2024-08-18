@@ -19,7 +19,7 @@ namespace Amusoft.DotnetNew.Tests.CLI;
 /// Dotnet new CLI tool
 /// </summary>
 [ExcludeFromCodeCoverage]
-public static class DotnetNew
+public static class Dotnet
 {
 	/// <summary>
 	/// 
@@ -57,7 +57,7 @@ public static class DotnetNew
 	/// <exception cref="FileNotFoundException"></exception>
 	/// <exception cref="DirectoryNotFoundException"></exception>
 	/// <exception cref="ScaffoldingFailedException"></exception>
-	public static async Task BuildAsync(string fullPath, string? arguments, Verbosity verbosity, CancellationToken cancellationToken, bool restore)
+	internal static async Task BuildAsync(string fullPath, string? arguments, Verbosity verbosity, CancellationToken cancellationToken, bool restore)
 	{
 		if (!File.Exists(fullPath) && !Directory.Exists(fullPath))
 		{
@@ -97,7 +97,7 @@ public static class DotnetNew
 	/// <exception cref="FileNotFoundException"></exception>
 	/// <exception cref="DirectoryNotFoundException"></exception>
 	/// <exception cref="BuildFailedException"></exception>
-	public static async Task RestoreAsync(string fullPath, string? arguments, Verbosity verbosity, CancellationToken cancellationToken)
+	internal static async Task RestoreAsync(string fullPath, string? arguments, Verbosity verbosity, CancellationToken cancellationToken)
 	{
 		if (!File.Exists(fullPath) && !Directory.Exists(fullPath))
 		{

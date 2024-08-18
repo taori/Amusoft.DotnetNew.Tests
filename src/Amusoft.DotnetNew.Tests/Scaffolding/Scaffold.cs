@@ -39,7 +39,7 @@ public class Scaffold : IDisposable
 	/// <param name="restore"></param>
 	public async Task BuildAsync(string relativePath, string? arguments, CancellationToken cancellationToken, Verbosity verbosity = default, bool restore = false)
 	{
-		await CLI.DotnetNew.BuildAsync(_tempPath.PathTranslator.GetAbsolutePath(relativePath).OriginalPath, arguments, verbosity, cancellationToken, restore);
+		await Dotnet.BuildAsync(_tempPath.PathTranslator.GetAbsolutePath(relativePath).OriginalPath, arguments, verbosity, cancellationToken, restore).ConfigureAwait(false);
 	}
 
 	/// <summary>
@@ -51,7 +51,19 @@ public class Scaffold : IDisposable
 	/// <param name="verbosity"></param>
 	public async Task RestoreAsync(string relativePath, string? arguments, CancellationToken cancellationToken, Verbosity verbosity = default)
 	{
-		await CLI.DotnetNew.RestoreAsync(_tempPath.PathTranslator.GetAbsolutePath(relativePath).OriginalPath, arguments, verbosity, cancellationToken);
+		await Dotnet.RestoreAsync(_tempPath.PathTranslator.GetAbsolutePath(relativePath).OriginalPath, arguments, verbosity, cancellationToken).ConfigureAwait(false);
+	}
+
+	/// <summary>
+	/// Returns the file contents for a given relative path
+	/// </summary>
+	/// <param name="relativePath">path relative to scaffold folder</param>
+	/// <param name="cancellationToken">cancellation token</param>
+	/// <returns></returns>
+	public async Task<string> GetFileContentAsync(string relativePath, CancellationToken cancellationToken = default)
+	{
+		var path = _tempPath.PathTranslator.GetAbsolutePath(relativePath);
+		return await File.ReadAllTextAsync(path.OriginalPath, cancellationToken).ConfigureAwait(false);
 	}
 
 	/// <summary>

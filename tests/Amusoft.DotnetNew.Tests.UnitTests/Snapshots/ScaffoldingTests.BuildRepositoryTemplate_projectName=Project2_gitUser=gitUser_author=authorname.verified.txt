@@ -1,0 +1,57 @@
+﻿{
+  log:
+---Result---
+
+Install for {ProjectDir:dotnet-library-repo} succeded
+
+---Result---
+
+Created temp directory at {Scaffold}
+
+---Command---
+
+dotnet new dotnet-library-repo -o "{Scaffold}" -n "Project2" --GitProjectName "Project2" --NugetPackageId "Project2" --ProductName "Project2" --GitUser "gitUser" --Author "authorname"
+
+---Result---
+
+{
+  "ExitCode": 0,
+  "Output": "The template /u0022nuget library repository/u0022 was created successfully.",
+  "Errors": "",
+  "Success": true,
+  "Runtime": "00:00:00"
+}
+
+---Result---
+
+success: restore "{Scaffold}/src/Project2.sln" -v m --ignore-failed-sources
+
+---Result---
+
+success: build {Scaffold}/src/Project2.sln --no-restore -v m
+
+,
+  files: [
+    .github/workflows/CI.yml,
+    .gitignore,
+    build/Project.Common.props,
+    build/SourceLink.props,
+    README.md,
+    scripts/build.ps1,
+    src/Directory.Build.props,
+    src/nuget.config,
+    src/packageIcon.png,
+    src/Project2.sln,
+    src/Project2/Project2.csproj,
+    tests/Project2.IntegrationTests/Project2.IntegrationTests.csproj,
+    tests/Project2.IntegrationTests/UnitTest1.cs,
+    tests/Project2.IntegrationTests/Usings.cs,
+    tests/Project2.UnitTests/Configuration/ProjectSetup.cs,
+    tests/Project2.UnitTests/nlog.config,
+    tests/Project2.UnitTests/Project2.UnitTests.csproj,
+    tests/Project2.UnitTests/Toolkit/EmbeddedResourceReader.cs,
+    tests/Project2.UnitTests/Toolkit/GlobalSetupFixture.cs,
+    tests/Project2.UnitTests/Toolkit/TestBase.cs,
+    tests/Project2.UnitTests/UnitTest1.cs
+  ]
+}

@@ -18,10 +18,10 @@ namespace Amusoft.DotnetNew.Tests.CLI;
 
 internal static class LoggedDotnetCli
 {
-	internal static Task<bool> RunDotnetCommandAsync(string arguments, CancellationToken cancellationToken, int[] acceptAsSuccess)
+	internal static async Task<bool> RunDotnetCommandAsync(string arguments, CancellationToken cancellationToken, int[] acceptAsSuccess)
 	{
 		var runner = new LocalProcessRunner();
-		return runner.RunAsync(arguments, cancellationToken, acceptAsSuccess);
+		return await runner.RunAsync(arguments, cancellationToken, acceptAsSuccess).ConfigureAwait(false);
 	}
 }
 
