@@ -1,11 +1,14 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using Amusoft.DotnetNew.Tests.Diagnostics;
 using Amusoft.DotnetNew.Tests.Interfaces;
 using Amusoft.DotnetNew.Tests.Scopes;
 using Amusoft.DotnetNew.Tests.UnitTests.Configuration;
 using Amusoft.DotnetNew.Tests.UnitTests.Toolkit;
 using Shouldly;
+using VerifyXunit;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -123,6 +126,32 @@ public class LoggingScopeTests : TestBase
 		scope3.AddRewriter(item);
 		scope1.ToFullString(PrintKind.All).ShouldContain("inner");
 	}
+
+	[Fact]
+	public async Task CombinedPrintTest()
+	{
+		var scope = new LoggingScope();
+		scope.AddInvocation(new TestInvocation("invocation"));
+		scope.AddResult(new TestResult("result"));
+		scope.AddRewriter(new TestRewriter("rewriter"));
+
+		var results = Enum.GetValues<PrintKind>()
+			.Select(kind => (kind, new StringBuilder()))
+			.ToDictionary(d => d.kind, d => d.Item2);
+		
+		foreach (var kindWithBuilder in results)
+		{
+			scope.Print(kindWithBuilder.Value, kindWithBuilder.Key);
+		}
+
+		await Verifier.Verify(new
+		{
+			All = results[PrintKind.All],
+			Invocations = results[PrintKind.Invocations],
+			Responses = results[PrintKind.Responses],
+		});
+	}
+	
 
 	internal class TestRewriter : ICommandRewriter
 	{

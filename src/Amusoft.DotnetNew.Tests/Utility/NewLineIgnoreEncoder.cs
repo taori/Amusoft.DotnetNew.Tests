@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Text.Encodings.Web;
 
 namespace Amusoft.DotnetNew.Tests.Utility;
 
+[ExcludeFromCodeCoverage]
 internal class NewLineIgnoreEncoder : JavaScriptEncoder
 {
 	public static readonly NewLineIgnoreEncoder Instance = new();

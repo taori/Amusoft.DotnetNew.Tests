@@ -20,5 +20,6 @@ internal class DotnetCommand : ICommandInvocation
 		stringBuilder.Append(TemplatingDefaults.Instance.PrintPattern("Command", Command));
 	}
 
+	[ExcludeFromCodeCoverage]
 	public static implicit operator DotnetCommand(string command) => new(command);
 }
