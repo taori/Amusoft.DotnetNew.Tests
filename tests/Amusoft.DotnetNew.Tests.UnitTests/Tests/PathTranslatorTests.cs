@@ -1,6 +1,5 @@
-﻿using Amusoft.DotnetNew.Tests.UnitTests.Configuration;
-using Amusoft.DotnetNew.Tests.UnitTests.Toolkit;
-using Amusoft.DotnetNew.Tests.Utility;
+﻿using Amusoft.DotnetNew.Tests.Utility;
+using Shared.TestSdk;
 using Shouldly;
 using Xunit;
 using Xunit.Abstractions;

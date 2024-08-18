@@ -10,9 +10,12 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Shouldly" Version="3.0.2"/> 
-		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0"/>
-		<PackageReference Include="xunit" Version="2.9.0"/>
+	  <ProjectReference Include="..\..\src\Amusoft.DotnetNew.Tests\Amusoft.DotnetNew.Tests.csproj" />
+	  <ProjectReference Include="..\Shared.TestSdk\Shared.TestSdk.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.3" />
 		<PackageReference Include="xunit.runner.visualstudio" Version="2.8.2">
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 			<PrivateAssets>all</PrivateAssets>
@@ -24,7 +27,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\src\Amusoft.DotnetNew.Tests\Amusoft.DotnetNew.Tests.csproj" />
+	  <Compile Include="..\Shared.TestSdk\SharedStartup.cs">
+	    <Link>SharedStartup.cs</Link>
+	  </Compile>
 	</ItemGroup>
 
 </Project>

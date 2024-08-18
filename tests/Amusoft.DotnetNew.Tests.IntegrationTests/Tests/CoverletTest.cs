@@ -1,7 +1,7 @@
 using Amusoft.DotnetNew.Tests.Templating;
 using Shouldly;
 
-namespace Amusoft.DotnetNew.Tests.IntegrationTests;
+namespace Amusoft.DotnetNew.Tests.IntegrationTests.Tests;
 
 public class CoverletTest
 {

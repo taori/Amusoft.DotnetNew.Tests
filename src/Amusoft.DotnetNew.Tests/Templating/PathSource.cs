@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using Amusoft.DotnetNew.Tests.Interfaces;
 using Amusoft.DotnetNew.Tests.Utility;
 
 namespace Amusoft.DotnetNew.Tests.Templating;
@@ -6,7 +7,7 @@ namespace Amusoft.DotnetNew.Tests.Templating;
 /// <summary>
 /// Solution path details
 /// </summary>
-public class PathSource
+public class PathSource : IPathSource
 {
 	internal PathSource(string fullPath)
 	{

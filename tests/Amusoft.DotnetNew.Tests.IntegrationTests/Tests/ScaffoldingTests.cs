@@ -1,26 +1,18 @@
-﻿using System;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using Amusoft.DotnetNew.Tests.CLI;
+﻿using Amusoft.DotnetNew.Tests.CLI;
 using Amusoft.DotnetNew.Tests.Diagnostics;
 using Amusoft.DotnetNew.Tests.Scopes;
-using Amusoft.DotnetNew.Tests.UnitTests.Configuration;
-using Amusoft.DotnetNew.Tests.UnitTests.Helpers;
-using Amusoft.DotnetNew.Tests.UnitTests.Toolkit;
+using Shared.TestSdk;
+using Shared.TestSdk.Helpers;
 using Shouldly;
-using VerifyXunit;
-using Xunit;
 using Xunit.Abstractions;
 
-namespace Amusoft.DotnetNew.Tests.UnitTests.Tests;
+namespace Amusoft.DotnetNew.Tests.IntegrationTests.Tests;
 
+[Trait("Category","SkipInCI")]
 public class ScaffoldingTests : TestBase
 {
 	[InlineData("Project1", "gitUser", "authorname")]
 	[InlineData("Project2", "gitUser", "authorname")]
-	[Trait("Category","SkipInCI")]
 	// https://github.com/taori/Amusoft.DotnetNew.Tests/issues/1
 	[Theory(Timeout = 60_000)]
 	private async Task BuildRepositoryTemplate(string projectName, string gitUser, string author)
@@ -59,7 +51,7 @@ public class ScaffoldingTests : TestBase
 	}
 	
 	[Fact(Timeout = 10_000)]
-	private async Task TestFileContent()
+	private async Task GetFileContentAsync()
 	{
 		var projectName = "Project1";
 		var gitUser = "GitUser";

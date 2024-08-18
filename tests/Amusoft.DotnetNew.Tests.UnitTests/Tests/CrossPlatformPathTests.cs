@@ -1,8 +1,7 @@
 ﻿using System.IO;
 using System.Threading.Tasks;
-using Amusoft.DotnetNew.Tests.UnitTests.Configuration;
-using Amusoft.DotnetNew.Tests.UnitTests.Toolkit;
 using Amusoft.DotnetNew.Tests.Utility;
+using Shared.TestSdk;
 using Shouldly;
 using VerifyXunit;
 using Xunit;

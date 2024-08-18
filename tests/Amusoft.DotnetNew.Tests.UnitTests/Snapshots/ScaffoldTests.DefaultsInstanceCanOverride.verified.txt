@@ -1,0 +1,10 @@
+﻿[
+  {
+    RelativePath: a/a.txt,
+    Content: content a
+  },
+  {
+    RelativePath: c.jpg,
+    Content: content c
+  }
+]

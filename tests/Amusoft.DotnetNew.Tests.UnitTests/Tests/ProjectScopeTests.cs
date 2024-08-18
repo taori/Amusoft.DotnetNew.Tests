@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Amusoft.DotnetNew.Tests.Scopes;
-using Amusoft.DotnetNew.Tests.Templating;
-using Amusoft.DotnetNew.Tests.UnitTests.Configuration;
-using Amusoft.DotnetNew.Tests.UnitTests.Toolkit;
+using Shared.TestSdk;
 using Shouldly;
 using Xunit;
 using Xunit.Abstractions;

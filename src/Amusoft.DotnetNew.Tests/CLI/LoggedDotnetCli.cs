@@ -9,6 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Amusoft.DotnetNew.Tests.Diagnostics;
 using Amusoft.DotnetNew.Tests.Extensions;
+using Amusoft.DotnetNew.Tests.Interfaces;
 using Amusoft.DotnetNew.Tests.Scopes;
 using CliWrap;
 using CliWrap.Buffered;
@@ -23,11 +24,6 @@ internal static class LoggedDotnetCli
 		var runner = new LocalProcessRunner();
 		return await runner.RunAsync(arguments, cancellationToken, acceptAsSuccess).ConfigureAwait(false);
 	}
-}
-
-internal interface IProcessRunner
-{
-	Task<bool> RunAsync(string arguments, CancellationToken cancellationToken, int[] successStatusCodes);
 }
 
 [ExcludeFromCodeCoverage]

@@ -1,0 +1,16 @@
+﻿# Project1
+
+## Project state
+
+[![.GitHub](https://github.com/GitUser/Project1/actions/workflows/CI.yml/badge.svg)](https://github.com/GitUser/Project1/actions/workflows/CI.yml)
+[![GitHub issues](https://img.shields.io/github/issues/GitUser/Project1)](https://github.com/GitUser/Project1/issues)
+[![NuGet version (Project1)](https://img.shields.io/nuget/v/Project1.svg)](https://www.nuget.org/packages/Project1/)
+[![NuGet version (Project1)](https://img.shields.io/nuget/vpre/Project1.svg)](https://www.nuget.org/packages/Project1/latest/prerelease)
+
+<!--CoverageStart-->
+Coverage state not available yet.
+<!--CoverageEnd-->
+
+## Description
+
+This template was generated using Amusoft.Templates

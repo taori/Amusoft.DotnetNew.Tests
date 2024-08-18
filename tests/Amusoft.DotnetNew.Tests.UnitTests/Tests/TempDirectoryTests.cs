@@ -1,7 +1,8 @@
 ﻿using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
 using Amusoft.DotnetNew.Tests.Templating;
-using Amusoft.DotnetNew.Tests.UnitTests.Configuration;
-using Amusoft.DotnetNew.Tests.UnitTests.Toolkit;
+using Shared.TestSdk;
 using Shouldly;
 using Xunit;
 using Xunit.Abstractions;
@@ -16,7 +17,7 @@ public class TempDirectoryTests : TestBase
 	{
 		using (var dir = new TempDirectory())
 		{
-			Directory.Exists(dir.Path).ShouldBeTrue();
+			Directory.Exists(dir.Path.Directory.OriginalPath).ShouldBeTrue();
 		}
 	}
 
@@ -26,7 +27,7 @@ public class TempDirectoryTests : TestBase
 		var path = string.Empty;
 		using (var dir = new TempDirectory())
 		{
-			path = dir.Path;
+			path = dir.Path.Directory.OriginalPath;
 		}
 		
 		Directory.Exists(path).ShouldBeFalse();
@@ -38,6 +39,26 @@ public class TempDirectoryTests : TestBase
 		using (var dir = new TempDirectory())
 		{
 			dir.Dispose();
+		}
+	}
+	
+	[Fact]
+	public async Task GetFileContentWorks()
+	{
+		using (var dir = new TempDirectory())
+		{
+			await File.WriteAllTextAsync(Path.Combine(dir.Path.Directory.OriginalPath, "test.txt"), "test");
+			(await dir.GetFileContentAsync("test.txt", CancellationToken.None)).ShouldBe("test");
+		}
+	}
+	
+	[Fact]
+	public void GetRelativePathsWorks()
+	{
+		using (var dir = new TempDirectory())
+		{
+			File.WriteAllText(Path.Combine(dir.Path.Directory.OriginalPath, "test.txt"), "test");
+			dir.GetRelativePaths().ShouldBe(["test.txt"]);
 		}
 	}
 

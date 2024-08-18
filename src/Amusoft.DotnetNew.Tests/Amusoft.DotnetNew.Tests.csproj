@@ -19,6 +19,8 @@
 	<ItemGroup>
 		<InternalsVisibleTo Include="Amusoft.DotnetNew.Tests.UnitTests"/>
 		<InternalsVisibleTo Include="Amusoft.DotnetNew.Tests.IntegrationTests"/>
+		<InternalsVisibleTo Include="Shared.TestSdk"/>
+		<InternalsVisibleTo Include="DynamicProxyGenAssembly2"/>
 	</ItemGroup>
 
 	<ItemGroup>

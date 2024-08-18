@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using Amusoft.DotnetNew.Tests.CLI;
+using Amusoft.DotnetNew.Tests.Interfaces;
 using Amusoft.DotnetNew.Tests.Templating;
 using Amusoft.DotnetNew.Tests.Utility;
 
@@ -14,19 +16,15 @@ namespace Amusoft.DotnetNew.Tests.Scaffolding;
 /// <summary>
 /// 
 /// </summary>
-[ExcludeFromCodeCoverage(Justification = "https://github.com/taori/Amusoft.DotnetNew.Tests/issues/1")]
 public class Scaffold : IDisposable
 {
-	private readonly PathSource _tempPath;
-	private readonly TempDirectory _tempDirectory;
+	private readonly ITempDirectory _tempDirectory;
+	private readonly IDotnetCli _cli;
 
-	/// <summary>
-	/// 
-	/// </summary>
-	public Scaffold(TempDirectory tempDirectory)
+	internal Scaffold(ITempDirectory tempDirectory, IDotnetCli cli)
 	{
 		_tempDirectory = tempDirectory;
-		_tempPath = new PathSource(_tempDirectory.Path);
+		_cli = cli;
 	}
 
 	/// <summary>
@@ -39,7 +37,7 @@ public class Scaffold : IDisposable
 	/// <param name="restore"></param>
 	public async Task BuildAsync(string relativePath, string? arguments, CancellationToken cancellationToken, Verbosity verbosity = default, bool restore = false)
 	{
-		await Dotnet.BuildAsync(_tempPath.PathTranslator.GetAbsolutePath(relativePath).OriginalPath, arguments, verbosity, cancellationToken, restore).ConfigureAwait(false);
+		await _cli.BuildAsync(_tempDirectory.Path.PathTranslator.GetAbsolutePath(relativePath).OriginalPath, arguments, verbosity, cancellationToken, restore).ConfigureAwait(false);
 	}
 
 	/// <summary>
@@ -51,7 +49,7 @@ public class Scaffold : IDisposable
 	/// <param name="verbosity"></param>
 	public async Task RestoreAsync(string relativePath, string? arguments, CancellationToken cancellationToken, Verbosity verbosity = default)
 	{
-		await Dotnet.RestoreAsync(_tempPath.PathTranslator.GetAbsolutePath(relativePath).OriginalPath, arguments, verbosity, cancellationToken).ConfigureAwait(false);
+		await _cli.RestoreAsync(_tempDirectory.Path.PathTranslator.GetAbsolutePath(relativePath).OriginalPath, arguments, verbosity, cancellationToken).ConfigureAwait(false);
 	}
 
 	/// <summary>
@@ -62,8 +60,27 @@ public class Scaffold : IDisposable
 	/// <returns></returns>
 	public async Task<string> GetFileContentAsync(string relativePath, CancellationToken cancellationToken = default)
 	{
-		var path = _tempPath.PathTranslator.GetAbsolutePath(relativePath);
-		return await File.ReadAllTextAsync(path.OriginalPath, cancellationToken).ConfigureAwait(false);
+		return await _tempDirectory.GetFileContentAsync(relativePath, cancellationToken).ConfigureAwait(false);
+	}
+
+	/// <summary>
+	/// Returns the content of all scaffolded files
+	/// </summary>
+	/// <param name="filter">true removes a file from the results, false keeps it</param>
+	/// <param name="cancellationToken"></param>
+	/// <returns></returns>
+	public async IAsyncEnumerable<FileContent> GetAllFileContentsAsync(RelativeFileFilter? filter = default, [EnumeratorCancellation] CancellationToken cancellationToken = default)
+	{
+		var filterInstance = filter ?? TemplatingDefaults.Instance.GetAllFileContentsFilter;
+		foreach (var relativePath in GetRelativeDirectoryPaths())
+		{
+			if(filterInstance(relativePath))
+				continue;
+			
+			cancellationToken.ThrowIfCancellationRequested();
+			var content = await GetFileContentAsync(relativePath, cancellationToken);
+			yield return new FileContent(relativePath, content);
+		}
 	}
 
 	/// <summary>
@@ -72,15 +89,7 @@ public class Scaffold : IDisposable
 	/// <returns></returns>
 	public IEnumerable<string> GetRelativeDirectoryPaths()
 	{
-		return Files().OrderBy(d => d);
-
-		IEnumerable<string> Files()
-		{
-			foreach (var fullPath in Directory.EnumerateFiles(_tempPath.Directory.OriginalPath, "*", SearchOption.AllDirectories))
-			{
-				yield return _tempPath.PathTranslator.GetRelativePath(fullPath).VirtualPath;
-			}
-		}
+		return _tempDirectory.GetRelativePaths().OrderBy(d => d);
 	}
 
 	private bool _disposed;

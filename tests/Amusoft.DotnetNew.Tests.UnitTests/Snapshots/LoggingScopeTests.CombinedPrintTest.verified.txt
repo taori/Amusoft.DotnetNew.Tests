@@ -1,4 +1,5 @@
 ﻿{
+  FullString: invocationresultrewriter,
   All: invocationresultrewriter,
   Invocations: invocationrewriter,
   Responses: resultrewriter

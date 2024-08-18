@@ -1,0 +1,6 @@
+﻿[
+  {
+    RelativePath: c.jpg,
+    Content: content c
+  }
+]

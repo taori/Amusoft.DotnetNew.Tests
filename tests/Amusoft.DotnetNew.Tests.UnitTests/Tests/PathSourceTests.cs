@@ -1,8 +1,7 @@
 ﻿using System.IO;
 using System.Threading.Tasks;
 using Amusoft.DotnetNew.Tests.Templating;
-using Amusoft.DotnetNew.Tests.UnitTests.Configuration;
-using Amusoft.DotnetNew.Tests.UnitTests.Toolkit;
+using Shared.TestSdk;
 using VerifyXunit;
 using Xunit;
 using Xunit.Abstractions;
@@ -37,6 +36,19 @@ public class PathSourceTests : TestBase
 				Directory = pathSource.Directory,
 			}
 		).UseParameters(subPath);
+	}
+	
+	[Fact(Timeout = 10000)]
+	public async Task DirectoryDoesNotExist()
+	{
+		var fullPath = Path.GetTempPath()[..^2];
+		var pathSource = new PathSource(fullPath);
+		await Verifier.Verify(new
+			{
+				File = pathSource.File,
+				Directory = pathSource.Directory,
+			}
+		);
 	}
 
 	public PathSourceTests(ITestOutputHelper outputHelper, AssemblyInitializer data) : base(outputHelper, data)

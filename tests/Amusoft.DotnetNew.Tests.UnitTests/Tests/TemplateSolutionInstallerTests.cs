@@ -2,10 +2,8 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using Amusoft.DotnetNew.Tests.Templating;
-using Amusoft.DotnetNew.Tests.UnitTests.Configuration;
-using Amusoft.DotnetNew.Tests.UnitTests.Helpers;
-using Amusoft.DotnetNew.Tests.UnitTests.Toolkit;
-using Amusoft.DotnetNew.Tests.Utility;
+using Shared.TestSdk;
+using Shared.TestSdk.Helpers;
 using Shouldly;
 using VerifyXunit;
 using Xunit;
@@ -68,6 +66,13 @@ namespace Amusoft.DotnetNew.Tests.UnitTests.Tests
         {
             var file = TemplateSolutionInstallerHelper.CreateLocalSolution();
             await Verifier.Throws(() => file.Solution.PathTranslator.GetAbsolutePath("./Amusoft.DotnetNew.Tests.sln"));
+        }
+
+        [Fact(Timeout = 10000)]
+        public async Task DiscoverDirectoryDoesNotExist()
+        {
+            var file = TemplateSolutionInstallerHelper.CreateLocalSolution();
+            await Verifier.Throws(() => file.DiscoverTemplates("asdf"));
         }
 
         public TemplateSolutionInstallerTests(ITestOutputHelper outputHelper, AssemblyInitializer data) : base(outputHelper, data)

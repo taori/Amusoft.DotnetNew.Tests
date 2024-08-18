@@ -5,8 +5,7 @@ using System.Threading.Tasks;
 using Amusoft.DotnetNew.Tests.Diagnostics;
 using Amusoft.DotnetNew.Tests.Interfaces;
 using Amusoft.DotnetNew.Tests.Scopes;
-using Amusoft.DotnetNew.Tests.UnitTests.Configuration;
-using Amusoft.DotnetNew.Tests.UnitTests.Toolkit;
+using Shared.TestSdk;
 using Shouldly;
 using VerifyXunit;
 using Xunit;
@@ -146,6 +145,7 @@ public class LoggingScopeTests : TestBase
 
 		await Verifier.Verify(new
 		{
+			FullString = LoggingScope.ToFullString(),
 			All = results[PrintKind.All],
 			Invocations = results[PrintKind.Invocations],
 			Responses = results[PrintKind.Responses],

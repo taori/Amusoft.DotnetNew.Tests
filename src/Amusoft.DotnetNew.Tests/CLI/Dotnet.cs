@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Amusoft.DotnetNew.Tests.Diagnostics;
 using Amusoft.DotnetNew.Tests.Exceptions;
 using Amusoft.DotnetNew.Tests.Extensions;
+using Amusoft.DotnetNew.Tests.Interfaces;
 using Amusoft.DotnetNew.Tests.Rewriters;
 using Amusoft.DotnetNew.Tests.Scaffolding;
 using Amusoft.DotnetNew.Tests.Scopes;
@@ -19,25 +20,26 @@ namespace Amusoft.DotnetNew.Tests.CLI;
 /// Dotnet new CLI tool
 /// </summary>
 [ExcludeFromCodeCoverage]
-public static class Dotnet
+public class Dotnet : IDotnetCli
 {
 	/// <summary>
-	/// 
+	/// Wrapper for scaffolding and other operations
 	/// </summary>
-	/// <param name="template"></param>
-	/// <param name="arguments"></param>
-	/// <param name="cancellationToken"></param>
-	/// <returns></returns>
-	/// <exception cref="ScaffoldingFailedException"></exception>
-	public static async Task<Scaffold> NewAsync(string template, string? arguments, CancellationToken cancellationToken)
+	public static readonly IDotnetCli Cli = new Dotnet();
+	
+	internal Dotnet()
+	{
+	}
+	
+	async Task<Scaffold> IDotnetCli.NewAsync(string template, string? arguments, CancellationToken cancellationToken)
 	{
 		var tempDirectory = new TempDirectory();
-		var scaffold = new Scaffold(tempDirectory);
+		var scaffold = new Scaffold(tempDirectory, new Dotnet());
 		var fullArgs = arguments is not null
 			? $"new {template} -o \"{tempDirectory.Path}\" {arguments}"
 			: $"new {template} -o \"{tempDirectory.Path}\"";
 		
-		LoggingScope.TryAddRewriter(new FolderNameAliasRewriter(new CrossPlatformPath(tempDirectory.Path), "Scaffold"));
+		LoggingScope.TryAddRewriter(new FolderNameAliasRewriter(tempDirectory.Path.Directory, "Scaffold"));
 		var result = await LoggedDotnetCli.RunDotnetCommandAsync(fullArgs, cancellationToken, []);
 		var output = LoggingScope.ToFullString();
 		if (!result)
@@ -46,18 +48,7 @@ public static class Dotnet
 		return scaffold;
 	}
 
-	/// <summary>
-	/// Tries to build with the given arguments
-	/// </summary>
-	/// <param name="fullPath">path for the build operation</param>
-	/// <param name="arguments">build arguments</param>
-	/// <param name="verbosity"></param>
-	/// <param name="cancellationToken">cancellation token</param>
-	/// <param name="restore"></param>
-	/// <exception cref="FileNotFoundException"></exception>
-	/// <exception cref="DirectoryNotFoundException"></exception>
-	/// <exception cref="ScaffoldingFailedException"></exception>
-	internal static async Task BuildAsync(string fullPath, string? arguments, Verbosity verbosity, CancellationToken cancellationToken, bool restore)
+	async Task IDotnetCli.BuildAsync(string fullPath, string? arguments, Verbosity verbosity, CancellationToken cancellationToken, bool restore)
 	{
 		if (!File.Exists(fullPath) && !Directory.Exists(fullPath))
 		{
@@ -87,17 +78,7 @@ public static class Dotnet
 		}
 	}
 
-	/// <summary>
-	/// Restores the project
-	/// </summary>
-	/// <param name="fullPath"></param>
-	/// <param name="arguments"></param>
-	/// <param name="verbosity"></param>
-	/// <param name="cancellationToken"></param>
-	/// <exception cref="FileNotFoundException"></exception>
-	/// <exception cref="DirectoryNotFoundException"></exception>
-	/// <exception cref="BuildFailedException"></exception>
-	internal static async Task RestoreAsync(string fullPath, string? arguments, Verbosity verbosity, CancellationToken cancellationToken)
+	async Task IDotnetCli.RestoreAsync(string fullPath, string? arguments, Verbosity verbosity, CancellationToken cancellationToken)
 	{
 		if (!File.Exists(fullPath) && !Directory.Exists(fullPath))
 		{
