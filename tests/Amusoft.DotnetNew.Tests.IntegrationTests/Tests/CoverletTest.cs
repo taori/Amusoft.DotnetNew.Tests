@@ -10,7 +10,7 @@ public class CoverletTest
     {
         using (var dir = new TempDirectory())
         {
-            Directory.Exists(dir.Path).ShouldBeTrue();
+            Directory.Exists(dir.Path.Directory.OriginalPath).ShouldBeTrue();
         }
     }
 }

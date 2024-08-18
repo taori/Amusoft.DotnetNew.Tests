@@ -30,7 +30,7 @@ public class ScaffoldingTests : TestBase
 				            --GitUser "{gitUser}"
 				            --Author "{author}"
 				            """;
-				using (var scaffold = await CLI.Dotnet.NewAsync("dotnet-library-repo", args.Replace(Environment.NewLine, " "), CancellationToken.None))
+				using (var scaffold = await Dotnet.Cli.NewAsync("dotnet-library-repo", args.Replace(Environment.NewLine, " "), CancellationToken.None))
 				{
 					var list = scaffold.GetRelativeDirectoryPaths().ToArray();
 					await scaffold.RestoreAsync($"src/{projectName}.sln", null, CancellationToken.None);
@@ -69,7 +69,7 @@ public class ScaffoldingTests : TestBase
 				            --GitUser "{gitUser}" 
 				            --Author "{author}"
 				            """;
-				using (var scaffold = await Dotnet.NewAsync("dotnet-library-repo", args.Replace(Environment.NewLine, " "), CancellationToken.None))
+				using (var scaffold = await Dotnet.Cli.NewAsync("dotnet-library-repo", args.Replace(Environment.NewLine, " "), CancellationToken.None))
 				{
 					var readmeContent = await scaffold.GetFileContentAsync("README.md");
 					await Verifier.Verify(readmeContent);
