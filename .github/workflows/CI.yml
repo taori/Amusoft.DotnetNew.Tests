@@ -36,35 +36,15 @@ on:
         description: e.g alpha.1
         default: ""
 
-      package:
-        type: boolean
-        description: run dotnet pack?
-        default: false
-
       publish:
         type: boolean
         description: run dotnet publish?
-        default: false
-
-      skipTests:
-        type: boolean
-        description: skip tests?
-        default: false
-
-      publishSymbols:
-        type: boolean
-        description: publish snupkg?
         default: false
 
       removePrereleases:
         type: boolean
         description: nuget unlist preleases?
         default: false
-
-      runCoverage:
-        type: boolean
-        description: run code coverage?
-        default: true
 
       configuration:
         description: build configuration
@@ -139,7 +119,7 @@ jobs:
               @("verbosity",          "${{github.event.inputs.verbosity}}",           "minimal"),
               @("publish",            "${{github.event.inputs.publish}}",             "false"),
               @("package",            "${{github.event.inputs.package}}",             "true"),
-              @("publishSymbols",     "${{github.event.inputs.publishSymbols}}",      "false"),
+              @("publishSymbols",     "${{github.event.inputs.publishSymbols}}",      "true"),
               @("removePrereleases",  "${{github.event.inputs.removePrereleases}}",   "false"),
               @("skipTests",          "${{github.event.inputs.skipTests}}",           "false"),
               @("runCoverage",        "${{github.event.inputs.runCoverage}}",         "true")
@@ -160,7 +140,7 @@ jobs:
 
   package:
     needs: parameters
-    uses: taori/actions/.github/workflows/nupkg.yml@main
+    uses: taori/actions/.github/workflows/nupkg.yml@v9
     with:
       solutionPath: src/Amusoft.DotnetNew.Tests.sln
       packProjects: src/Amusoft.DotnetNew.Tests/Amusoft.DotnetNew.Tests.csproj
