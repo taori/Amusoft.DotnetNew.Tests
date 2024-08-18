@@ -1,0 +1,10 @@
+﻿---Result---
+
+{
+  "ExitCode": 0,
+  "Output": "some output",
+  "Errors": "some error",
+  "Success": true,
+  "Runtime": "00:00:00"
+}
+

@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Text;
 using Amusoft.DotnetNew.Tests.Interfaces;
 using Amusoft.DotnetNew.Tests.Templating;
 
@@ -6,6 +7,7 @@ namespace Amusoft.DotnetNew.Tests.Diagnostics;
 
 internal class DotnetCommand : ICommandInvocation
 {
+	[ExcludeFromCodeCoverage]
 	public string Command { get; }
 
 	public DotnetCommand(string command)
