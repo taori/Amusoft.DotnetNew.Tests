@@ -41,12 +41,11 @@ public class PathSourceTests : TestBase
 	[Fact(Timeout = 10000)]
 	public async Task DirectoryDoesNotExist()
 	{
-		var fullPath = Path.GetTempPath()[..^2];
-		var pathSource = new PathSource(fullPath);
+		var pathSource = new PathSource("tmp2341");
 		await Verifier.Verify(new
 			{
-				File = pathSource.File,
-				Directory = pathSource.Directory,
+				File = pathSource.File.VirtualPath,
+				Directory = pathSource.Directory.VirtualPath,
 			}
 		);
 	}

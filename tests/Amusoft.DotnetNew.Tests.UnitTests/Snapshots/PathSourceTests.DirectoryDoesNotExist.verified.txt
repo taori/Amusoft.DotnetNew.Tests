@@ -1,10 +1,4 @@
 ﻿{
-  File: {
-    OriginalPath: {UserProfile}\AppData\Local\Tem,
-    VirtualPath: {UserProfile}/AppData/Local/Tem
-  },
-  Directory: {
-    OriginalPath: {UserProfile}\AppData\Local\Tem,
-    VirtualPath: {UserProfile}/AppData/Local/Tem
-  }
+  File: tmp2341,
+  Directory: tmp2341
 }
