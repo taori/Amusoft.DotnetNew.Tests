@@ -4,6 +4,9 @@
 		<TargetFramework>net7.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
+		<!--https://stackoverflow.com/questions/48896443/an-assembly-specified-in-the-application-dependencies-manifest-was-not-fou-->
+<!--		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>-->
+		<IsTestProject>false</IsTestProject>
 	</PropertyGroup>
 	
 	<ItemGroup>
