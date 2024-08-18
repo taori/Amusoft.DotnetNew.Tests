@@ -10,6 +10,7 @@
 	<ItemGroup>
 		<ProjectReference Include="..\..\src\Amusoft.DotnetNew.Tests\Amusoft.DotnetNew.Tests.csproj"/>
 		<ProjectReference Include="..\Shared.TestSdk\Shared.TestSdk.csproj" />
+		<PackageReference Include="Amusoft.XUnit.NLog.Extensions" Version="2.4.2-alpha61"/>
 	</ItemGroup>
 	
 	<ItemGroup>
