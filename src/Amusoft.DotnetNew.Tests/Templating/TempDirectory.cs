@@ -27,7 +27,7 @@ internal class TempDirectory : ITempDirectory
 		
 		Path = new PathSource(directory);
 		Directory.CreateDirectory(Path.Directory.OriginalPath);
-		LoggingScope.TryAddResult(new TextResult($"Created temp directory at {Path}"));
+		LoggingScope.TryAddResult(new TextResult($"Created temp directory at {Path.Directory.OriginalPath}"));
 	}
 
 	public IPathSource Path { get; }

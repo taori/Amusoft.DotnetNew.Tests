@@ -65,8 +65,8 @@ public class ScaffoldingTests : TestBase
 				            -n "{projectName}"
 				            --GitProjectName "{projectName}"
 				            --NugetPackageId "{projectName}"
-				            --ProductName "{projectName}" 
-				            --GitUser "{gitUser}" 
+				            --ProductName "{projectName}"
+				            --GitUser "{gitUser}"
 				            --Author "{author}"
 				            """;
 				using (var scaffold = await Dotnet.Cli.NewAsync("dotnet-library-repo", args.Replace(Environment.NewLine, " "), CancellationToken.None))

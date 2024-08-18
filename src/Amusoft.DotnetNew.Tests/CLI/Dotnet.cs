@@ -36,8 +36,8 @@ public class Dotnet : IDotnetCli
 		var tempDirectory = new TempDirectory();
 		var scaffold = new Scaffold(tempDirectory, new Dotnet());
 		var fullArgs = arguments is not null
-			? $"new {template} -o \"{tempDirectory.Path}\" {arguments}"
-			: $"new {template} -o \"{tempDirectory.Path}\"";
+			? $"new {template} -o \"{tempDirectory.Path.Directory.OriginalPath}\" {arguments}"
+			: $"new {template} -o \"{tempDirectory.Path.Directory.OriginalPath}\"";
 		
 		LoggingScope.TryAddRewriter(new FolderNameAliasRewriter(tempDirectory.Path.Directory, "Scaffold"));
 		var result = await LoggedDotnetCli.RunDotnetCommandAsync(fullArgs, cancellationToken, []);
