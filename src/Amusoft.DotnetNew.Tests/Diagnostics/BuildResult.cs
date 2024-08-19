@@ -13,12 +13,12 @@ internal class BuildResult(
 	string content
 ) : ICommandResult
 {
-	private static readonly Regex Regex = new("-> (?<dll>.+?\\.dll)", RegexOptions.Compiled);
+	//-/u003E
+	private static readonly Regex Regex = new(@"-(?:[\/\\]u003E|>) (?<dll>.+?\.dll)", RegexOptions.Compiled);
 	
 	private IEnumerable<string> GetDlls()
 	{
-		var replace = content.Replace("/u003E",">");
-		var matchCollection = Regex.Matches(replace);
+		var matchCollection = Regex.Matches(content);
 		return matchCollection
 			.Select(d => d.Groups["dll"].Value.Replace("//","/"))
 			.OrderBy(d => d);
