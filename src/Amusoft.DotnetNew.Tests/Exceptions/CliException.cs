@@ -28,6 +28,7 @@ public abstract class CliException : Exception
 	/// <summary>
 	/// 
 	/// </summary>
+	/// <param name="rewriteContext"></param>
 	/// <param name="message"></param>
 	/// <param name="output"></param>
 	protected CliException(IRewriteContext? rewriteContext, string? message, string? output) : base(BuildMessage(rewriteContext, message, output))

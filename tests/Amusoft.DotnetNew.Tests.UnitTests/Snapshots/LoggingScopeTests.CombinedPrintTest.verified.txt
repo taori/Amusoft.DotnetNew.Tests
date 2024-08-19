@@ -1,4 +1,5 @@
 ﻿{
+  Rewrite: invocationresultrewriter,
   FullString: invocationresultrewriter,
   All: invocationresultrewriter,
   Invocations: invocationrewriter,
