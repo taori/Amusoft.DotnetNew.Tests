@@ -14,8 +14,7 @@ public class BuildFailedException : CliException
 	/// </summary>
 	/// <param name="message"></param>
 	/// <param name="output"></param>
-	/// <param name="rewriteContext"></param>
-	public BuildFailedException(string? message, string? output, IRewriteContext? rewriteContext) : base(rewriteContext, message, output)
+	public BuildFailedException(string? message, string? output) : base(message, output)
 	{
 	}
 }

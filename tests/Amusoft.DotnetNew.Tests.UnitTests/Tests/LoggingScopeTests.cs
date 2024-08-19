@@ -145,7 +145,6 @@ public class LoggingScopeTests : TestBase
 
 		await Verifier.Verify(new
 		{
-			Rewrite = LoggingScope.Current?.Rewrite(""),
 			FullString = LoggingScope.ToFullString(),
 			All = results[PrintKind.All],
 			Invocations = results[PrintKind.Invocations],

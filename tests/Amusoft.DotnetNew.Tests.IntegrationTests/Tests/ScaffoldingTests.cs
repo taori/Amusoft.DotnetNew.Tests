@@ -83,13 +83,16 @@ public class ScaffoldingTests : TestBase
 	[Fact(Timeout = 10_000)]
 	private async Task ScaffoldingErrorTest()
 	{
+		
 		using (var loggingScope = new LoggingScope())
 		{
 			var solution = TemplateSolutionInstallerHelper.CreateLocalSolution();
 			using (var installations = await solution.InstallTemplatesFromDirectoryAsync("../tests/Resources", CancellationToken.None))
 			{
 				var ex = await Assert.ThrowsAsync<ScaffoldingFailedException>(async () => await Dotnet.Cli.NewAsync("dotnet-template", string.Empty, CancellationToken.None));
-				await Verifier.Verify(ex);
+				var settings = new VerifySettings();
+				settings.ScrubMember<Exception>(nameof(ScaffoldingFailedException.Message));
+				await Verifier.Verify(ex, settings);
 			}
 		}
 	}

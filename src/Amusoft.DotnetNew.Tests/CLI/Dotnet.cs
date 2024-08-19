@@ -38,12 +38,19 @@ public class Dotnet : IDotnetCli
 		var fullArgs = !string.IsNullOrEmpty(arguments)
 			? $"new {template} -o \"{tempDirectory.Path.Directory.OriginalPath}\" {arguments}"
 			: $"new {template} -o \"{tempDirectory.Path.Directory.OriginalPath}\"";
-		
+
 		LoggingScope.TryAddRewriter(new FolderNameAliasRewriter(tempDirectory.Path.Directory, "Scaffold"));
-		var result = await LoggedDotnetCli.RunDotnetCommandAsync(fullArgs, cancellationToken, []);
-		var output = LoggingScope.ToFullString();
-		if (!result)
-			throw new ScaffoldingFailedException(LoggingScope.Current, fullArgs, output);
+		using (var loggingScope = new LoggingScope(false))
+		{
+			if (await LoggedDotnetCli.RunDotnetCommandAsync(fullArgs, cancellationToken, []))
+			{
+				loggingScope.ParentScope?.AddResult(new TextResult($"success: {fullArgs}"));
+			}
+			else
+			{
+				throw new ScaffoldingFailedException(fullArgs, loggingScope.ToFullString(PrintKind.All));
+			}
+		}
 		
 		return scaffold;
 	}
@@ -61,19 +68,19 @@ public class Dotnet : IDotnetCli
 			? string.Empty
 			: "--no-restore";
 
+		var fullArgs = arguments is null
+			? $"build {fullPath} {restoreArgument} -v {verbosity.ToVerbosityText()}"
+			: $"build {fullPath} {restoreArgument} -v {verbosity.ToVerbosityText()} {arguments}";
+		
 		using (var loggingScope = new LoggingScope(false))
 		{
-			var fullArgs = arguments is null
-				? $"build {fullPath} {restoreArgument} -v {verbosity.ToVerbosityText()}"
-				: $"build {fullPath} {restoreArgument} -v {verbosity.ToVerbosityText()} {arguments}";
-			
 			if (await LoggedDotnetCli.RunDotnetCommandAsync(fullArgs, cancellationToken, []))
 			{
 				loggingScope.ParentScope?.AddResult(new TextResult($"success: {fullArgs}"));
 			}
 			else
 			{
-				throw new BuildFailedException(fullArgs, loggingScope.ToFullString(PrintKind.All), loggingScope);
+				throw new BuildFailedException(fullArgs, loggingScope.ToFullString(PrintKind.All));
 			}
 		}
 	}
@@ -99,7 +106,7 @@ public class Dotnet : IDotnetCli
 			}
 			else
 			{
-				throw new BuildFailedException(fullArgs, loggingScope.ToFullString(PrintKind.All), loggingScope);
+				throw new BuildFailedException(fullArgs, loggingScope.ToFullString(PrintKind.All));
 			}
 		}
 	}

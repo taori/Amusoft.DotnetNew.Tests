@@ -12,7 +12,7 @@ namespace Amusoft.DotnetNew.Tests.Scopes;
 /// <summary>
 /// Logging scope to capture any logs
 /// </summary>
-public class LoggingScope : AmbientScope<LoggingScope>, IRewriteContext
+public class LoggingScope : AmbientScope<LoggingScope>
 {
 	/// <summary>
 	/// Constructor
@@ -21,6 +21,13 @@ public class LoggingScope : AmbientScope<LoggingScope>, IRewriteContext
 	public LoggingScope(bool connected = true)
 	{
 		Connected = connected;
+		if (ParentScope?._rewriters is { Count: > 0 } rewriters)
+		{
+			foreach (var rewriter in rewriters)
+			{
+				AddRewriter(rewriter);
+			}
+		}
 	}
 
 	/// <summary>
@@ -84,6 +91,11 @@ public class LoggingScope : AmbientScope<LoggingScope>, IRewriteContext
 			printable.Print(stringBuilder);
 		}
 
+		ApplyRewriters(stringBuilder);
+	}
+
+	private void ApplyRewriters(StringBuilder stringBuilder)
+	{
 		foreach (var commandRewriter in _rewriters.OrderBy(d => d.ExecutionOrder))
 		{
 			commandRewriter.Rewrite(stringBuilder);
@@ -99,16 +111,4 @@ public class LoggingScope : AmbientScope<LoggingScope>, IRewriteContext
 	internal static void TryAddResult(ICommandResult item) => Current?.AddResult(item);
 	
 	internal static string? ToFullString() => Current?.ToFullString(PrintKind.All);
-	
-	/// <summary>
-	/// Rewrites the given input
-	/// </summary>
-	/// <param name="input">cleartext</param>
-	/// <returns>rewritten text</returns>
-	public string Rewrite(string input)
-	{
-		var sb = new StringBuilder(input);
-		Print(sb, PrintKind.All);
-		return sb.ToString();
-	}
 }

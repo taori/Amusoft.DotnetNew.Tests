@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using Amusoft.DotnetNew.Tests.Diagnostics;
+using Amusoft.DotnetNew.Tests.Exceptions;
 
 namespace Shared.TestSdk.Initializers;
 
