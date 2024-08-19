@@ -37,6 +37,7 @@ internal class CliWrapRunner : IProcessRunner
 			["DOTNET_CLI_UI_LANGUAGE"] = "en",
 		};
 
+		DiagnosticScope.TryAddContent($"dotnet {arguments}");
 		LoggingScope.TryAddInvocation($"dotnet {arguments}");
 
 		var command = Cli.Wrap("dotnet")
@@ -48,6 +49,11 @@ internal class CliWrapRunner : IProcessRunner
 			.ExecuteBufferedAsync(cancellationToken)
 			.ConfigureAwait(false);
 		
+		DiagnosticScope.TryAddJson(new
+		{
+			Output = bufferedCommandResult.StandardOutput,
+			Error = bufferedCommandResult.StandardError,
+		});
 		LoggingScope.TryAddResult(bufferedCommandResult.ToCommandResult());
 
 		return bufferedCommandResult.IsSuccess || successStatusCodes.Contains(bufferedCommandResult.ExitCode);
@@ -59,6 +65,7 @@ internal class LocalProcessRunner : IProcessRunner
 {
 	public async Task<bool> RunAsync(string arguments, CancellationToken cancellationToken, int[] successStatusCodes)
 	{
+		DiagnosticScope.TryAddContent($"dotnet {arguments}");
 		LoggingScope.TryAddInvocation($"dotnet {arguments}");
 		
 		var psi = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
@@ -99,12 +106,18 @@ internal class LocalProcessRunner : IProcessRunner
 			sw.Stop();
 		
 			var success = process.HasExited && (process.ExitCode == 0 || successStatusCodes.Contains(process.ExitCode));
+			DiagnosticScope.TryAddJson(new
+			{
+				Output = output.ToString(),
+				Error = error.ToString(),
+			});
 			LoggingScope.TryAddResult(new CommandResult(process.ExitCode, output.ToString(), error.ToString(), success, sw.Elapsed));
 
 			return success;
 		}
 		catch (OperationCanceledException)
 		{
+			DiagnosticScope.TryAddContent("Operation cancelled");
 			LoggingScope.TryAddResult(new TextResult("Process aborted"));
 			return false;
 		}
