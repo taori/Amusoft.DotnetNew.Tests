@@ -1,3 +1,4 @@
 ﻿[
-  ../tests/Resources/dotnet-library-repo
+  ../tests/Resources/dotnet-library-repo,
+  ../tests/Resources/dotnet-template
 ]

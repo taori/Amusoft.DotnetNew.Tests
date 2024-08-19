@@ -1,5 +1,6 @@
 ﻿using Amusoft.DotnetNew.Tests.CLI;
 using Amusoft.DotnetNew.Tests.Diagnostics;
+using Amusoft.DotnetNew.Tests.Exceptions;
 using Amusoft.DotnetNew.Tests.Scopes;
 using Shared.TestSdk;
 using Shared.TestSdk.Helpers;
@@ -8,9 +9,9 @@ using Xunit.Abstractions;
 
 namespace Amusoft.DotnetNew.Tests.IntegrationTests.Tests;
 
-[Trait("Category","SkipInCI")]
 public class ScaffoldingTests : TestBase
 {
+	[Trait("Category","SkipInCI")]
 	[InlineData("Project1", "gitUser", "authorname")]
 	[InlineData("Project2", "gitUser", "authorname")]
 	// https://github.com/taori/Amusoft.DotnetNew.Tests/issues/1
@@ -50,6 +51,7 @@ public class ScaffoldingTests : TestBase
 		}
 	}
 	
+	[Trait("Category","SkipInCI")]
 	[Fact(Timeout = 10_000)]
 	private async Task GetFileContentAsync()
 	{
@@ -74,6 +76,20 @@ public class ScaffoldingTests : TestBase
 					var readmeContent = await scaffold.GetFileContentAsync("README.md");
 					await Verifier.Verify(readmeContent);
 				}
+			}
+		}
+	}
+	
+	[Fact(Timeout = 10_000)]
+	private async Task ScaffoldingErrorTest()
+	{
+		using (var loggingScope = new LoggingScope())
+		{
+			var solution = TemplateSolutionInstallerHelper.CreateLocalSolution();
+			using (var installations = await solution.InstallTemplatesFromDirectoryAsync("../tests/Resources", CancellationToken.None))
+			{
+				var ex = await Assert.ThrowsAsync<ScaffoldingFailedException>(async () => await Dotnet.Cli.NewAsync("dotnet-template", string.Empty, CancellationToken.None));
+				await Verifier.Verify(ex);
 			}
 		}
 	}

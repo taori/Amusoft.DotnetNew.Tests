@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using Amusoft.DotnetNew.Tests.Scopes;
 
 namespace Amusoft.DotnetNew.Tests.Exceptions;
 
@@ -13,7 +14,8 @@ public class BuildFailedException : CliException
 	/// </summary>
 	/// <param name="message"></param>
 	/// <param name="output"></param>
-	public BuildFailedException(string? message, string? output) : base(message, output)
+	/// <param name="rewriteContext"></param>
+	public BuildFailedException(string? message, string? output, IRewriteContext? rewriteContext) : base(rewriteContext, message, output)
 	{
 	}
 }

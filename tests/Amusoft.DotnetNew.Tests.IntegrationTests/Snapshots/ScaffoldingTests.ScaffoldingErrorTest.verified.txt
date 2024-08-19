@@ -1,0 +1,87 @@
+﻿{
+  Type: ScaffoldingFailedException,
+  Output:
+---Result---
+
+Install for {ProjectDir:dotnet-library-repo} succeded
+
+---Result---
+
+Install for {ProjectDir:dotnet-template} succeded
+
+---Result---
+
+Created temp directory at {Scaffold}
+
+---Command---
+
+dotnet new dotnet-template -o "{Scaffold}"
+
+---Result---
+
+{
+  "ExitCode": 102,
+  "Output": "",
+  "Errors": "Missing mandatory option(s) for the template /u0027.template.config structure/u0027: /u0027--param:author/u0027.For details on the exit code, refer to https://aka.ms/templating-exit-codes#102",
+  "Success": false,
+  "Runtime": "00:00:00"
+}
+
+,
+  Message:
+new dotnet-template -o "{Scaffold}"
+
+---Result---
+
+Install for {ProjectDir:dotnet-library-repo} succeded
+
+---Result---
+
+Install for {ProjectDir:dotnet-template} succeded
+
+---Result---
+
+Created temp directory at {Scaffold}
+
+---Command---
+
+dotnet new dotnet-template -o "{Scaffold}"
+
+---Result---
+
+{
+  "ExitCode": 102,
+  "Output": "",
+  "Errors": "Missing mandatory option(s) for the template /u0027.template.config structure/u0027: /u0027--param:author/u0027.For details on the exit code, refer to https://aka.ms/templating-exit-codes#102",
+  "Success": false,
+  "Runtime": "00:00:00"
+}
+
+---Result---
+
+Install for {ProjectDir:dotnet-library-repo} succeded
+
+---Result---
+
+Install for {ProjectDir:dotnet-template} succeded
+
+---Result---
+
+Created temp directory at {Scaffold}
+
+---Command---
+
+dotnet new dotnet-template -o "{Scaffold}"
+
+---Result---
+
+{
+  "ExitCode": 102,
+  "Output": "",
+  "Errors": "Missing mandatory option(s) for the template /u0027.template.config structure/u0027: /u0027--param:author/u0027.For details on the exit code, refer to https://aka.ms/templating-exit-codes#102",
+  "Success": false,
+  "Runtime": "00:00:00"
+}
+
+
+}

@@ -64,6 +64,7 @@ internal class LocalProcessRunner : IProcessRunner
 			? new ProcessStartInfo("dotnet", arguments)
 			{
 				RedirectStandardOutput = true,
+				RedirectStandardError = true,
 				UseShellExecute = false,
 				CreateNoWindow = true,
 				LoadUserProfile = false,
@@ -71,18 +72,22 @@ internal class LocalProcessRunner : IProcessRunner
 			: new ProcessStartInfo("dotnet", arguments)
 			{
 				RedirectStandardOutput = true,
+				RedirectStandardError = true,
 				UseShellExecute = false,
 				CreateNoWindow = true,
 			};
 
 		psi.Environment.Add("DOTNET_CLI_UI_LANGUAGE", "en");
 
-		var sb = new StringBuilder();
+		var output = new StringBuilder();
+		var error = new StringBuilder();
 		var process = new Process();
 		process.StartInfo = psi;
-		process.OutputDataReceived += (sender, args) => sb.Append(args.Data);
+		process.OutputDataReceived += (sender, args) => output.Append(args.Data);
+		process.ErrorDataReceived += (sender, args) => error.Append(args.Data);
 		process.Start();
 		process.BeginOutputReadLine();
+		process.BeginErrorReadLine();
 
 		var sw = new Stopwatch();
 		sw.Restart();
@@ -93,7 +98,7 @@ internal class LocalProcessRunner : IProcessRunner
 			sw.Stop();
 		
 			var success = process.HasExited && (process.ExitCode == 0 || successStatusCodes.Contains(process.ExitCode));
-			LoggingScope.TryAddResult(new CommandResult(process.ExitCode, sb.ToString(), string.Empty, success, sw.Elapsed));
+			LoggingScope.TryAddResult(new CommandResult(process.ExitCode, output.ToString(), error.ToString(), success, sw.Elapsed));
 
 			return success;
 		}

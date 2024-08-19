@@ -35,7 +35,7 @@ public class Dotnet : IDotnetCli
 	{
 		var tempDirectory = new TempDirectory();
 		var scaffold = new Scaffold(tempDirectory, new Dotnet());
-		var fullArgs = arguments is not null
+		var fullArgs = !string.IsNullOrEmpty(arguments)
 			? $"new {template} -o \"{tempDirectory.Path.Directory.OriginalPath}\" {arguments}"
 			: $"new {template} -o \"{tempDirectory.Path.Directory.OriginalPath}\"";
 		
@@ -43,7 +43,7 @@ public class Dotnet : IDotnetCli
 		var result = await LoggedDotnetCli.RunDotnetCommandAsync(fullArgs, cancellationToken, []);
 		var output = LoggingScope.ToFullString();
 		if (!result)
-			throw new BuildFailedException(fullArgs, output);
+			throw new ScaffoldingFailedException(LoggingScope.Current, fullArgs, output);
 		
 		return scaffold;
 	}
@@ -73,7 +73,7 @@ public class Dotnet : IDotnetCli
 			}
 			else
 			{
-				throw new BuildFailedException(fullArgs, loggingScope.ToFullString(PrintKind.All));
+				throw new BuildFailedException(fullArgs, loggingScope.ToFullString(PrintKind.All), loggingScope);
 			}
 		}
 	}
@@ -99,7 +99,7 @@ public class Dotnet : IDotnetCli
 			}
 			else
 			{
-				throw new BuildFailedException(fullArgs, loggingScope.ToFullString(PrintKind.All));
+				throw new BuildFailedException(fullArgs, loggingScope.ToFullString(PrintKind.All), loggingScope);
 			}
 		}
 	}

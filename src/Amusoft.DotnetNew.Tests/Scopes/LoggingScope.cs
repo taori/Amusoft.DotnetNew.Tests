@@ -12,7 +12,7 @@ namespace Amusoft.DotnetNew.Tests.Scopes;
 /// <summary>
 /// Logging scope to capture any logs
 /// </summary>
-public class LoggingScope : AmbientScope<LoggingScope>
+public class LoggingScope : AmbientScope<LoggingScope>, IRewriteContext
 {
 	/// <summary>
 	/// Constructor
@@ -99,4 +99,16 @@ public class LoggingScope : AmbientScope<LoggingScope>
 	internal static void TryAddResult(ICommandResult item) => Current?.AddResult(item);
 	
 	internal static string? ToFullString() => Current?.ToFullString(PrintKind.All);
+	
+	/// <summary>
+	/// Rewrites the given input
+	/// </summary>
+	/// <param name="input">cleartext</param>
+	/// <returns>rewritten text</returns>
+	public string Rewrite(string input)
+	{
+		var sb = new StringBuilder(input);
+		Print(sb, PrintKind.All);
+		return sb.ToString();
+	}
 }
