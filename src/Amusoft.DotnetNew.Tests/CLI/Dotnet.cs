@@ -76,7 +76,7 @@ public class Dotnet : IDotnetCli
 		{
 			if (await LoggedDotnetCli.RunDotnetCommandAsync(fullArgs, cancellationToken, []))
 			{
-				loggingScope.ParentScope?.AddResult(new TextResult($"success: {fullArgs}"));
+				loggingScope.ParentScope?.AddResult(new BuildResult(fullArgs, loggingScope.ToFullString(PrintKind.Responses)));
 			}
 			else
 			{

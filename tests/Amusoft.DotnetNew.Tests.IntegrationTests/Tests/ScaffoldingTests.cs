@@ -45,7 +45,7 @@ public class ScaffoldingTests : TestBase
 						)
 						.UseParameters(projectName, gitUser, author);
 
-					installations.Installations.Count.ShouldBe(1);
+					installations.Installations.Count.ShouldBe(2);
 				}
 			}
 		}

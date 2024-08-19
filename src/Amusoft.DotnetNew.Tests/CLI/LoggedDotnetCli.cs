@@ -22,6 +22,7 @@ internal static class LoggedDotnetCli
 	internal static async Task<bool> RunDotnetCommandAsync(string arguments, CancellationToken cancellationToken, int[] acceptAsSuccess)
 	{
 		var runner = new LocalProcessRunner();
+		// var runner = new CliWrapRunner();
 		return await runner.RunAsync(arguments, cancellationToken, acceptAsSuccess).ConfigureAwait(false);
 	}
 }

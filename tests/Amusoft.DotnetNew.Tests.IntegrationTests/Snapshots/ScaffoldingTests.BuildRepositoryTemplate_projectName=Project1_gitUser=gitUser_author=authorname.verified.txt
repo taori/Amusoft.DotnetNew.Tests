@@ -6,29 +6,31 @@ Install for {ProjectDir:dotnet-library-repo} succeded
 
 ---Result---
 
-Created temp directory at {Scaffold}
-
----Command---
-
-dotnet new dotnet-library-repo -o "{Scaffold}" -n "Project1" --GitProjectName "Project1" --NugetPackageId "Project1" --ProductName "Project1" --GitUser "gitUser" --Author "authorname"
+Install for {ProjectDir:dotnet-template} succeded
 
 ---Result---
 
-{
-  "ExitCode": 0,
-  "Output": "The template /u0022nuget library repository/u0022 was created successfully.",
-  "Errors": "",
-  "Success": true,
-  "Runtime": "00:00:00"
-}
+Created temp directory at {Scaffold}
+
+---Result---
+
+success: new dotnet-library-repo -o "{Scaffold}" -n "Project1" --GitProjectName "Project1" --NugetPackageId "Project1" --ProductName "Project1" --GitUser "gitUser" --Author "authorname"
 
 ---Result---
 
 success: restore "{Scaffold}/src/Project1.sln" -v m --ignore-failed-sources
 
----Result---
+---BuildResult---
 
-success: build {Scaffold}/src/Project1.sln --no-restore -v m
+{
+  "Command": "build {Scaffold}/src/Project1.sln --no-restore -v m",
+  "Files": [
+    "{Scaffold}/src/Project1/bin/Debug/net6.0/Project1.dll",
+    "{Scaffold}/src/Project1/bin/Debug/netstandard2.0/Project1.dll",
+    "{Scaffold}/tests/Project1.IntegrationTests/bin/Debug/net6.0/Project1.IntegrationTests.dll",
+    "{Scaffold}/tests/Project1.UnitTests/bin/Debug/net6.0/Project1.UnitTests.dll"
+  ]
+}
 
 ,
   files: [

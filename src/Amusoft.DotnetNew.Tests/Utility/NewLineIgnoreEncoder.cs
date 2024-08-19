@@ -19,7 +19,7 @@ internal class NewLineIgnoreEncoder : JavaScriptEncoder
 		return Default.TryEncodeUnicodeScalar(unicodeScalar, buffer, bufferLength, out numberOfCharactersWritten);
 	}
 
-	private static readonly HashSet<int> Ignores = ['\r', '\n', '\\'];
+	private static readonly HashSet<int> Ignores = ['\r', '\n', '\\', '<', '>'];
 	
 	public override bool WillEncode(int unicodeScalar)
 	{
