@@ -10,7 +10,7 @@ dotnet new dotnet-template -o "{Scaffold}"
 {
   "ExitCode": 102,
   "Output": "",
-  "Errors": "Missing mandatory option(s) for the template /u0027.template.config structure/u0027: /u0027--param:author/u0027.For details on the exit code, refer to https://aka.ms/templating-exit-codes#102",
+  "Errors": "Missing mandatory option(s) for the template '.template.config structure': '--param:author'.For details on the exit code, refer to https://aka.ms/templating-exit-codes#102",
   "Success": false,
   "Runtime": "00:00:00"
 }

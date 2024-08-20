@@ -5,9 +5,9 @@ using System.Text.Encodings.Web;
 namespace Amusoft.DotnetNew.Tests.Utility;
 
 [ExcludeFromCodeCoverage]
-internal class NewLineIgnoreEncoder : JavaScriptEncoder
+internal class CustomJsonEncoder : JavaScriptEncoder
 {
-	public static readonly NewLineIgnoreEncoder Instance = new();
+	public static readonly CustomJsonEncoder Instance = new();
 	
 	public override unsafe int FindFirstCharacterToEncode(char* text, int textLength)
 	{
@@ -19,7 +19,7 @@ internal class NewLineIgnoreEncoder : JavaScriptEncoder
 		return Default.TryEncodeUnicodeScalar(unicodeScalar, buffer, bufferLength, out numberOfCharactersWritten);
 	}
 
-	private static readonly HashSet<int> Ignores = ['\r', '\n', '\\', '<', '>'];
+	private static readonly HashSet<int> Ignores = ['\r', '\n', '\\', '<', '>','\''];
 	
 	public override bool WillEncode(int unicodeScalar)
 	{

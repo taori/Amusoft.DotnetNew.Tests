@@ -1,10 +1,13 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using Amusoft.DotnetNew.Tests.Interfaces;
 using Amusoft.DotnetNew.Tests.Templating;
+using Amusoft.DotnetNew.Tests.Utility;
 
 namespace Amusoft.DotnetNew.Tests.Diagnostics;
 
@@ -13,17 +16,16 @@ internal class BuildResult(
 	string content
 ) : ICommandResult
 {
-	//-/u003E
-	private static readonly Regex Regex = new(@"-(?:[\/\\]u003E|>) (?<dll>.+?\.dll)", RegexOptions.Compiled);
+	private static readonly Regex Regex = new(@"-(?:>) (?<dll>.+?\.dll)", RegexOptions.Compiled);
 	
 	private IEnumerable<string> GetDlls()
 	{
 		var matchCollection = Regex.Matches(content);
 		return matchCollection
-			.Select(d => d.Groups["dll"].Value.Replace("//","/"))
+			.Select(d => d.Groups["dll"].Value)
 			.OrderBy(d => d);
 	}
-	
+
 	public void Print(StringBuilder stringBuilder)
 	{
 		var serializeContent = new
@@ -33,7 +35,8 @@ internal class BuildResult(
 		};
 		var serialized = JsonSerializer.Serialize(serializeContent,new JsonSerializerOptions()
 			{
-				WriteIndented = true
+				WriteIndented = true,
+				Encoder = CustomJsonEncoder.Instance
 			}
 		);
 		

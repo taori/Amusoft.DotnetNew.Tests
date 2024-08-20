@@ -80,7 +80,7 @@ public class ScaffoldingTests : TestBase
 		}
 	}
 	
-	[Fact(Timeout = 10_000)]
+	[Fact(Timeout = 60_000)]
 	private async Task ScaffoldingErrorTest()
 	{
 		

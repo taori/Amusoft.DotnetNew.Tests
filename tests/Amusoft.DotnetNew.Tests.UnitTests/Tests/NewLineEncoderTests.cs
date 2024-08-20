@@ -10,7 +10,7 @@ public class NewLineEncoderTests
 	[Fact]
 	public async Task VerifyMaxOutputCharactersPerInputCharacter()
 	{
-		var enconder = new NewLineIgnoreEncoder();
+		var enconder = new CustomJsonEncoder();
 		await Verifier.Verify(enconder.MaxOutputCharactersPerInputCharacter);
 	} 
 }

@@ -33,7 +33,7 @@ internal record class CommandResult(
 			new JsonSerializerOptions()
 			{
 				WriteIndented = true,
-				// Encoder = NewLineIgnoreEncoder.Instance
+				Encoder = CustomJsonEncoder.Instance
 			}
 		);
 		
