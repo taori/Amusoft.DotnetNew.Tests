@@ -13,7 +13,7 @@
 Package | Line Rate | Branch Rate | Health
 -------- | --------- | ----------- | ------
 Amusoft.DotnetNew.Tests | 99% | 88% | ✔
-**Summary** | **99%** (354 / 359) | **88%** (122 / 138) | ✔
+**Summary** | **99%** (353 / 358) | **88%** (122 / 138) | ✔
 
 _Minimum allowed line rate is 85%_
 
