@@ -3,10 +3,10 @@
 {
   "Command": "cli args",
   "Files": [
-    "C:\SpecialDir\6e95ba419fa843259d960d2c4f9c4d18\src\Project1\bin\Debug\net6.0\Project1.dll",
-    "C:\SpecialDir\6e95ba419fa843259d960d2c4f9c4d18\src\Project1\bin\Debug\netstandard2.0\Project1.dll",
-    "C:\SpecialDir\6e95ba419fa843259d960d2c4f9c4d18\tests\Project1.IntegrationTests\bin\Debug\net6.0\Project1.IntegrationTests.dll",
-    "C:\SpecialDir\6e95ba419fa843259d960d2c4f9c4d18\tests\Project1.UnitTests\bin\Debug\net6.0\Project1.UnitTests.dll"
+    "C:/SpecialDir/6e95ba419fa843259d960d2c4f9c4d18/src/Project1/bin/Debug/net6.0/Project1.dll",
+    "C:/SpecialDir/6e95ba419fa843259d960d2c4f9c4d18/src/Project1/bin/Debug/netstandard2.0/Project1.dll",
+    "C:/SpecialDir/6e95ba419fa843259d960d2c4f9c4d18/tests/Project1.IntegrationTests/bin/Debug/net6.0/Project1.IntegrationTests.dll",
+    "C:/SpecialDir/6e95ba419fa843259d960d2c4f9c4d18/tests/Project1.UnitTests/bin/Debug/net6.0/Project1.UnitTests.dll"
   ]
 }
 

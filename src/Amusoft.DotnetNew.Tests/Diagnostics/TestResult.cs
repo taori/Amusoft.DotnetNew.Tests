@@ -17,7 +17,7 @@ internal class TestResult(
 	// .A total of 1 test files matched the specified pattern.Passed!  - Failed:     0, Passed:     1, Skipped:     0, Total:     1, Duration: < 1 ms - Project1.IntegrationTests.dll (net6.0)Passed!  - Failed:     0, Passed:     1, Skipped:     0, Total:     1, Duration: < 1 ms - Project1.UnitTests.dll (net6.0)",
 	private static readonly Regex Regex = new(@"(?<=\r?\n)(?!\r?\n)([\w]+|!)!.+<(?<duration>[^-]+)(?<project>[^(]+).+", RegexOptions.Compiled);
 	
-	private IEnumerable<string> GetDlls()
+	private IEnumerable<string> GetTestResultLines()
 	{
 		var matchCollection = Regex.Matches(content);
 		return matchCollection
@@ -31,7 +31,7 @@ internal class TestResult(
 		var serializeContent = new
 		{
 			Command = command,
-			Lines = GetDlls(),
+			Lines = GetTestResultLines(),
 		};
 		var serialized = JsonSerializer.Serialize(serializeContent,new JsonSerializerOptions()
 			{

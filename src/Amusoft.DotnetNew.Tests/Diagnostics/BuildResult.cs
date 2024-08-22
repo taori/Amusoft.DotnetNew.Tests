@@ -21,7 +21,8 @@ internal class BuildResult(
 		var matchCollection = Regex.Matches(content);
 		return matchCollection
 			.Select(d => d.Groups["dll"].Value)
-			.OrderBy(d => d);
+			.OrderBy(d => d)
+			.Select(d => new CrossPlatformPath(d).VirtualPath);
 	}
 
 	public void Print(StringBuilder stringBuilder)
