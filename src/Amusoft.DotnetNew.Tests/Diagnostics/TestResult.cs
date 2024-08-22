@@ -23,7 +23,7 @@ internal class TestResult(
 		return matchCollection
 			.Select(match => (content: match.Value.Replace(match.Groups["duration"].Value, " SCRUBBED "), sort: match.Groups["project"].Value))
 			.OrderBy(d => d.sort)
-			.Select(d => d.content);
+			.Select(d => d.content.Trim());
 	}
 
 	public void Print(StringBuilder stringBuilder)
