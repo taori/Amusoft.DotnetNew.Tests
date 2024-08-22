@@ -1,7 +1,5 @@
-﻿using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using System.IO;
-using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using Amusoft.DotnetNew.Tests.Diagnostics;
@@ -12,7 +10,6 @@ using Amusoft.DotnetNew.Tests.Rewriters;
 using Amusoft.DotnetNew.Tests.Scaffolding;
 using Amusoft.DotnetNew.Tests.Scopes;
 using Amusoft.DotnetNew.Tests.Templating;
-using Amusoft.DotnetNew.Tests.Utility;
 
 namespace Amusoft.DotnetNew.Tests.CLI;
 
@@ -53,6 +50,32 @@ public class Dotnet : IDotnetCli
 		}
 		
 		return scaffold;
+	}
+
+	async Task IDotnetCli.TestAsync(string fullPath, string? arguments, Verbosity verbosity, CancellationToken cancellationToken)
+	{
+		if (!File.Exists(fullPath) && !Directory.Exists(fullPath))
+		{
+			if (!File.Exists(fullPath))
+				throw new FileNotFoundException(fullPath);
+			throw new DirectoryNotFoundException(fullPath);
+		}
+
+		var fullArgs = arguments is null
+			? $"test {fullPath} -v {verbosity.ToVerbosityText()} --no-restore"
+			: $"test {fullPath} -v {verbosity.ToVerbosityText()} --no-restore {arguments}";
+		
+		using (var loggingScope = new LoggingScope(false))
+		{
+			if (await LoggedDotnetCli.RunDotnetCommandAsync(fullArgs, cancellationToken, []))
+			{
+				loggingScope.ParentScope?.AddResult(new TestResult(fullArgs, loggingScope.ToFullString(PrintKind.Responses)));
+			}
+			else
+			{
+				throw new TestExecutionFailedException(fullArgs, loggingScope.ToFullString(PrintKind.All));
+			}
+		}
 	}
 
 	async Task IDotnetCli.BuildAsync(string fullPath, string? arguments, Verbosity verbosity, CancellationToken cancellationToken, bool restore)

@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading;
@@ -9,7 +7,6 @@ using System.Threading.Tasks;
 using Amusoft.DotnetNew.Tests.CLI;
 using Amusoft.DotnetNew.Tests.Interfaces;
 using Amusoft.DotnetNew.Tests.Templating;
-using Amusoft.DotnetNew.Tests.Utility;
 
 namespace Amusoft.DotnetNew.Tests.Scaffolding;
 
@@ -50,6 +47,18 @@ public class Scaffold : IDisposable
 	public async Task RestoreAsync(string relativePath, string? arguments, CancellationToken cancellationToken, Verbosity verbosity = default)
 	{
 		await _cli.RestoreAsync(_tempDirectory.Path.PathTranslator.GetAbsolutePath(relativePath).OriginalPath, arguments, verbosity, cancellationToken).ConfigureAwait(false);
+	}
+
+	/// <summary>
+	/// Builds the project at a given path
+	/// </summary>
+	/// <param name="relativePath">relative path of the project/solution you want to build within the scaffold. e.g. src/SolutionName.sln</param>
+	/// <param name="arguments">build arguments</param>
+	/// <param name="cancellationToken">cancellation token</param>
+	/// <param name="verbosity"></param>
+	public async Task TestAsync(string relativePath, string? arguments, CancellationToken cancellationToken, Verbosity verbosity = default)
+	{
+		await _cli.TestAsync(_tempDirectory.Path.PathTranslator.GetAbsolutePath(relativePath).OriginalPath, arguments, verbosity, cancellationToken).ConfigureAwait(false);
 	}
 
 	/// <summary>

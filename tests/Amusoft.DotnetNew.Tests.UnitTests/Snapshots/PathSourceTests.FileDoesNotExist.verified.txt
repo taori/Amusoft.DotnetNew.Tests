@@ -1,0 +1,4 @@
+﻿{
+  File: {TempPath}DB78C667-5654-45B8-97E8-73280474442A.txt,
+  Directory: {TempPath}
+}

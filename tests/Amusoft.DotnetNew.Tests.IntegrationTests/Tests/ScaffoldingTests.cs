@@ -50,6 +50,46 @@ public class ScaffoldingTests : TestBase
 			}
 		}
 	}
+	[Trait("Category","SkipInCI")]
+	[InlineData("Project1", "gitUser", "authorname")]
+	[InlineData("Project2", "gitUser", "authorname")]
+	// https://github.com/taori/Amusoft.DotnetNew.Tests/issues/1
+	[Theory(Timeout = 60_000)]
+	private async Task TestRepositoryTemplate(string projectName, string gitUser, string author)
+	{
+		using (var loggingScope = new LoggingScope())
+		{
+			var solution = TemplateSolutionInstallerHelper.CreateLocalSolution();
+			using (var installations = await solution.InstallTemplatesFromDirectoryAsync("../tests/Resources", CancellationToken.None))
+			{
+				var args = $"""
+				            -n "{projectName}"
+				            --GitProjectName "{projectName}"
+				            --NugetPackageId "{projectName}"
+				            --ProductName "{projectName}"
+				            --GitUser "{gitUser}"
+				            --Author "{author}"
+				            """;
+				using (var scaffold = await Dotnet.Cli.NewAsync("dotnet-library-repo", args.Replace(Environment.NewLine, " "), CancellationToken.None))
+				{
+					var list = scaffold.GetRelativeDirectoryPaths().ToArray();
+					await scaffold.RestoreAsync($"src/{projectName}.sln", null, CancellationToken.None);
+					await scaffold.BuildAsync($"src/{projectName}.sln", null, CancellationToken.None);
+					await scaffold.TestAsync($"src/{projectName}.sln", null, CancellationToken.None);
+
+					await Verifier.Verify(new
+							{
+								log = loggingScope.ToFullString(PrintKind.All),
+								files = list,
+							}
+						)
+						.UseParameters(projectName, gitUser, author);
+
+					installations.Installations.Count.ShouldBe(2);
+				}
+			}
+		}
+	}
 	
 	[Trait("Category","SkipInCI")]
 	[Fact(Timeout = 10_000)]

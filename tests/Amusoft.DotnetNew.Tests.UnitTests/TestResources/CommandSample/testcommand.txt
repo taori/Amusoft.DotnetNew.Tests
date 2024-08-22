@@ -1,0 +1,28 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+C:/Users/A/.nuget/packages/microsoft.build.tasks.git/1.0.0/build/Microsoft.Build.Tasks.Git.targets(24,5): warning : Unable to locate repository with working directory that contains directory '{Scaffold}/src/Project1'. [{Scaffold}/src/Project1/Project1.csproj::TargetFramework=net6.0]
+C:/Users/A/.nuget/packages/microsoft.build.tasks.git/1.0.0/build/Microsoft.Build.Tasks.Git.targets(47,5): warning : Unable to locate repository with working directory that contains directory '{Scaffold}/src/Project1'. [{Scaffold}/src/Project1/Project1.csproj::TargetFramework=net6.0]
+C:/Users/A/.nuget/packages/microsoft.sourcelink.common/1.0.0/build/Microsoft.SourceLink.Common.targets(52,5): warning : Source control information is not available - the generated source link is empty. [{Scaffold}/src/Project1/Project1.csproj::TargetFramework=net6.0]
+  Project1 -> {Scaffold}/src/Project1/bin/Debug/net6.0/Project1.dll
+  Project1.IntegrationTests -> {Scaffold}/tests/Project1.IntegrationTests/bin/Debug/net6.0/Project1.IntegrationTests.dll
+Test run for {Scaffold}/tests/Project1.IntegrationTests/bin/Debug/net6.0/Project1.IntegrationTests.dll (.NETCoreApp,Version=v6.0)
+Microsoft (R) Test Execution Command Line Tool Version 17.10.0 (x64)
+Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Starting test execution, please wait...
+A total of 1 test files matched the specified pattern.
+C:/Users/A/.nuget/packages/microsoft.build.tasks.git/1.0.0/build/Microsoft.Build.Tasks.Git.targets(24,5): warning : Unable to locate repository with working directory that contains directory '{Scaffold}/src/Project1'. [{Scaffold}/src/Project1/Project1.csproj::TargetFramework=netstandard2.0]
+C:/Users/A/.nuget/packages/microsoft.build.tasks.git/1.0.0/build/Microsoft.Build.Tasks.Git.targets(47,5): warning : Unable to locate repository with working directory that contains directory '{Scaffold}/src/Project1'. [{Scaffold}/src/Project1/Project1.csproj::TargetFramework=netstandard2.0]
+C:/Users/A/.nuget/packages/microsoft.sourcelink.common/1.0.0/build/Microsoft.SourceLink.Common.targets(52,5): warning : Source control information is not available - the generated source link is empty. [{Scaffold}/src/Project1/Project1.csproj::TargetFramework=netstandard2.0]
+  Project1 -> {Scaffold}/src/Project1/bin/Debug/netstandard2.0/Project1.dll
+  Project1.UnitTests -> {Scaffold}/tests/Project1.UnitTests/bin/Debug/net6.0/Project1.UnitTests.dll
+Test run for {Scaffold}/tests/Project1.UnitTests/bin/Debug/net6.0/Project1.UnitTests.dll (.NETCoreApp,Version=v6.0)
+Microsoft (R) Test Execution Command Line Tool Version 17.10.0 (x64)
+Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Starting test execution, please wait...
+A total of 1 test files matched the specified pattern.
+
+Passed!  - Failed:     0, Passed:     1, Skipped:     0, Total:     1, Duration: < 1 ms - Project1.IntegrationTests.dll (net6.0)
+
+Passed!  - Failed:     0, Passed:     1, Skipped:     0, Total:     1, Duration: < 1 ms - Project1.UnitTests.dll (net6.0)

@@ -27,7 +27,7 @@ namespace Shared.TestSdk.Toolkit
 			}
 			catch (Exception e)
 			{
-				Log.Debug("available names: {@Values}", _assembly.GetManifestResourceNames());
+				Log.Error("available names: {@Values}", _assembly.GetManifestResourceNames());
 				throw new Exception($"Failed to get content for accessPath {accessPath}", e);
 			}
 		}

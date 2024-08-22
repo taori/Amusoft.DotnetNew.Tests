@@ -26,6 +26,7 @@ namespace Shared.TestSdk
 		protected TestBase(ITestOutputHelper outputHelper, AssemblyInitializer data) : base(outputHelper)
 		{
 			_data = data;
+			XUnitOutputTarget.OutputHelper = outputHelper;
 		}
 	}
 	

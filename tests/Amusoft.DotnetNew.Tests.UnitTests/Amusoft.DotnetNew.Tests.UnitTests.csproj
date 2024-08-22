@@ -40,4 +40,9 @@
 	  </Compile>
 	</ItemGroup>
 
+	<ItemGroup>
+	  <None Remove="TestResources\**\*.*" />
+	  <EmbeddedResource Include="TestResources\**\*.*" />
+	</ItemGroup>
+
 </Project>

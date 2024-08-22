@@ -1,12 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Amusoft.DotnetNew.Tests.CLI;
-using Amusoft.DotnetNew.Tests.Diagnostics;
 using Amusoft.DotnetNew.Tests.Internals;
 using Amusoft.DotnetNew.Tests.Rewriters;
 using Amusoft.DotnetNew.Tests.Scopes;

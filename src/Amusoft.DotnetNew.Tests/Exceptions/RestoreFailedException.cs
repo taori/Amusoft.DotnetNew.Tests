@@ -1,5 +1,4 @@
 using System.Diagnostics.CodeAnalysis;
-using Amusoft.DotnetNew.Tests.Scopes;
 
 namespace Amusoft.DotnetNew.Tests.Exceptions;
 

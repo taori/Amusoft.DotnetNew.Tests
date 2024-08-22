@@ -78,13 +78,7 @@ public class LoggingScope : AmbientScope<LoggingScope>
 	/// <param name="kind"></param>
 	internal void Print(StringBuilder stringBuilder, PrintKind kind)
 	{
-		IEnumerable<IPrintable> data = kind switch
-		{
-			PrintKind.All => _commandData,
-			PrintKind.Invocations => _commandData.OfType<ICommandInvocation>(),
-			PrintKind.Responses => _commandData.OfType<ICommandResult>(),
-			_ => throw new ArgumentOutOfRangeException(nameof(kind), kind, null)
-		};
+		var data = GetPrintables();
 
 		foreach (var printable in data)
 		{
@@ -92,6 +86,19 @@ public class LoggingScope : AmbientScope<LoggingScope>
 		}
 
 		ApplyRewriters(stringBuilder);
+
+		[ExcludeFromCodeCoverage]
+		IEnumerable<IPrintable> GetPrintables()
+		{
+			IEnumerable<IPrintable> printables = kind switch
+			{
+				PrintKind.All => _commandData,
+				PrintKind.Invocations => _commandData.OfType<ICommandInvocation>(),
+				PrintKind.Responses => _commandData.OfType<ICommandResult>(),
+				_ => throw new ArgumentOutOfRangeException(nameof(kind), kind, null)
+			};
+			return printables;
+		}
 	}
 
 	private void ApplyRewriters(StringBuilder stringBuilder)

@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Amusoft.DotnetNew.Tests.Templating;
 using Shared.TestSdk;
+using Shouldly;
 using VerifyXunit;
 using Xunit;
 using Xunit.Abstractions;
@@ -13,7 +14,7 @@ public class PathSourceTests : TestBase
 	[Theory(Timeout = 10000)]
 	[InlineData("Filename.txt")]
 	[InlineData("Filename2.txt")]
-	public async Task File(string path)
+	public async Task FileDoesNotExist(string path)
 	{
 		var pathSource = new PathSource(Path.Combine(Path.GetTempPath(), path));
 		await Verifier.Verify(new
@@ -24,10 +25,17 @@ public class PathSourceTests : TestBase
 		).UseParameters(path);
 	}
 	
+	[Fact]
+	public void FileExists()
+	{
+		var pathSource = new PathSource(Path.GetTempFileName());
+		pathSource.Directory.VirtualPath.ShouldNotBe(pathSource.File.VirtualPath);
+	}
+	
 	[Theory(Timeout = 10000)]
 	[InlineData("asdf")]
 	[InlineData("asdf2")]
-	public async Task Directory(string subPath)
+	public async Task DirectoryDoesNotExistPhysical(string subPath)
 	{
 		var pathSource = new PathSource(Path.Combine(Path.GetTempPath(), subPath));
 		await Verifier.Verify(new
@@ -42,6 +50,18 @@ public class PathSourceTests : TestBase
 	public async Task DirectoryDoesNotExist()
 	{
 		var pathSource = new PathSource("tmp2341");
+		await Verifier.Verify(new
+			{
+				File = pathSource.File.VirtualPath,
+				Directory = pathSource.Directory.VirtualPath,
+			}
+		);
+	}
+	
+	[Fact(Timeout = 10000)]
+	public async Task DirectoryDoesExist()
+	{
+		var pathSource = new PathSource(Path.GetTempPath());
 		await Verifier.Verify(new
 			{
 				File = pathSource.File.VirtualPath,

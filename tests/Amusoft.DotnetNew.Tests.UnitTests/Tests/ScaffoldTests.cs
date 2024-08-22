@@ -83,6 +83,20 @@ public class ScaffoldTests : TestBase
 		await scaffold.RestoreAsync(String.Empty, String.Empty, CancellationToken.None, Verbosity.Minimal);
 		cliMock.Verify(d => d.RestoreAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<Verbosity>(), It.IsAny<CancellationToken>()), Times.Once);
 	}
+	
+	[Fact]
+	public async Task TestCalled()
+	{
+		var directoryMock = new Mock<ITempDirectory>();
+		directoryMock.Setup(d => d.Path).Returns(new PathSource(Path.GetTempPath()));
+		var cliMock = new Mock<IDotnetCli>();
+		cliMock
+			.Setup(d => d.TestAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<Verbosity>(), It.IsAny<CancellationToken>()))
+			;
+		var scaffold = new Scaffold(directoryMock.Object, cliMock.Object);
+		await scaffold.TestAsync(String.Empty, String.Empty, CancellationToken.None, Verbosity.Minimal);
+		cliMock.Verify(d => d.TestAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<Verbosity>(), It.IsAny<CancellationToken>()), Times.Once);
+	}
 
 	private Scaffold CreateFakeScaffold()
 	{

@@ -1,0 +1,10 @@
+﻿{
+  File: {
+    OriginalPath: {TempPath}tmpkm1bmm.tmp,
+    VirtualPath: {TempPath}tmpkm1bmm.tmp
+  },
+  Directory: {
+    OriginalPath: {TempPath},
+    VirtualPath: {TempPath}
+  }
+}

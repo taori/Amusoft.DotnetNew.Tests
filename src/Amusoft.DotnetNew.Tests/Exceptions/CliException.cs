@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
-using System.Runtime.Serialization;
-using Amusoft.DotnetNew.Tests.Scopes;
 
 namespace Amusoft.DotnetNew.Tests.Exceptions;
 

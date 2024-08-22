@@ -1,0 +1,8 @@
+﻿---Result---
+
+Install for {ProjectDir:dotnet-library-repo} succeded
+
+---Result---
+
+Uninstall for {ProjectDir:dotnet-library-repo} succeded
+

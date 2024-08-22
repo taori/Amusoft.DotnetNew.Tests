@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Amusoft.DotnetNew.Tests.CLI;
 using Amusoft.DotnetNew.Tests.Exceptions;
 using Amusoft.DotnetNew.Tests.Scaffolding;
-using Amusoft.DotnetNew.Tests.Templating;
 using Amusoft.DotnetNew.Tests.Utility;
 
 namespace Amusoft.DotnetNew.Tests.Interfaces;
@@ -85,4 +84,14 @@ public interface IDotnetCli
 	/// <returns></returns>
 	/// <exception cref="ScaffoldingFailedException"></exception>
 	Task<Scaffold> NewAsync(string template, string? arguments, CancellationToken cancellationToken);
+
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="fullPath"></param>
+	/// <param name="arguments"></param>
+	/// <param name="verbosity"></param>
+	/// <param name="cancellationToken"></param>
+	/// <returns></returns>
+	Task TestAsync(string fullPath, string? arguments, Verbosity verbosity, CancellationToken cancellationToken);
 }

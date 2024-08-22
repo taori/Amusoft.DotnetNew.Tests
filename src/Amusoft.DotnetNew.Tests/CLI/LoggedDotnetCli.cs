@@ -91,8 +91,8 @@ internal class LocalProcessRunner : IProcessRunner
 		var error = new StringBuilder();
 		var process = new Process();
 		process.StartInfo = psi;
-		process.OutputDataReceived += (sender, args) => output.Append(args.Data);
-		process.ErrorDataReceived += (sender, args) => error.Append(args.Data);
+		process.OutputDataReceived += (sender, args) => output.AppendLine(args.Data);
+		process.ErrorDataReceived += (sender, args) => error.AppendLine(args.Data);
 		process.Start();
 		process.BeginOutputReadLine();
 		process.BeginErrorReadLine();

@@ -1,0 +1,71 @@
+﻿{
+  log:
+---Result---
+
+Install for {ProjectDir:dotnet-library-repo} succeded
+
+---Result---
+
+Install for {ProjectDir:dotnet-template} succeded
+
+---Result---
+
+Created temp directory at {Scaffold}
+
+---Result---
+
+success: new dotnet-library-repo -o "{Scaffold}" -n "Project1" --GitProjectName "Project1" --NugetPackageId "Project1" --ProductName "Project1" --GitUser "gitUser" --Author "authorname"
+
+---Result---
+
+success: restore "{Scaffold}/src/Project1.sln" -v m --ignore-failed-sources
+
+---BuildResult---
+
+{
+  "Command": "build {Scaffold}/src/Project1.sln --no-restore -v m",
+  "Files": [
+    "{Scaffold}/src/Project1/bin/Debug/net6.0/Project1.dll",
+    "{Scaffold}/src/Project1/bin/Debug/netstandard2.0/Project1.dll",
+    "{Scaffold}/tests/Project1.IntegrationTests/bin/Debug/net6.0/Project1.IntegrationTests.dll",
+    "{Scaffold}/tests/Project1.UnitTests/bin/Debug/net6.0/Project1.UnitTests.dll"
+  ]
+}
+
+---TestResult---
+
+{
+  "Command": "test {Scaffold}/src/Project1.sln -v m --no-restore",
+  "Lines": [
+    "Passed!  - Failed:     0, Passed:     1, Skipped:     0, Total:     1, Duration: < SCRUBBED - Project1.IntegrationTests.dll (net6.0)
+",
+    "Passed!  - Failed:     0, Passed:     1, Skipped:     0, Total:     1, Duration: < SCRUBBED - Project1.UnitTests.dll (net6.0)
+"
+  ]
+}
+
+,
+  files: [
+    .github/workflows/CI.yml,
+    .gitignore,
+    build/Project.Common.props,
+    build/SourceLink.props,
+    README.md,
+    scripts/build.ps1,
+    src/Directory.Build.props,
+    src/nuget.config,
+    src/packageIcon.png,
+    src/Project1.sln,
+    src/Project1/Project1.csproj,
+    tests/Project1.IntegrationTests/Project1.IntegrationTests.csproj,
+    tests/Project1.IntegrationTests/UnitTest1.cs,
+    tests/Project1.IntegrationTests/Usings.cs,
+    tests/Project1.UnitTests/Configuration/ProjectSetup.cs,
+    tests/Project1.UnitTests/nlog.config,
+    tests/Project1.UnitTests/Project1.UnitTests.csproj,
+    tests/Project1.UnitTests/Toolkit/EmbeddedResourceReader.cs,
+    tests/Project1.UnitTests/Toolkit/GlobalSetupFixture.cs,
+    tests/Project1.UnitTests/Toolkit/TestBase.cs,
+    tests/Project1.UnitTests/UnitTest1.cs
+  ]
+}

@@ -1,0 +1,16 @@
+﻿---Result---
+
+Install for {ProjectDir:dotnet-library-repo} succeded
+
+---Result---
+
+Install for {ProjectDir:dotnet-template} succeded
+
+---Result---
+
+Uninstall for {ProjectDir:dotnet-library-repo} succeded
+
+---Result---
+
+Uninstall for {ProjectDir:dotnet-template} succeded
+

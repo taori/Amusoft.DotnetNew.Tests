@@ -1,4 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Amusoft.DotnetNew.Tests.Exceptions;
 
@@ -6,14 +6,14 @@ namespace Amusoft.DotnetNew.Tests.Exceptions;
 /// 
 /// </summary>
 [ExcludeFromCodeCoverage]
-public class BuildFailedException : CliException
+public class TestExecutionFailedException : CliException
 {
 	/// <summary>
 	/// 
 	/// </summary>
 	/// <param name="message"></param>
 	/// <param name="output"></param>
-	public BuildFailedException(string? message, string? output) : base(message, output)
+	public TestExecutionFailedException(string? message, string? output) : base(message, output)
 	{
 	}
 }

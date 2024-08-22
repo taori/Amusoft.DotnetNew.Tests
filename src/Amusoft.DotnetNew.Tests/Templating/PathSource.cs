@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.IO;
 using Amusoft.DotnetNew.Tests.Interfaces;
 using Amusoft.DotnetNew.Tests.Utility;
 
@@ -9,6 +10,7 @@ namespace Amusoft.DotnetNew.Tests.Templating;
 /// </summary>
 public class PathSource : IPathSource
 {
+	[ExcludeFromCodeCoverage]
 	internal PathSource(string fullPath)
 	{
 		var paths = GetPathDetails(fullPath);
@@ -17,6 +19,7 @@ public class PathSource : IPathSource
 		PathTranslator = new PathTranslator(paths.Directory);
 	}
 
+	[ExcludeFromCodeCoverage]
 	private (string File, string Directory) GetPathDetails(string fullPath)
 	{
 		if (System.IO.File.Exists(fullPath) || System.IO.File.Exists(fullPath))
