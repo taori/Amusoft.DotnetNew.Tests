@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using Amusoft.DotnetNew.Tests.Diagnostics;
 using Amusoft.DotnetNew.Tests.Interfaces;
-using Amusoft.DotnetNew.Tests.Toolkit;
+using Amusoft.Toolkit.Threading;
 
 namespace Amusoft.DotnetNew.Tests.Scopes;
 

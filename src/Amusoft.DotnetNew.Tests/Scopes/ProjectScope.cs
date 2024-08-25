@@ -1,4 +1,4 @@
-﻿using Amusoft.DotnetNew.Tests.Toolkit;
+﻿using Amusoft.Toolkit.Threading;
 
 namespace Amusoft.DotnetNew.Tests.Scopes;
 

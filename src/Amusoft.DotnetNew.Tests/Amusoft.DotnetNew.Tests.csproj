@@ -24,6 +24,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Amusoft.Toolkit.Threading" Version="[1.*,)" />
 		<PackageReference Include="CliWrap" Version="[3.6.*,)" />
 		<PackageReference Include="JetBrains.Annotations" Version="2024.2.0" PrivateAssets="all" />
 		<PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="8.0.0" PrivateAssets="all"/>

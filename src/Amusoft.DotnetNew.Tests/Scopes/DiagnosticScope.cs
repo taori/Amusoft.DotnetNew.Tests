@@ -1,7 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using System.Text.Json;
-using Amusoft.DotnetNew.Tests.Toolkit;
+using Amusoft.Toolkit.Threading;
 
 namespace Amusoft.DotnetNew.Tests.Scopes;
 
