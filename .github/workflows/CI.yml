@@ -109,7 +109,7 @@ jobs:
           $suffix = "${{github.event.inputs.versionSuffix}}"
           $bnr = "${{github.run_number}}"
           
-          Write-Host "baseRef: ${{github.base_ref}}"
+          Write-Host "ref_name: ${{github.ref_name}}"
           Write-Host "event_name: ${{github.event_name}}"
           Write-Host "action: ${{github.event.action}}"
           Write-Host "pull_request.merged: ${{github.event.pull_request.merged}}"
@@ -118,9 +118,9 @@ jobs:
           
           if($commitMode -eq "noop" && "${{github.event_name}}" -eq "workflow_dispatch") {
               $commitMode = "dispatch" }
-          if($commitMode -eq "noop" && "$branch|pull_request|closed|true" -eq "${{github.base_ref}}|${{github.event_name}}|${{github.event.action}}|${{github.event.pull_request.merged}}") {
+          if($commitMode -eq "noop" && "$branch|pull_request|closed|true" -eq "${{github.ref_name}}|${{github.event_name}}|${{github.event.action}}|${{github.event.pull_request.merged}}") {
               $commitMode = "pushMerge" }
-          if($commitMode -eq "noop" && "$branch|push" -eq "${{github.base_ref}}|${{github.event_name}}") {
+          if($commitMode -eq "noop" && "$branch|push" -eq "${{github.ref_name}}|${{github.event_name}}") {
               $commitMode = "push" }
           
           
