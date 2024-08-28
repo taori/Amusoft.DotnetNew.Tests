@@ -122,9 +122,6 @@ jobs:
               $commitMode = "pushMerge" }
           if($commitMode -eq "noop" && "$branch|push" -eq "${{github.ref_name}}|${{github.event_name}}") {
               $commitMode = "push" }
-              
-          echo "Identified commit mode $commitMode" >> $env:GITHUB_STEP_SUMMARY
-          exit 1;
                     
           $data = @{          #prefix         #suffix         #configuration  #verbosity  #publish    #removeprerelease                       
               "dispatch" =    @("$prefix",    "$suffix",      "$conf",        "$verb",    "$publ",    "$removePrereleases")
@@ -155,6 +152,11 @@ jobs:
               Write-Host "$item=$($data[$commitMode][$index])"
               echo "$item=$($data[$commitMode][$index])" >> $env:GITHUB_OUTPUT
               echo "$item=$($data[$commitMode][$index])" >> $env:GITHUB_STEP_SUMMARY
+          }
+          
+          echo "Identified commit mode $commitMode" >> $env:GITHUB_STEP_SUMMARY
+          if($commitMode -eq "noop") {
+            exit 1;
           }
 
   package:
