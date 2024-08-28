@@ -122,8 +122,10 @@ jobs:
               $commitMode = "pushMerge" }
           if($commitMode -eq "noop" && "$branch|push" -eq "${{github.ref_name}}|${{github.event_name}}") {
               $commitMode = "push" }
-          
-          
+              
+          echo "Identified commit mode $commitMode" >> $env:GITHUB_STEP_SUMMARY
+          exit 1;
+                    
           $data = @{          #prefix         #suffix         #configuration  #verbosity  #publish    #removeprerelease                       
               "dispatch" =    @("$prefix",    "$suffix",      "$conf",        "$verb",    "$publ",    "$removePrereleases")
               "push" =        @("",           "alpha.$bnr",   "Release",      "n",        "true",     "false")
