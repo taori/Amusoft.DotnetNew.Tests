@@ -34,7 +34,7 @@ on:
       versionSuffix:
         type: string
         description: e.g alpha.1
-        default: "alpha"
+        default: ""
 
       publish:
         type: boolean
