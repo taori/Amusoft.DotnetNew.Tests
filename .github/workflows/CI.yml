@@ -138,15 +138,15 @@ jobs:
               exit 1;
           }
 
-          $names.Add("package");
-          $names.Add("publishSymbols");
-          $names.Add("runTests");
-          $names.Add("runCoverage");
+          $names += "package";
+          $names += "publishSymbols";
+          $names += "runTests";
+          $names += "runCoverage";
 
-          $data[$commitMode].Add($data[$commitMode][4])
-          $data[$commitMode].Add($data[$commitMode][4])
-          $data[$commitMode].Add($data[$commitMode][4])
-          $data[$commitMode].Add($data[$commitMode][4])
+          $data[$commitMode] += $data[$commitMode][4]
+          $data[$commitMode] += $data[$commitMode][4]
+          $data[$commitMode] += $data[$commitMode][4]
+          $data[$commitMode] += $data[$commitMode][4]
           
           foreach($item in $names){
               $index = $names.IndexOf($item)
