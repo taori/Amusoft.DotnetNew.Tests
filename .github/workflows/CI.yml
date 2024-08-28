@@ -116,11 +116,11 @@ jobs:
           
           $commitMode = "noop"
           
-          if($commitMode -eq "noop" && "${{github.event_name}}" -eq "workflow_dispatch") {
+          if($commitMode -eq "noop" -and "${{github.event_name}}" -eq "workflow_dispatch") {
               $commitMode = "dispatch" }
-          if($commitMode -eq "noop" && "$branch|pull_request|closed|true" -eq "${{github.ref_name}}|${{github.event_name}}|${{github.event.action}}|${{github.event.pull_request.merged}}") {
+          if($commitMode -eq "noop" -and "$branch|pull_request|closed|true" -eq "${{github.ref_name}}|${{github.event_name}}|${{github.event.action}}|${{github.event.pull_request.merged}}") {
               $commitMode = "pushMerge" }
-          if($commitMode -eq "noop" && "$branch|push" -eq "${{github.ref_name}}|${{github.event_name}}") {
+          if($commitMode -eq "noop" -and "$branch|push" -eq "${{github.ref_name}}|${{github.event_name}}") {
               $commitMode = "push" }
                     
           $data = @{          #prefix         #suffix         #configuration  #verbosity  #publish    #removeprerelease                       
