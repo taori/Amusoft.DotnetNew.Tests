@@ -1,4 +1,4 @@
-# Amusoft.DotnetNew.Tests
+# [Amusoft.DotnetNew.Tests](https://www.github.com/taori/Amusoft.DotnetNew.Tests)
 
 ## Project state
 
@@ -19,6 +19,10 @@ _Minimum allowed line rate is 85%_
 
 [Coverage details](https://taori.github.io/Amusoft.DotnetNew.Tests)
 <!--CoverageEnd-->
+
+## Changelog
+- 0.3.0 Added support for xunit 3 test output
+- 0.2.0 Added support for xunit 2 test output
 
 ## Description
 

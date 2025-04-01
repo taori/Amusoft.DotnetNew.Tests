@@ -178,7 +178,11 @@ jobs:
       testArguments: "--filter Category!=SkipInCI"
       concurrencyAbortable: true
       coverageThreshold: '85 95'
-      dotnetVersion: 6.0.x
+      dotnetVersion: |
+        6.0.x
+        7.0.x
+        8.0.x
+        
     secrets:
       nuget: ${{ secrets.NUGET }}
       
