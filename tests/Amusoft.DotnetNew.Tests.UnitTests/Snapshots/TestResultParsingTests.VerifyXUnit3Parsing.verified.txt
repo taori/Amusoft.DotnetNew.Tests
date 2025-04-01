@@ -1,0 +1,15 @@
+﻿---TestResult---
+
+{
+  "Command": "fake command",
+  "Lines": [
+    "Amusoft.Toolkit.Mvvm.Wpf.IntegrationTests test net8.0 succeeded ( SCRUBBED )",
+    "Amusoft.Toolkit.Mvvm.Wpf.IntegrationTests test net9.0 succeeded ( SCRUBBED )",
+    "Amusoft.Toolkit.Mvvm.IntegrationTests test net8.0 succeeded ( SCRUBBED )",
+    "Amusoft.Toolkit.Mvvm.IntegrationTests test net9.0 succeeded ( SCRUBBED )",
+    "Amusoft.Toolkit.Mvvm.UnitTests test net8.0 succeeded ( SCRUBBED )",
+    "Amusoft.Toolkit.Mvvm.UnitTests test net9.0 succeeded ( SCRUBBED )",
+    "Test summary: total: 5; failed: 0; succeeded: 5; skipped: 0; duration:  SCRUBBED s"
+  ]
+}
+

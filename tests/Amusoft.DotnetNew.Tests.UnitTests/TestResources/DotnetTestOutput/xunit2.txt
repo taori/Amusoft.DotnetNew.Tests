@@ -1,0 +1,29 @@
+C:\Users\A\.nuget\packages\microsoft.build.tasks.git\1.1.1\build\Microsoft.Build.Tasks.Git.targets(25,5): warning : Unable to locate repository with working directory that contains directory '{Scaffold}\src\GeneratedProject'. [{Scaffold}\src\GeneratedProject\GeneratedProject.csproj::TargetFramework=net6.0]
+C:\Users\A\.nuget\packages\microsoft.build.tasks.git\1.1.1\build\Microsoft.Build.Tasks.Git.targets(48,5): warning : Unable to locate repository with working directory that contains directory '{Scaffold}\src\GeneratedProject'. [{Scaffold}\src\GeneratedProject\GeneratedProject.csproj::TargetFramework=net6.0]
+C:\Users\A\.nuget\packages\microsoft.sourcelink.common\1.1.1\build\Microsoft.SourceLink.Common.targets(53,5): warning : Source control information is not available - the generated source link is empty. [{Scaffold}\src\GeneratedProject\GeneratedProject.csproj::TargetFramework=net6.0]
+C:\Users\A\.nuget\packages\microsoft.codeanalysis.netanalyzers\8.0.0\buildTransitive\Microsoft.CodeAnalysis.NetAnalyzers.targets(648,5): warning : The .NET SDK has newer analyzers with version '9.0.0' than what version '8.0.0' of 'Microsoft.CodeAnalysis.NetAnalyzers' package provides. Update or remove this package reference. You can suppress this warning by setting the MSBuild property '_SkipUpgradeNetAnalyzersNuGetWarning' to 'true'. [{Scaffold}\src\GeneratedProject\GeneratedProject.csproj::TargetFramework=net6.0]
+  GeneratedProject -> {Scaffold}\src\GeneratedProject\bin\Debug\net6.0\GeneratedProject.dll
+C:\Users\A\.nuget\packages\microsoft.build.tasks.git\1.1.1\build\Microsoft.Build.Tasks.Git.targets(25,5): warning : Unable to locate repository with working directory that contains directory '{Scaffold}\src\GeneratedProject'. [{Scaffold}\src\GeneratedProject\GeneratedProject.csproj::TargetFramework=netstandard2.0]
+C:\Users\A\.nuget\packages\microsoft.build.tasks.git\1.1.1\build\Microsoft.Build.Tasks.Git.targets(48,5): warning : Unable to locate repository with working directory that contains directory '{Scaffold}\src\GeneratedProject'. [{Scaffold}\src\GeneratedProject\GeneratedProject.csproj::TargetFramework=netstandard2.0]
+C:\Users\A\.nuget\packages\microsoft.sourcelink.common\1.1.1\build\Microsoft.SourceLink.Common.targets(53,5): warning : Source control information is not available - the generated source link is empty. [{Scaffold}\src\GeneratedProject\GeneratedProject.csproj::TargetFramework=netstandard2.0]
+C:\Users\A\.nuget\packages\microsoft.codeanalysis.netanalyzers\8.0.0\buildTransitive\Microsoft.CodeAnalysis.NetAnalyzers.targets(648,5): warning : The .NET SDK has newer analyzers with version '9.0.0' than what version '8.0.0' of 'Microsoft.CodeAnalysis.NetAnalyzers' package provides. Update or remove this package reference. You can suppress this warning by setting the MSBuild property '_SkipUpgradeNetAnalyzersNuGetWarning' to 'true'. [{Scaffold}\src\GeneratedProject\GeneratedProject.csproj::TargetFramework=netstandard2.0]
+  GeneratedProject -> {Scaffold}\src\GeneratedProject\bin\Debug\netstandard2.0\GeneratedProject.dll
+  GeneratedProject.Tests.Shared -> {Scaffold}\tests\GeneratedProject.Tests.Shared\bin\Debug\net6.0\GeneratedProject.Tests.Shared.dll
+  GeneratedProject.UnitTests -> {Scaffold}\tests\GeneratedProject.UnitTests\bin\Debug\net6.0\GeneratedProject.UnitTests.dll
+  GeneratedProject.IntegrationTests -> {Scaffold}\tests\GeneratedProject.IntegrationTests\bin\Debug\net6.0\GeneratedProject.IntegrationTests.dll
+Test run for {Scaffold}\tests\GeneratedProject.IntegrationTests\bin\Debug\net6.0\GeneratedProject.IntegrationTests.dll (.NETCoreApp,Version=v6.0)
+Test run for {Scaffold}\tests\GeneratedProject.UnitTests\bin\Debug\net6.0\GeneratedProject.UnitTests.dll (.NETCoreApp,Version=v6.0)
+VSTest version 17.12.0 (x64)
+VSTest version 17.12.0 (x64)
+
+
+Starting test execution, please wait...
+Starting test execution, please wait...
+A total of 1 test files matched the specified pattern.
+A total of 1 test files matched the specified pattern.
+
+Passed!  - Failed:     0, Passed:     1, Skipped:     0, Total:     1, Duration: 284 ms - GeneratedProject.IntegrationTests.dll (net6.0)
+
+Passed!  - Failed:     0, Passed:     1, Skipped:     0, Total:     1, Duration: 292 ms - GeneratedProject.UnitTests.dll (net6.0)
+
+Workload updates are available. Run \u0060dotnet workload list\u0060 for more information.

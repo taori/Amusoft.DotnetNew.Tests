@@ -37,8 +37,8 @@ success: restore "{Scaffold}/src/Project1.sln" -v m --ignore-failed-sources
 {
   "Command": "test {Scaffold}/src/Project1.sln -v m --no-restore",
   "Lines": [
-    "Passed!  - Failed:     0, Passed:     1, Skipped:     0, Total:     1, Duration: < SCRUBBED - Project1.IntegrationTests.dll (net6.0)",
-    "Passed!  - Failed:     0, Passed:     1, Skipped:     0, Total:     1, Duration: < SCRUBBED - Project1.UnitTests.dll (net6.0)"
+    "Passed!  - Failed:     0, Passed:     1, Skipped:     0, Total:     1, Duration: SCRUBBED - Project1.IntegrationTests.dll (net6.0)",
+    "Passed!  - Failed:     0, Passed:     1, Skipped:     0, Total:     1, Duration: SCRUBBED - Project1.UnitTests.dll (net6.0)"
   ]
 }
 

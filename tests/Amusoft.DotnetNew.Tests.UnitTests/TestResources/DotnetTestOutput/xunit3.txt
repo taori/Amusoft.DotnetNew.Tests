@@ -1,0 +1,48 @@
+Restore complete (0,9s)
+  Amusoft.Toolkit.Mvvm.Core net5.0 succeeded (0,2s) → Amusoft.Toolkit.Mvvm.Core\bin\Debug\net5.0\Amusoft.Toolkit.Mvvm.Core.dll
+  Amusoft.Toolkit.Mvvm.Core net462 succeeded (0,3s) → Amusoft.Toolkit.Mvvm.Core\bin\Debug\net462\Amusoft.Toolkit.Mvvm.Core.dll
+  Amusoft.Toolkit.Mvvm.Wpf net5.0-windows succeeded (0,2s) → Amusoft.Toolkit.Mvvm.Wpf\bin\Debug\net5.0-windows\Amusoft.Toolkit.Mvvm.Wpf.dll
+  Amusoft.Toolkit.Mvvm.Tests.Shared succeeded (0,2s) → {Scaffold}\tests\Amusoft.Toolkit.Mvvm.Tests.Shared\bin\Debug\net8.0\Amusoft.Toolkit.Mvvm.Tests.Shared.dll
+  Amusoft.Toolkit.Mvvm.IntegrationTests net9.0 succeeded (0,4s) → {Scaffold}\tests\Amusoft.Toolkit.Mvvm.IntegrationTests\bin\Debug\net9.0\Amusoft.Toolkit.Mvvm.IntegrationTests.dll
+  Amusoft.Toolkit.Mvvm.Wpf net462 succeeded (0,4s) → Amusoft.Toolkit.Mvvm.Wpf\bin\Debug\net462\Amusoft.Toolkit.Mvvm.Wpf.dll
+  Amusoft.Toolkit.Mvvm.Wpf.IntegrationTests net8.0 succeeded (0,4s) → {Scaffold}\tests\Amusoft.Toolkit.Mvvm.Wpf.IntegrationTests\bin\Debug\net8.0\Amusoft.Toolkit.Mvvm.Wpf.IntegrationTests.dll
+  Amusoft.Toolkit.Mvvm.Wpf.IntegrationTests net9.0 succeeded (0,2s) → {Scaffold}\tests\Amusoft.Toolkit.Mvvm.Wpf.IntegrationTests\bin\Debug\net9.0\Amusoft.Toolkit.Mvvm.Wpf.IntegrationTests.dll
+  Amusoft.Toolkit.Mvvm.IntegrationTests net8.0 succeeded (0,4s) → {Scaffold}\tests\Amusoft.Toolkit.Mvvm.IntegrationTests\bin\Debug\net8.0\Amusoft.Toolkit.Mvvm.IntegrationTests.dll
+[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v3.0.2+dd36e86129 (64-bit .NET 9.0.2)
+[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v3.0.2+dd36e86129 (64-bit .NET 8.0.13)
+[xUnit.net 00:00:00.23]   Discovering: Amusoft.Toolkit.Mvvm.Wpf.IntegrationTests (app domain = off, method display = ClassAndMethod, method display options = None)
+[xUnit.net 00:00:00.27]   Discovering: Amusoft.Toolkit.Mvvm.IntegrationTests (app domain = off, method display = ClassAndMethod, method display options = None)
+[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v3.0.2+dd36e86129 (64-bit .NET 9.0.2)
+[xUnit.net 00:00:00.52]   Discovered:  Amusoft.Toolkit.Mvvm.Wpf.IntegrationTests (1 test case to be run)
+[xUnit.net 00:00:00.52]   Discovered:  Amusoft.Toolkit.Mvvm.IntegrationTests (1 test case to be run)
+[xUnit.net 00:00:00.26]   Discovering: Amusoft.Toolkit.Mvvm.IntegrationTests (app domain = off, method display = ClassAndMethod, method display options = None)
+[xUnit.net 00:00:00.76]   Starting:    Amusoft.Toolkit.Mvvm.Wpf.IntegrationTests (parallel test collections = on [4 threads], stop on fail = off, explicit = off, seed = 1386712116)
+[xUnit.net 00:00:00.82]   Starting:    Amusoft.Toolkit.Mvvm.IntegrationTests (parallel test collections = on [4 threads], stop on fail = off, explicit = off, seed = 1476573645)
+[xUnit.net 00:00:00.50]   Discovered:  Amusoft.Toolkit.Mvvm.IntegrationTests (1 test case to be run)
+[xUnit.net 00:00:00.89]   Finished:    Amusoft.Toolkit.Mvvm.Wpf.IntegrationTests
+[xUnit.net 00:00:00.99]   Finished:    Amusoft.Toolkit.Mvvm.IntegrationTests
+  Amusoft.Toolkit.Mvvm.Wpf.IntegrationTests test net8.0 succeeded (1,9s)
+  Amusoft.Toolkit.Mvvm.Wpf.IntegrationTests test net9.0 succeeded (1,9s)
+[xUnit.net 00:00:00.75]   Starting:    Amusoft.Toolkit.Mvvm.IntegrationTests (parallel test collections = on [4 threads], stop on fail = off, explicit = off, seed = 2065851502)
+  Amusoft.Toolkit.Mvvm.IntegrationTests test net8.0 succeeded (1,9s)
+[xUnit.net 00:00:00.86]   Finished:    Amusoft.Toolkit.Mvvm.IntegrationTests
+  Amusoft.Toolkit.Mvvm.UnitTests net8.0 succeeded (0,3s) → {Scaffold}\tests\Amusoft.Toolkit.Mvvm.UnitTests\bin\Debug\net8.0\Amusoft.Toolkit.Mvvm.UnitTests.dll
+  Amusoft.Toolkit.Mvvm.IntegrationTests test net9.0 succeeded (1,9s)
+  Amusoft.Toolkit.Mvvm.UnitTests net9.0 succeeded (0,6s) → {Scaffold}\tests\Amusoft.Toolkit.Mvvm.UnitTests\bin\Debug\net9.0\Amusoft.Toolkit.Mvvm.UnitTests.dll
+[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v3.0.2+dd36e86129 (64-bit .NET 8.0.13)
+[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v3.0.2+dd36e86129 (64-bit .NET 9.0.2)
+[xUnit.net 00:00:00.17]   Discovering: Amusoft.Toolkit.Mvvm.UnitTests (app domain = off, method display = ClassAndMethod, method display options = None)
+[xUnit.net 00:00:00.18]   Discovering: Amusoft.Toolkit.Mvvm.UnitTests (app domain = off, method display = ClassAndMethod, method display options = None)
+[xUnit.net 00:00:00.33]   Discovered:  Amusoft.Toolkit.Mvvm.UnitTests (1 test case to be run)
+[xUnit.net 00:00:00.36]   Discovered:  Amusoft.Toolkit.Mvvm.UnitTests (1 test case to be run)
+[xUnit.net 00:00:00.52]   Starting:    Amusoft.Toolkit.Mvvm.UnitTests (parallel test collections = on [4 threads], stop on fail = off, explicit = off, seed = 1779808987)
+[xUnit.net 00:00:00.53]   Starting:    Amusoft.Toolkit.Mvvm.UnitTests (parallel test collections = on [4 threads], stop on fail = off, explicit = off, seed = 971085615)
+[xUnit.net 00:00:00.60]   Finished:    Amusoft.Toolkit.Mvvm.UnitTests
+[xUnit.net 00:00:00.61]   Finished:    Amusoft.Toolkit.Mvvm.UnitTests
+  Amusoft.Toolkit.Mvvm.UnitTests test net8.0 succeeded (1,3s)
+  Amusoft.Toolkit.Mvvm.UnitTests test net9.0 succeeded (1,3s)
+
+Test summary: total: 5; failed: 0; succeeded: 5; skipped: 0; duration: 3,5s
+Build succeeded in 6,2s
+
+Workload updates are available. Run `dotnet workload list` for more information.
