@@ -25,7 +25,8 @@ public class TemplateSolutionTests
 	{
 		var solutionFile = TemplateSolutionInstallerHelper.CreateLocalSolution();
 		var paths = solutionFile.DiscoverTemplates("../tests/Resources")
-			.Select(d => d.VirtualPath);
+			.Select(d => d.VirtualPath)
+			.ToArray();
 
 		await Verifier.Verify(paths);
 	}

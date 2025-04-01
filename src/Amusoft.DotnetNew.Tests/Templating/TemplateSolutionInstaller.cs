@@ -100,6 +100,7 @@ public class TemplateSolution
 		return templateFiles
 			.Select(path => PathHelper.AbsoluteTrimPathEnd(path, 2))
 			.Select(path => Solution.PathTranslator.GetRelativePath(path))
+			.OrderBy(d => d.VirtualPath)
 			.ToArray();
 	}
 
