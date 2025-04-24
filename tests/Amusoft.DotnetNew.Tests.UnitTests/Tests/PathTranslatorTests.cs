@@ -27,6 +27,7 @@ public class PathTranslatorTests : TestBase
 	[Theory]
 	[InlineData(@"C:\Users\A\AppData\Local\Temp\bf129b466576486fb0bfbb43d5f28b49",@"src/All.sln",@"C:/Users/A/AppData/Local/Temp/bf129b466576486fb0bfbb43d5f28b49/src/All.sln")]
 	[InlineData(@"C:\Users\A\AppData\Local\Temp\bf129b466576486fb0bfbb43d5f28b49",@"../src/All.sln",@"C:/Users/A/AppData/Local/Temp/src/All.sln")]
+	[InlineData(@"C:\Users\A\AppData\Local\Temp\bf129b466576486fb0bfbb43d5f28b49",@"../src/All.slnx",@"C:/Users/A/AppData/Local/Temp/src/All.slnx")]
 	public void AbsolutePath(string refpath, string relPath, string expected)
 	{
 		var translator = new PathTranslator(refpath);

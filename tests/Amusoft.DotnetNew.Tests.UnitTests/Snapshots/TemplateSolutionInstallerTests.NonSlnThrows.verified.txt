@@ -1,4 +1,4 @@
 ﻿{
   Type: ArgumentException,
-  Message: Solution files are expected to end with the extension sln
+  Message: Solution files are expected to end with the extension sln or slnx
 }

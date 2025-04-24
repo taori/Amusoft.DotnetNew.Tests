@@ -26,8 +26,8 @@ public class TemplateSolution
 	/// <param name="solutionPath"></param>
 	public TemplateSolution(string solutionPath)
 	{
-		if (!solutionPath.EndsWith(".sln"))
-			throw new ArgumentException("Solution files are expected to end with the extension sln");
+		if (!solutionPath.EndsWith(".sln") && !solutionPath.EndsWith(".slnx"))
+			throw new ArgumentException("Solution files are expected to end with the extension sln or slnx");
 		if (!File.Exists(solutionPath))
 			throw new FileNotFoundException(solutionPath);
 		
@@ -58,7 +58,8 @@ public class TemplateSolution
 		var searchPath = searchDirectoryStart;
 		while (--iterations >= 0 && searchPath != null)
 		{
-			var slnFiles = Directory.EnumerateFiles(searchPath, "*.sln", SearchOption.AllDirectories);
+			var slnFiles = Directory.EnumerateFiles(searchPath, "*.sln", SearchOption.AllDirectories)
+				.Concat(Directory.EnumerateFiles(searchPath, "*.slnx", SearchOption.AllDirectories));
 			var match = slnFiles.FirstOrDefault(d => Path.GetFileName(d).Equals(solutionName, StringComparison.OrdinalIgnoreCase));
 			if (match is not null)
 				return match;

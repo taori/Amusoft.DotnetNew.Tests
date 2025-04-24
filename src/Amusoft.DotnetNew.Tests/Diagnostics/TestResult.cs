@@ -26,7 +26,8 @@ internal class TestResult(
 			return xunit2;
 		if (GetXunit3Lines() is { Length: > 0 } xunit3)
 			return xunit3;
-		return GetXunit2Lines();
+
+		return [];
 	}
 
 	private string[] GetXunit2Lines()

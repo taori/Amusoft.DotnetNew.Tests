@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using Amusoft.DotnetNew.Tests.Diagnostics;
 using Amusoft.DotnetNew.Tests.Exceptions;
+using DiffEngine;
 
 namespace Shared.TestSdk.Initializers;
 
@@ -8,6 +9,7 @@ public class VerifyInitializer
 {
 	public static void Initialize()
 	{
+		DiffTools.UseOrder(DiffTool.TortoiseGitMerge, DiffTool.VisualStudioCode, DiffTool.WinMerge);
 		Verifier.DerivePathInfo(PathInfoConfiguration);
 		VerifierSettings.ScrubMember<Exception>(nameof(Exception.StackTrace));
 		VerifierSettings.ScrubMember<CommandResult>(nameof(CommandResult.Runtime));
