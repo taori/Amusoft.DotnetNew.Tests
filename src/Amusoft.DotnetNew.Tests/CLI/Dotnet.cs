@@ -33,13 +33,17 @@ public class Dotnet : IDotnetCli
 		var tempDirectory = new TempDirectory();
 		var scaffold = new Scaffold(tempDirectory, new Dotnet());
 		var fullArgs = !string.IsNullOrEmpty(arguments)
-			? $"new {template} -o \"{tempDirectory.Path.Directory.OriginalPath}\" {arguments}"
-			: $"new {template} -o \"{tempDirectory.Path.Directory.OriginalPath}\"";
+			? $"new {template} {arguments}"
+			: $"new {template}";
 
 		LoggingScope.TryAddRewriter(new FolderNameAliasRewriter(tempDirectory.Path.Directory, "Scaffold"));
+		var options = new DotnetCommandOptions()
+		{
+			WorkingDirectory = tempDirectory.Path.Directory.OriginalPath,
+		};
 		using (var loggingScope = new LoggingScope(false))
 		{
-			if (await LoggedDotnetCli.RunDotnetCommandAsync(fullArgs, cancellationToken, []))
+			if (await LoggedDotnetCli.RunDotnetCommandAsync(fullArgs, cancellationToken, options, []))
 			{
 				loggingScope.ParentScope?.AddResult(new TextResult($"success: {fullArgs}"));
 			}
@@ -67,7 +71,7 @@ public class Dotnet : IDotnetCli
 		
 		using (var loggingScope = new LoggingScope(false))
 		{
-			if (await LoggedDotnetCli.RunDotnetCommandAsync(fullArgs, cancellationToken, []))
+			if (await LoggedDotnetCli.RunDotnetCommandAsync(fullArgs, cancellationToken, null, []))
 			{
 				loggingScope.ParentScope?.AddResult(new TestResult(fullArgs, loggingScope.ToFullString(PrintKind.Responses)));
 			}
@@ -97,7 +101,7 @@ public class Dotnet : IDotnetCli
 		
 		using (var loggingScope = new LoggingScope(false))
 		{
-			if (await LoggedDotnetCli.RunDotnetCommandAsync(fullArgs, cancellationToken, []))
+			if (await LoggedDotnetCli.RunDotnetCommandAsync(fullArgs, cancellationToken, null, []))
 			{
 				loggingScope.ParentScope?.AddResult(new BuildResult(fullArgs, loggingScope.ToFullString(PrintKind.Responses)));
 			}
@@ -123,7 +127,7 @@ public class Dotnet : IDotnetCli
 			var fullArgs = arguments is null
 				? $"restore \"{fullPath}\" -v {vText} --ignore-failed-sources"
 				: $"restore \"{fullPath}\" -v {vText} --ignore-failed-sources {arguments}";
-			if (await LoggedDotnetCli.RunDotnetCommandAsync(fullArgs, cancellationToken, []))
+			if (await LoggedDotnetCli.RunDotnetCommandAsync(fullArgs, cancellationToken, null, []))
 			{
 				loggingScope.ParentScope?.AddResult(new TextResult($"success: {fullArgs}"));
 			}

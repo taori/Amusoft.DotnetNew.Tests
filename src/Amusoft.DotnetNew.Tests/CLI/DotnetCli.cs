@@ -12,7 +12,7 @@ internal static class DotnetCli
 		using (var scope = new LoggingScope(false))
 		{
 			// 106 == already installed
-			var r = await LoggedDotnetCli.RunDotnetCommandAsync($"new install \"{path}\"", cancellationToken, [106]);
+			var r = await LoggedDotnetCli.RunDotnetCommandAsync($"new install \"{path}\"", cancellationToken, null, [106]);
 			scope.ParentScope?.AddResult(new TextResult(r ? $"Install for {path} succeded" : $"Install for {path} failed - {scope.ToFullString(PrintKind.All)}"));
 			return r;
 		}
@@ -22,7 +22,7 @@ internal static class DotnetCli
 	{
 		using (var scope = new LoggingScope(false))
 		{
-			var r = await LoggedDotnetCli.RunDotnetCommandAsync($"new uninstall \"{path}\"", cancellationToken, []);
+			var r = await LoggedDotnetCli.RunDotnetCommandAsync($"new uninstall \"{path}\"", cancellationToken, null, []);
 			scope.ParentScope?.AddResult(new TextResult(r ? $"Uninstall for {path} succeded" : $"Uninstall for {path} failed - {scope.ToFullString(PrintKind.All)}"));
 			return r;
 		}

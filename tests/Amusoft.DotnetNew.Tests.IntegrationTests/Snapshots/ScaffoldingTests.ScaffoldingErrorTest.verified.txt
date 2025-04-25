@@ -1,9 +1,13 @@
 ﻿{
   Type: ScaffoldingFailedException,
   Output:
+---Result---
+
+Using working directory: {Scaffold}
+
 ---Command---
 
-dotnet new dotnet-template -o "{Scaffold}"
+dotnet new dotnet-template
 
 ---Result---
 

@@ -19,18 +19,21 @@ namespace Amusoft.DotnetNew.Tests.CLI;
 
 internal static class LoggedDotnetCli
 {
-	internal static async Task<bool> RunDotnetCommandAsync(string arguments, CancellationToken cancellationToken, int[] acceptAsSuccess)
+	internal static async Task<bool> RunDotnetCommandAsync(string arguments, CancellationToken cancellationToken, DotnetCommandOptions? commandOptions, int[] acceptAsSuccess)
 	{
+		if(commandOptions?.WorkingDirectory != null)
+			LoggingScope.Current?.AddResult(new TextResult($"Using working directory: {commandOptions.WorkingDirectory}"));
+		
 		var runner = new LocalProcessRunner();
 		// var runner = new CliWrapRunner();
-		return await runner.RunAsync(arguments, cancellationToken, acceptAsSuccess).ConfigureAwait(false);
+		return await runner.RunAsync(arguments, commandOptions, cancellationToken, acceptAsSuccess).ConfigureAwait(false);
 	}
 }
 
 [ExcludeFromCodeCoverage]
 internal class CliWrapRunner : IProcessRunner
 {
-	public async Task<bool> RunAsync(string arguments, CancellationToken cancellationToken, int[] successStatusCodes)
+	public async Task<bool> RunAsync(string arguments, DotnetCommandOptions? commandOptions, CancellationToken cancellationToken, int[] successStatusCodes)
 	{
 		var env = new Dictionary<string, string?>()
 		{
@@ -41,9 +44,13 @@ internal class CliWrapRunner : IProcessRunner
 		LoggingScope.TryAddInvocation($"dotnet {arguments}");
 
 		var command = Cli.Wrap("dotnet")
+			.WithWorkingDirectory(commandOptions.WorkingDirectory)
 			.WithEnvironmentVariables(env)
 			.WithArguments(arguments)
 			.WithValidation(CommandResultValidation.None);
+
+		if (commandOptions?.WorkingDirectory != null)
+			command.WithWorkingDirectory(commandOptions.WorkingDirectory);
 		
 		var bufferedCommandResult = await command
 			.ExecuteBufferedAsync(cancellationToken)
@@ -63,7 +70,7 @@ internal class CliWrapRunner : IProcessRunner
 [ExcludeFromCodeCoverage]
 internal class LocalProcessRunner : IProcessRunner
 {
-	public async Task<bool> RunAsync(string arguments, CancellationToken cancellationToken, int[] successStatusCodes)
+	public async Task<bool> RunAsync(string arguments, DotnetCommandOptions? commandOptions, CancellationToken cancellationToken, int[] successStatusCodes)
 	{
 		DiagnosticScope.TryAddContent($"dotnet {arguments}");
 		LoggingScope.TryAddInvocation($"dotnet {arguments}");
@@ -86,6 +93,8 @@ internal class LocalProcessRunner : IProcessRunner
 			};
 
 		psi.Environment.Add("DOTNET_CLI_UI_LANGUAGE", "en");
+		if (commandOptions != null)
+			psi.WorkingDirectory = commandOptions.WorkingDirectory;
 
 		var output = new StringBuilder();
 		var error = new StringBuilder();

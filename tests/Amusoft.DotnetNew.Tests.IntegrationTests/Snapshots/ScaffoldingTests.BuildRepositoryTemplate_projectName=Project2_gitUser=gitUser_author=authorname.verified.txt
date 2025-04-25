@@ -14,7 +14,7 @@ Created temp directory at {Scaffold}
 
 ---Result---
 
-success: new dotnet-library-repo -o "{Scaffold}" -n "Project2" --GitProjectName "Project2" --NugetPackageId "Project2" --ProductName "Project2" --GitUser "gitUser" --Author "authorname"
+success: new dotnet-library-repo -n "Project2" --GitProjectName "Project2" --NugetPackageId "Project2" --ProductName "Project2" --GitUser "gitUser" --Author "authorname"
 
 ---Result---
 
