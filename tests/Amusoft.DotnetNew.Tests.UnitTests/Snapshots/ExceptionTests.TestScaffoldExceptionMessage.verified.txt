@@ -1,0 +1,4 @@
+﻿{
+  message: message - output,
+  output: output
+}

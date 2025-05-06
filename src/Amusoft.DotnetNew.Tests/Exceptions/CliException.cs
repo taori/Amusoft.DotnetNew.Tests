@@ -28,7 +28,7 @@ public abstract class CliException : Exception
 	/// </summary>
 	/// <param name="message"></param>
 	/// <param name="output"></param>
-	protected CliException(string? message, string? output) : base(message)
+	protected CliException(string? message, string? output) : base($"{message} - {output}")
 	{
 		Output = output;
 	}

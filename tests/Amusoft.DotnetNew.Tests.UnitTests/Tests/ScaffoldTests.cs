@@ -10,6 +10,7 @@ using Amusoft.DotnetNew.Tests.Scaffolding;
 using Amusoft.DotnetNew.Tests.Templating;
 using Moq;
 using Shared.TestSdk;
+using Shouldly;
 using VerifyXunit;
 using Xunit;
 using Xunit.Abstractions;
@@ -116,6 +117,17 @@ public class ScaffoldTests : TestBase
 		var cliMock = new Mock<IDotnetCli>();
 		var scaffold = new Scaffold(directoryMock.Object, cliMock.Object);
 		return scaffold;
+	}
+
+	[Fact]
+	private void GetAbsoluteRootPath()
+	{
+		var directoryMock = new Mock<ITempDirectory>();
+		var folderPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+		directoryMock.Setup(d => d.Path).Returns(new PathSource(folderPath));
+		var cliMock = new Mock<IDotnetCli>();
+		var scaffold = new Scaffold(directoryMock.Object, cliMock.Object);
+		scaffold.GetAbsoluteRootPath().ShouldBe(folderPath);
 	}
 
 	public ScaffoldTests(ITestOutputHelper outputHelper, AssemblyInitializer data) : base(outputHelper, data)
