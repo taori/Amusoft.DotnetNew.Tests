@@ -96,7 +96,7 @@ public class Scaffold : IDisposable
 	/// Returns the directory path of the scaffold
 	/// </summary>
 	/// <returns></returns>
-	public string GetAbsoluteRootPath() => _tempDirectory.Path.Directory.OriginalPath;
+	public string GetAbsoluteRootPath() => _tempDirectory.Path.File.OriginalPath;
 
 	/// <summary>
 	/// Gets all paths within the temp directory with their relative paths
